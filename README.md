@@ -6,7 +6,7 @@ Interactive visualization of the consortium knowledge graph — people, publicat
 
 ---
 
-## Curator workflow (for Nadia and others)
+## Curator workflow 
 
 **Edit `config.yaml` → commit to main → `kg.trig` updates automatically.**
 
