@@ -6,93 +6,85 @@ Interactive visualization of the consortium knowledge graph — people, publicat
 
 ---
 
-## Files
+## Curator workflow (for Nadia and others)
 
-| File | Purpose |
-|---|---|
-| `index.html` | Interactive D3 + N3.js visualization |
-| `kg.trig` | TriG knowledge graph (5 named graphs) |
-| `people.csv` | Source: consortium members roster |
-| `publications.csv` | Source: publications from Crossref ingestion |
-| `generate_kg.py` | Regenerates `kg.trig` from the two CSVs |
+**Edit `config.yaml` → commit to main → `kg.trig` updates automatically.**
+
+That's it. You never need to touch Turtle syntax or run any scripts.
+
+### 1. Set a claim status
+
+Open `config.yaml` on GitHub, find the person's email, and fill in `claim_status`:
+
+```yaml
+people:
+  abigayle.fogarty@mssm.edu:
+    claim_status: Verified    # Verified | Pending | Disputed | Retracted
+    confidence: 0.95
+    notes: "Confirmed member via email 2026-08"
+```
+
+### 2. Add a manual authorship link
+
+A paper isn't linked to someone because their ORCID wasn't in the publications data?
+Add it under `authorship:` using the PubMed ID and the person's email:
+
+```yaml
+authorship:
+  - pmid: "39680425"
+    person_email: "ds5577@nyu.edu"
+    claim_status: Pending
+    evidence: "https://doi.org/10.7554/eLife.93754"
+```
+
+### 3. Change a security label
+
+Override someone's default `Internal` label to `Public`:
+
+```yaml
+security:
+  "some.person@example.com":
+    label: Public
+    policy: policy-public-read
+```
+
+### What happens next
+
+A GitHub Action (`update-kg.yml`) fires on every push to `main` that touches `config.yaml`. It runs `generate_kg.py`, which merges your YAML overlay with `people.csv` and `publications.csv` into a fresh `kg.trig`, then auto-commits it. GitHub Pages picks up the new TriG on the next page load.
 
 ---
 
-## How to edit the graph (for curators)
-
-The file to edit is **`kg.trig`**. You can edit it directly via the GitHub web UI (click the pencil icon on the file), or clone the repo and open it in any text editor.
-
-### Named graph layers
+## Named graph layers
 
 ```
 graph:core       → canonical facts (names, affiliations, titles, etc.)
 graph:claims     → L2 claim status + confidence + L1 evidence links
-graph:derived    → computed authorship edges (person → publication, ORCID-matched)
+graph:derived    → authorship edges (ORCID-matched + manual from config.yaml)
 graph:access     → L3 security labels and access policies
 graph:provenance → ingestion provenance (agent, timestamps)
 ```
 
-### Updating a claim (L2)
-
-Find the claim in `graph:claims { … }`. Each claim looks like:
-
-```turtle
-claim:identity-25b356ed
-  a ex:Claim ;
-  ex:subject person:25b356ed-4392-46ab-a8ae-723007fb9820 ;
-  ex:predicate schema:name ;
-  ex:claimStatus "Verified" ;        ← change this
-  ex:confidence "0.95"^^xsd:decimal . ← and/or this
-```
-
-Valid `ex:claimStatus` values: `"Verified"`, `"Disputed"`, `"Pending"`, `"Retracted"`.
-
-### Updating a security label (L3)
-
-Find the entity in `graph:access { … }`:
-
-```turtle
-person:25b356ed-4392-46ab-a8ae-723007fb9820
-  ex:securityLabel "Internal" ;      ← "Internal" or "Public"
-  ex:accessPolicy  "policy-consortium-read" .
-```
-
-### Adding an authorship edge manually
-
-In `graph:derived { … }`, add a line:
-
-```turtle
-person:<person_id> schema:author pub:<publication_id> .
-```
-
-And add the matching claim in `graph:claims { … }`:
-
-```turtle
-claim:authorship-<8-char-pub-id>-<orcid-slug>
-  a ex:Claim ;
-  ex:subject person:<person_id> ;
-  ex:predicate schema:author ;
-  ex:object pub:<publication_id> ;
-  ex:claimStatus "Pending" ;
-  ex:hasEvidence [ dct:source <https://doi.org/...> ] .
-```
-
 ---
 
-## Regenerating `kg.trig` from updated CSVs
+## Files
 
-```bash
-python3 generate_kg.py
-```
-
-This reads `people.csv` and `publications.csv` and overwrites `kg.trig`.
+| File | Purpose |
+|---|---|
+| `config.yaml` | **Edit this** — curator overlay for claims, authorship, security |
+| `index.html` | Interactive D3 + N3.js visualization (auto-loads kg.trig) |
+| `kg.trig` | Generated TriG knowledge graph — do not edit directly |
+| `people.csv` | Source: consortium members roster |
+| `publications.csv` | Source: publications from Crossref ingestion |
+| `generate_kg.py` | Lifter: merges CSVs + config.yaml → kg.trig |
+| `.github/workflows/update-kg.yml` | GitHub Action that regenerates kg.trig on push |
 
 ---
 
 ## Local development
 
 ```bash
-# Serve locally (needed because fetch() requires HTTP, not file://)
-python3 -m http.server 8080
-# then open http://localhost:8080
+pip install pyyaml
+python3 generate_kg.py          # regenerate kg.trig
+python3 -m http.server 8080     # serve locally (fetch() needs HTTP)
+# open http://localhost:8080
 ```

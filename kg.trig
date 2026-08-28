@@ -10,7 +10,7 @@
 @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
 @prefix graph:  <https://brain-bbqs.org/graph/> .
 
-# Generated: 2026-08-28T13:25:49Z
+# Generated: 2026-08-28T13:32:45Z
 # Source: people.csv (241 rows) + publications.csv (45 rows)
 
 graph:core {

@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
-"""Generate kg.trig from people.csv + publications.csv following the KG-ready CSV schema."""
+"""Generate kg.trig from people.csv + publications.csv + config.yaml overlay."""
 
-import csv, json, re, sys
+import csv, json, re, sys, os
 from datetime import datetime
+
+try:
+    import yaml
+except ImportError:
+    yaml = None
 
 BASE = "https://brain-bbqs.org/"
 PREFIXES = """\
@@ -34,6 +39,21 @@ def read_csv(path):
 
 people = read_csv('people.csv')
 pubs   = read_csv('publications.csv')
+
+# ── Load config.yaml overlay ──────────────────────────────────────────────────
+config = {'people': {}, 'authorship': [], 'security': {}}
+if yaml and os.path.exists('config.yaml'):
+    with open('config.yaml', encoding='utf-8') as f:
+        loaded = yaml.safe_load(f) or {}
+    config['people']     = loaded.get('people', {}) or {}
+    config['authorship'] = loaded.get('authorship', []) or []
+    config['security']   = loaded.get('security', {}) or {}
+
+# Build email → config entry lookup
+cfg_by_email = {}
+for email, entry in config['people'].items():
+    if email and entry:
+        cfg_by_email[email.strip()] = entry
 
 # ── helpers ──────────────────────────────────────────────────────────────────
 def lit(val, dtype=None):
@@ -135,6 +155,11 @@ for p in people:
 derived_lines = []
 authorship_claims = []  # feed into graph:claims
 
+# Build pmid → pub lookup for manual authorship
+pmid_to_pub = {p['pmid'].strip(): p for p in pubs if p['pmid'].strip()}
+email_to_person_id = {p['email_primary'].strip(): p['person_id'].strip()
+                      for p in people if p['email_primary'].strip()}
+
 for pub in pubs:
     pub_id = pub['publication_id'].strip()
     if not pub_id or not pub['author_orcids'].strip():
@@ -160,6 +185,33 @@ for pub in pubs:
                     (f"https://doi.org/{pub['doi'].strip()}" if pub['doi'].strip() else pub['url'].strip()),
             })
 
+# Manual authorship links from config.yaml
+for entry in config['authorship']:
+    pmid    = str(entry.get('pmid', '')).strip()
+    email   = str(entry.get('person_email', '')).strip()
+    if not pmid or not email:
+        continue
+    pub_row = pmid_to_pub.get(pmid)
+    pid     = email_to_person_id.get(email)
+    if not pub_row or not pid:
+        print(f"  [config] WARNING: authorship entry not matched — pmid={pmid} email={email}", file=sys.stderr)
+        continue
+    pub_id   = pub_row['publication_id'].strip()
+    edge_key = f"person:{pid} schema:author pub:{pub_id}"
+    if edge_key not in derived_lines:
+        derived_lines.append(edge_key + " .")
+    claim_id = f"authorship-{pub_id[:8]}-cfg-{slug(email)}"
+    authorship_claims.append({
+        'claim_id': claim_id,
+        'person_id': pid,
+        'pub_id': pub_id,
+        'orcid': '',
+        'doi': pub_row['doi'].strip(),
+        'claim_status': str(entry.get('claim_status', 'Pending')),
+        'confidence': str(entry.get('confidence', '')),
+        'evidence_source': str(entry.get('evidence', pub_row['url'].strip())),
+    })
+
 # ─────────────────────────────────────────────────────────────────────────────
 # graph:claims — reified Claim nodes (L1 + L2)
 # ─────────────────────────────────────────────────────────────────────────────
@@ -178,23 +230,34 @@ for ac in authorship_claims:
         triples.append(f"  ; ex:hasEvidence [ dct:source <{ac['evidence_source']}> ]")
     claims_lines.append(f"claim:{cid}\n" + "\n".join(triples) + " .\n")
 
-# Identity claims for people (L2 placeholders)
+# Identity claims for people (L2 — CSV values merged with config.yaml overlay)
 for p in people:
-    pid = p['person_id'].strip()
+    pid   = p['person_id'].strip()
+    email = p['email_primary'].strip()
     if not pid:
         continue
     cid = f"identity-{pid[:8]}"
+    # Merge: config.yaml overrides CSV blanks
+    cfg = cfg_by_email.get(email, {}) or {}
+    claim_status   = str(cfg.get('claim_status', '') or p['claim_status'].strip()).strip()
+    confidence_val = str(cfg.get('confidence',   '') or p['confidence'].strip()).strip()
+    evidence_src   = p['evidence_source'].strip()
+    asserted_in    = p['asserted_in'].strip()
+    notes_val      = str(cfg.get('notes', '') or '').strip()
+
     triples = [f"  a ex:Claim"]
     triples.append(f"  ; ex:subject person:{pid}")
     triples.append(f"  ; ex:predicate schema:name")
-    if p['claim_status'].strip():
-        triples.append(f"  ; ex:claimStatus {lit(p['claim_status'].strip())}")
-    if p['confidence'].strip():
-        triples.append(f"  ; ex:confidence {lit(p['confidence'].strip(), 'xsd:decimal')}")
-    if p['evidence_source'].strip():
-        triples.append(f"  ; ex:hasEvidence [ dct:source <{p['evidence_source'].strip()}> ]")
-    if p['asserted_in'].strip():
-        triples.append(f"  ; ex:assertedIn {lit(p['asserted_in'].strip())}")
+    if claim_status:
+        triples.append(f"  ; ex:claimStatus {lit(claim_status)}")
+    if confidence_val:
+        triples.append(f"  ; ex:confidence {lit(confidence_val, 'xsd:decimal')}")
+    if evidence_src:
+        triples.append(f"  ; ex:hasEvidence [ dct:source <{evidence_src}> ]")
+    if asserted_in:
+        triples.append(f"  ; ex:assertedIn {lit(asserted_in)}")
+    if notes_val:
+        triples.append(f"  ; ex:curatorNote {lit(notes_val)}")
     claims_lines.append(f"claim:{cid}\n" + "\n".join(triples) + " .\n")
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -202,11 +265,14 @@ for p in people:
 # ─────────────────────────────────────────────────────────────────────────────
 access_lines = []
 for p in people:
-    pid = p['person_id'].strip()
+    pid   = p['person_id'].strip()
+    email = p['email_primary'].strip()
     if not pid:
         continue
-    label  = p['security_label'].strip() or 'Internal'
-    policy = p['access_policy'].strip() or 'policy-consortium-read'
+    # config.yaml security overrides take precedence
+    sec_cfg = (config['security'] or {}).get(email, {}) or {}
+    label  = str(sec_cfg.get('label', '') or p['security_label'].strip() or 'Internal')
+    policy = str(sec_cfg.get('policy','') or p['access_policy'].strip() or 'policy-consortium-read')
     tenant = p['tenant'].strip() or 'consortium-alpha'
     access_lines.append(
         f"person:{pid} ex:securityLabel {lit(label)} ; ex:accessPolicy {lit(policy)} ; ex:tenant {lit(tenant)} ."
