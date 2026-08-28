@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Generate kg.trig from people.csv + publications.csv + config.yaml overlay."""
+"""Generate kg.trig from people.csv + publications.csv + config.yaml + schema.yaml."""
 
-import csv, json, re, sys, os
+import csv, re, sys, os
 from datetime import datetime
 
 try:
@@ -9,8 +9,28 @@ try:
 except ImportError:
     yaml = None
 
-BASE = "https://brain-bbqs.org/"
-PREFIXES = """\
+def esc(s):
+    return s.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n')
+
+def slug(s):
+    return re.sub(r'[^A-Za-z0-9_-]', '_', s.strip())
+
+def lit(val, dtype=None):
+    if dtype:
+        return f'"{esc(val)}"^^{dtype}'
+    return f'"{esc(val)}"'
+
+def read_csv(path):
+    with open(path, newline='', encoding='utf-8') as f:
+        return list(csv.DictReader(f))
+
+# ── Load schema.yaml ──────────────────────────────────────────────────────────
+schema = {}
+if yaml and os.path.exists('schema.yaml'):
+    with open('schema.yaml', encoding='utf-8') as f:
+        schema = yaml.safe_load(f) or {}
+
+FALLBACK_PREFIXES = """\
 @prefix schema: <https://schema.org/> .
 @prefix ex:     <https://brain-bbqs.org/vocab/> .
 @prefix person: <https://brain-bbqs.org/person/> .
@@ -25,18 +45,18 @@ PREFIXES = """\
 
 """
 
-def esc(s):
-    """Escape a string literal for Turtle."""
-    return s.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n')
+schema_prefixes = schema.get('prefixes', {})
+if schema_prefixes:
+    lines = [f'@prefix {k}: <{v}> .' for k, v in schema_prefixes.items()]
+    if 'graph' not in schema_prefixes:
+        lines.append('@prefix graph: <https://brain-bbqs.org/graph/> .')
+    PREFIXES = '\n'.join(lines) + '\n\n'
+else:
+    PREFIXES = FALLBACK_PREFIXES
 
-def slug(s):
-    """Turn a string into a safe IRI segment."""
-    return re.sub(r'[^A-Za-z0-9_-]', '_', s.strip())
+node_types = schema.get('node_types', {})
 
-def read_csv(path):
-    with open(path, newline='', encoding='utf-8') as f:
-        return list(csv.DictReader(f))
-
+# ── CSV data ──────────────────────────────────────────────────────────────────
 people = read_csv('people.csv')
 pubs   = read_csv('publications.csv')
 
@@ -49,27 +69,86 @@ if yaml and os.path.exists('config.yaml'):
     config['authorship'] = loaded.get('authorship', []) or []
     config['security']   = loaded.get('security', {}) or {}
 
-# Build email → config entry lookup
-cfg_by_email = {}
-for email, entry in config['people'].items():
-    if email and entry:
-        cfg_by_email[email.strip()] = entry
+cfg_by_email = {k.strip(): v for k, v in config['people'].items() if k and v}
 
-# ── helpers ──────────────────────────────────────────────────────────────────
-def lit(val, dtype=None):
-    if dtype:
-        return f'"{esc(val)}"^^{dtype}'
-    return f'"{esc(val)}"'
-
-def orcid_to_person(orcid, orcid_map):
-    """Return person IRI if this ORCID is in the people roster."""
-    return orcid_map.get(orcid.strip())
-
-# Build ORCID → person_id map
 orcid_map = {}
 for p in people:
     if p['orcid'].strip():
         orcid_map[p['orcid'].strip()] = p['person_id'].strip()
+
+pmid_to_pub = {r['pmid'].strip(): r for r in pubs if r['pmid'].strip()}
+email_to_person_id = {r['email_primary'].strip(): r['person_id'].strip()
+                      for r in people if r['email_primary'].strip()}
+
+# ── Schema-driven property → triple generation ────────────────────────────────
+def props_to_triples(row, prop_defs):
+    """Generate Turtle predicate-object lines from a CSV row + schema property defs."""
+    triples = []
+    for prop in prop_defs:
+        col = prop.get('csv_column')
+        if not col:
+            continue
+        val = row.get(col, '').strip()
+        if not val:
+            continue
+        pred      = prop['predicate']
+        scheme    = prop.get('identifier_scheme')
+        obj_t     = prop.get('object_type')
+        multi     = prop.get('multi_value', False)
+        sep       = prop.get('separator', ',')
+        dtype     = prop.get('datatype')
+        ref_style = prop.get('ref_style')  # 'iri' or 'blank'
+
+        if scheme:
+            triples.append(f'  ; {pred} [ schema:propertyID "{scheme}" ; schema:value {lit(val)} ]')
+        elif obj_t:
+            ot_def  = node_types.get(obj_t, {})
+            iri_pfx = ot_def.get('iri_prefix', obj_t.lower())
+            rdf_t   = prop.get('rdf_type') or ot_def.get('rdf_type') or f'schema:{obj_t}'
+            # Use IRI ref when the object type is a named entity, unless explicitly blanked
+            use_iri = (ref_style == 'iri') if ref_style else (
+                ot_def.get('iri_prefix') and ref_style != 'blank'
+            )
+            # 'blank' ref_style overrides iri_prefix
+            if ref_style == 'blank':
+                use_iri = False
+            if multi:
+                for item in val.split(sep):
+                    item = item.strip()
+                    if item:
+                        if use_iri:
+                            triples.append(f'  ; {pred} {iri_pfx}:{slug(item)}')
+                        else:
+                            triples.append(f'  ; {pred} [ a {rdf_t} ; schema:name {lit(item)} ]')
+            else:
+                if use_iri:
+                    triples.append(f'  ; {pred} {iri_pfx}:{slug(val)}')
+                else:
+                    triples.append(f'  ; {pred} [ a {rdf_t} ; schema:name {lit(val)} ]')
+        elif multi:
+            for item in val.split(sep):
+                item = item.strip()
+                if item:
+                    triples.append(f'  ; {pred} {lit(item, dtype) if dtype else lit(item)}')
+        elif dtype:
+            triples.append(f'  ; {pred} {lit(val, dtype)}')
+        else:
+            triples.append(f'  ; {pred} {lit(val)}')
+    return triples
+
+# ── Node type config helpers ──────────────────────────────────────────────────
+def nt_cfg(name, id_col_default, rdf_t_default, pfx_default):
+    nt = node_types.get(name, {})
+    return {
+        'props':   nt.get('properties', []),
+        'rdf_t':   nt.get('rdf_type', rdf_t_default),
+        'pfx':     nt.get('iri_prefix', pfx_default),
+        'id_col':  nt.get('id_column', id_col_default),
+    }
+
+per_nt  = nt_cfg('Person',      'person_id',      'schema:Person',           'person')
+pub_nt  = nt_cfg('Publication', 'publication_id', 'schema:ScholarlyArticle', 'pub')
+wg_nt   = nt_cfg('WorkingGroup', None,            'ex:WorkingGroup',          'wg')
 
 # ─────────────────────────────────────────────────────────────────────────────
 # graph:core  — canonical entities
@@ -77,118 +156,61 @@ for p in people:
 core_lines = []
 
 for p in people:
-    pid = p['person_id'].strip()
+    pid = p.get(per_nt['id_col'], '').strip()
     if not pid:
         continue
-    s = f"person:{pid}"
-    triples = [f"  a schema:Person"]
-    if p['name'].strip():
-        triples.append(f"  ; schema:name {lit(p['name'].strip())}")
-    if p['institution_name'].strip():
-        institutions = [i.strip() for i in p['institution_name'].split(',') if i.strip()]
-        for inst in institutions:
-            triples.append(f"  ; schema:affiliation [ a schema:Organization ; schema:name {lit(inst)} ]")
-    if p['role'].strip():
-        triples.append(f"  ; ex:consortiumRole {lit(p['role'].strip())}")
-    if p['profile_url'].strip():
-        triples.append(f"  ; schema:url {lit(p['profile_url'].strip())}")
-    if p['orcid'].strip():
-        triples.append(f"  ; schema:identifier [ schema:propertyID \"ORCID\" ; schema:value {lit(p['orcid'].strip())} ]")
-    if p['scholar_id'].strip():
-        triples.append(f"  ; schema:identifier [ schema:propertyID \"GoogleScholar\" ; schema:value {lit(p['scholar_id'].strip())} ]")
-    if p['reporter_profile_id'].strip():
-        triples.append(f"  ; schema:identifier [ schema:propertyID \"NIH_RePORTER\" ; schema:value {lit(p['reporter_profile_id'].strip())} ]")
-    if p['working_groups'].strip():
-        for wg in p['working_groups'].split(';'):
-            wg = wg.strip()
-            if wg:
-                triples.append(f"  ; ex:memberOf wg:{slug(wg)}")
-    if p['email_primary'].strip():
-        triples.append(f"  ; schema:email {lit(p['email_primary'].strip())}")
-    if p['generated_at'].strip():
-        triples.append(f"  ; prov:generatedAtTime {lit(p['generated_at'].strip(), 'xsd:dateTime')}")
-    core_lines.append(f"{s}\n" + "\n".join(triples) + " .\n")
+    triples = [f"  a {per_nt['rdf_t']}"] + props_to_triples(p, per_nt['props'])
+    core_lines.append(f"{per_nt['pfx']}:{pid}\n" + "\n".join(triples) + " .\n")
 
-for pub in pubs:
-    pub_id = pub['publication_id'].strip()
+for row in pubs:
+    pub_id = row.get(pub_nt['id_col'], '').strip()
     if not pub_id:
         continue
-    s = f"pub:{pub_id}"
-    triples = [f"  a schema:ScholarlyArticle"]
-    if pub['title'].strip():
-        triples.append(f"  ; dct:title {lit(pub['title'].strip())}")
-    if pub['journal'].strip():
-        triples.append(f"  ; schema:isPartOf [ a schema:Periodical ; schema:name {lit(pub['journal'].strip())} ]")
-    if pub['year'].strip():
-        triples.append(f"  ; schema:datePublished {lit(pub['year'].strip(), 'xsd:gYear')}")
-    if pub['doi'].strip():
-        triples.append(f"  ; schema:identifier [ schema:propertyID \"DOI\" ; schema:value {lit(pub['doi'].strip())} ]")
-    if pub['pmid'].strip():
-        triples.append(f"  ; schema:identifier [ schema:propertyID \"PMID\" ; schema:value {lit(pub['pmid'].strip())} ]")
-    if pub['url'].strip():
-        triples.append(f"  ; schema:url {lit(pub['url'].strip())}")
-    if pub['citations'].strip():
-        triples.append(f"  ; ex:citationCount {lit(pub['citations'].strip(), 'xsd:integer')}")
-    if pub['rcr'].strip():
-        triples.append(f"  ; ex:relativeCitationRatio {lit(pub['rcr'].strip(), 'xsd:decimal')}")
-    if pub['keywords'].strip():
-        for kw in pub['keywords'].split(';'):
-            kw = kw.strip()
-            if kw:
-                triples.append(f"  ; schema:keywords {lit(kw)}")
-    if pub['generated_at'].strip():
-        triples.append(f"  ; prov:generatedAtTime {lit(pub['generated_at'].strip(), 'xsd:dateTime')}")
-    core_lines.append(f"{s}\n" + "\n".join(triples) + " .\n")
+    triples = [f"  a {pub_nt['rdf_t']}"] + props_to_triples(row, pub_nt['props'])
+    core_lines.append(f"{pub_nt['pfx']}:{pub_id}\n" + "\n".join(triples) + " .\n")
 
-# Working group entities
+# Working groups (synthesized from person membership lists)
 wg_seen = set()
 for p in people:
     for wg in p['working_groups'].split(';'):
         wg = wg.strip()
         if wg and wg not in wg_seen:
             wg_seen.add(wg)
-            core_lines.append(f"wg:{slug(wg)}\n  a ex:WorkingGroup ; schema:name {lit(wg)} .\n")
+            core_lines.append(
+                f"{wg_nt['pfx']}:{slug(wg)}\n  a {wg_nt['rdf_t']} ; schema:name {lit(wg)} .\n"
+            )
 
 # ─────────────────────────────────────────────────────────────────────────────
-# graph:derived — authorship edges (ORCID-matched)
+# graph:derived — authorship edges (ORCID-matched + manual from config.yaml)
 # ─────────────────────────────────────────────────────────────────────────────
 derived_lines = []
-authorship_claims = []  # feed into graph:claims
+authorship_claims = []
 
-# Build pmid → pub lookup for manual authorship
-pmid_to_pub = {p['pmid'].strip(): p for p in pubs if p['pmid'].strip()}
-email_to_person_id = {p['email_primary'].strip(): p['person_id'].strip()
-                      for p in people if p['email_primary'].strip()}
-
-for pub in pubs:
-    pub_id = pub['publication_id'].strip()
-    if not pub_id or not pub['author_orcids'].strip():
+for row in pubs:
+    pub_id = row.get(pub_nt['id_col'], '').strip()
+    if not pub_id or not row['author_orcids'].strip():
         continue
-    orcids = [o.strip() for o in pub['author_orcids'].split(';') if o.strip()]
-    for orcid in orcids:
+    for orcid in [o.strip() for o in row['author_orcids'].split(';') if o.strip()]:
         if orcid in orcid_map:
             person_id = orcid_map[orcid]
-            derived_lines.append(
-                f"person:{person_id} schema:author pub:{pub_id} ."
-            )
+            derived_lines.append(f"person:{person_id} schema:author pub:{pub_id} .")
             claim_id = f"authorship-{pub_id[:8]}-{slug(orcid)}"
             authorship_claims.append({
                 'claim_id': claim_id,
                 'person_id': person_id,
                 'pub_id': pub_id,
                 'orcid': orcid,
-                'doi': pub['doi'].strip(),
-                'claim_status': pub['claim_status'].strip() or
-                    ('Verified' if pub['doi'].strip() else ''),
-                'confidence': pub['confidence'].strip(),
-                'evidence_source': pub['evidence_source'].strip() or
-                    (f"https://doi.org/{pub['doi'].strip()}" if pub['doi'].strip() else pub['url'].strip()),
+                'doi': row['doi'].strip(),
+                'claim_status': row['claim_status'].strip() or
+                    ('Verified' if row['doi'].strip() else ''),
+                'confidence': row['confidence'].strip(),
+                'evidence_source': row['evidence_source'].strip() or
+                    (f"https://doi.org/{row['doi'].strip()}" if row['doi'].strip() else row['url'].strip()),
             })
 
-# Manual authorship links from config.yaml
 for entry in config['authorship']:
-    pmid    = str(entry.get('pmid', '')).strip()
-    email   = str(entry.get('person_email', '')).strip()
+    pmid  = str(entry.get('pmid', '')).strip()
+    email = str(entry.get('person_email', '')).strip()
     if not pmid or not email:
         continue
     pub_row = pmid_to_pub.get(pmid)
@@ -196,7 +218,7 @@ for entry in config['authorship']:
     if not pub_row or not pid:
         print(f"  [config] WARNING: authorship entry not matched — pmid={pmid} email={email}", file=sys.stderr)
         continue
-    pub_id   = pub_row['publication_id'].strip()
+    pub_id   = pub_row[pub_nt['id_col']].strip()
     edge_key = f"person:{pid} schema:author pub:{pub_id}"
     if edge_key not in derived_lines:
         derived_lines.append(edge_key + " .")
@@ -216,12 +238,15 @@ for entry in config['authorship']:
 # graph:claims — reified Claim nodes (L1 + L2)
 # ─────────────────────────────────────────────────────────────────────────────
 claims_lines = []
+
 for ac in authorship_claims:
     cid = ac['claim_id']
-    triples = [f"  a ex:Claim"]
-    triples.append(f"  ; ex:subject person:{ac['person_id']}")
-    triples.append(f"  ; ex:predicate schema:author")
-    triples.append(f"  ; ex:object pub:{ac['pub_id']}")
+    triples = [
+        '  a ex:Claim',
+        f"  ; ex:subject person:{ac['person_id']}",
+        '  ; ex:predicate schema:author',
+        f"  ; ex:object pub:{ac['pub_id']}",
+    ]
     if ac['claim_status']:
         triples.append(f"  ; ex:claimStatus {lit(ac['claim_status'])}")
     if ac['confidence']:
@@ -230,14 +255,12 @@ for ac in authorship_claims:
         triples.append(f"  ; ex:hasEvidence [ dct:source <{ac['evidence_source']}> ]")
     claims_lines.append(f"claim:{cid}\n" + "\n".join(triples) + " .\n")
 
-# Identity claims for people (L2 — CSV values merged with config.yaml overlay)
 for p in people:
-    pid   = p['person_id'].strip()
+    pid   = p.get(per_nt['id_col'], '').strip()
     email = p['email_primary'].strip()
     if not pid:
         continue
     cid = f"identity-{pid[:8]}"
-    # Merge: config.yaml overrides CSV blanks
     cfg = cfg_by_email.get(email, {}) or {}
     claim_status   = str(cfg.get('claim_status', '') or p['claim_status'].strip()).strip()
     confidence_val = str(cfg.get('confidence',   '') or p['confidence'].strip()).strip()
@@ -245,9 +268,11 @@ for p in people:
     asserted_in    = p['asserted_in'].strip()
     notes_val      = str(cfg.get('notes', '') or '').strip()
 
-    triples = [f"  a ex:Claim"]
-    triples.append(f"  ; ex:subject person:{pid}")
-    triples.append(f"  ; ex:predicate schema:name")
+    triples = [
+        '  a ex:Claim',
+        f"  ; ex:subject person:{pid}",
+        '  ; ex:predicate schema:name',
+    ]
     if claim_status:
         triples.append(f"  ; ex:claimStatus {lit(claim_status)}")
     if confidence_val:
@@ -264,27 +289,27 @@ for p in people:
 # graph:access — L3 security labels + access policies
 # ─────────────────────────────────────────────────────────────────────────────
 access_lines = []
+
 for p in people:
-    pid   = p['person_id'].strip()
+    pid   = p.get(per_nt['id_col'], '').strip()
     email = p['email_primary'].strip()
     if not pid:
         continue
-    # config.yaml security overrides take precedence
     sec_cfg = (config['security'] or {}).get(email, {}) or {}
-    label  = str(sec_cfg.get('label', '') or p['security_label'].strip() or 'Internal')
-    policy = str(sec_cfg.get('policy','') or p['access_policy'].strip() or 'policy-consortium-read')
+    label  = str(sec_cfg.get('label',  '') or p['security_label'].strip()  or 'Internal')
+    policy = str(sec_cfg.get('policy', '') or p['access_policy'].strip()   or 'policy-consortium-read')
     tenant = p['tenant'].strip() or 'consortium-alpha'
     access_lines.append(
         f"person:{pid} ex:securityLabel {lit(label)} ; ex:accessPolicy {lit(policy)} ; ex:tenant {lit(tenant)} ."
     )
 
-for pub in pubs:
-    pub_id = pub['publication_id'].strip()
+for row in pubs:
+    pub_id = row.get(pub_nt['id_col'], '').strip()
     if not pub_id:
         continue
-    label  = pub['security_label'].strip() or 'Public'
-    policy = pub['access_policy'].strip() or 'policy-public-read'
-    tenant = pub['tenant'].strip() or 'consortium-alpha'
+    label  = row['security_label'].strip() or 'Public'
+    policy = row['access_policy'].strip()  or 'policy-public-read'
+    tenant = row['tenant'].strip()         or 'consortium-alpha'
     access_lines.append(
         f"pub:{pub_id} ex:securityLabel {lit(label)} ; ex:accessPolicy {lit(policy)} ; ex:tenant {lit(tenant)} ."
     )
@@ -293,11 +318,12 @@ for pub in pubs:
 # graph:provenance
 # ─────────────────────────────────────────────────────────────────────────────
 prov_lines = []
-for pub in pubs:
-    pub_id = pub['publication_id'].strip()
+
+for row in pubs:
+    pub_id = row.get(pub_nt['id_col'], '').strip()
     if not pub_id:
         continue
-    agent = pub['ingestion_agent'].strip()
+    agent = row['ingestion_agent'].strip()
     if agent:
         prov_lines.append(
             f"pub:{pub_id} prov:wasAttributedTo [ a prov:Agent ; schema:name {lit(agent)} ] ."
