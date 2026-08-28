@@ -1,68 +1,75 @@
-# BRAIN BBQS Knowledge Graph · GitHub Pages
-
-Interactive visualization of the consortium knowledge graph — people, publications, and working groups — with full L1/L2/L3 provenance layers.
+# BRAIN BBQS Knowledge Graph
 
 **Live site:** `https://brain-bbqs.github.io/knowledge-graph/`
 
 ---
 
-## Curator workflow (for Nadia and others)
+## The schema file
 
-**Edit `config.yaml` → commit to main → `kg.trig` updates automatically.**
+Everything about the knowledge graph's structure lives in one file: **`schema.yaml`**.
 
-That's it. You never need to touch Turtle syntax or run any scripts.
-
-### 1. Set a claim status
-
-Open `config.yaml` on GitHub, find the person's email, and fill in `claim_status`:
-
-```yaml
-people:
-  abigayle.fogarty@mssm.edu:
-    claim_status: Verified    # Verified | Pending | Disputed | Retracted
-    confidence: 0.95
-    notes: "Confirmed member via email 2026-08"
-```
-
-### 2. Add a manual authorship link
-
-A paper isn't linked to someone because their ORCID wasn't in the publications data?
-Add it under `authorship:` using the PubMed ID and the person's email:
-
-```yaml
-authorship:
-  - pmid: "39680425"
-    person_email: "ds5577@nyu.edu"
-    claim_status: Pending
-    evidence: "https://doi.org/10.7554/eLife.93754"
-```
-
-### 3. Change a security label
-
-Override someone's default `Internal` label to `Public`:
-
-```yaml
-security:
-  "some.person@example.com":
-    label: Public
-    policy: policy-public-read
-```
-
-### What happens next
-
-A GitHub Action (`update-kg.yml`) fires on every push to `main` that touches `config.yaml`. It runs `generate_kg.py`, which merges your YAML overlay with `people.csv` and `publications.csv` into a fresh `kg.trig`, then auto-commits it. GitHub Pages picks up the new TriG on the next page load.
+Edit it to change what types of things exist in the graph, what properties they have, how they connect, and what the provenance layers mean. You never need to touch Python or RDF syntax.
 
 ---
 
-## Named graph layers
+## What's in schema.yaml
 
+### `prefixes`
+Short aliases for RDF namespaces. You probably won't need to touch this.
+
+### `named_graphs`
+The five containers that hold different kinds of data:
+
+| Graph | What it holds |
+|---|---|
+| `core` | Canonical facts — names, affiliations, titles |
+| `claims` | L2 curation status and L1 evidence links |
+| `derived` | Computed edges (e.g. ORCID-matched authorship) |
+| `access` | L3 security labels and access policies |
+| `provenance` | Who ingested each record and when |
+
+### `node_types`
+The categories of things in the graph: **Person**, **Publication**, **WorkingGroup**, **Organization**.
+
+Each node type lists its properties. A property looks like this:
+
+```yaml
+- predicate: "schema:name"
+  label:      "Full Name"
+  required:   true
+  csv_column: name
 ```
-graph:core       → canonical facts (names, affiliations, titles, etc.)
-graph:claims     → L2 claim status + confidence + L1 evidence links
-graph:derived    → authorship edges (ORCID-matched + manual from config.yaml)
-graph:access     → L3 security labels and access policies
-graph:provenance → ingestion provenance (agent, timestamps)
+
+- `predicate` — the RDF property (don't change unless you know what you're doing)
+- `label` — human-readable name shown in the visualization
+- `csv_column` — which column in the CSV holds this value
+- `required` — whether the field must be present
+
+### `edge_types`
+Relationships between node types — e.g. Person → WorkingGroup, Person → Publication.
+
+### `claim_schema`
+Fields that track how confident we are in each assertion (L1 evidence, L2 curation status, confidence score, curator notes).
+
+### `access_schema`
+Security labels (`Internal`, `Public`) and access policies that control who can see what (L3).
+
+---
+
+## How to add a new property to Person
+
+1. Open `schema.yaml`
+2. Find the `Person:` node type → `properties:` list
+3. Add a new entry, e.g.:
+
+```yaml
+- predicate: "ex:lab"
+  label:      "Lab"
+  csv_column: lab_name
 ```
+
+4. Add the corresponding column to `people.csv`
+5. Commit to `main` — the GitHub Action regenerates the graph automatically
 
 ---
 
@@ -70,21 +77,10 @@ graph:provenance → ingestion provenance (agent, timestamps)
 
 | File | Purpose |
 |---|---|
-| `config.yaml` | **Edit this** — curator overlay for claims, authorship, security |
-| `index.html` | Interactive D3 + N3.js visualization (auto-loads kg.trig) |
-| `kg.trig` | Generated TriG knowledge graph — do not edit directly |
-| `people.csv` | Source: consortium members roster |
-| `publications.csv` | Source: publications from Crossref ingestion |
-| `generate_kg.py` | Lifter: merges CSVs + config.yaml → kg.trig |
-| `.github/workflows/update-kg.yml` | GitHub Action that regenerates kg.trig on push |
-
----
-
-## Local development
-
-```bash
-pip install pyyaml
-python3 generate_kg.py          # regenerate kg.trig
-python3 -m http.server 8080     # serve locally (fetch() needs HTTP)
-# open http://localhost:8080
-```
+| `schema.yaml` | **The schema** — edit this to change the graph structure |
+| `config.yaml` | Curator overlay — claim status, manual authorship links, security overrides |
+| `people.csv` | Source data: consortium members |
+| `publications.csv` | Source data: publications |
+| `generate_kg.py` | Reads schema + CSVs + config → writes `kg.trig` |
+| `kg.trig` | Generated RDF — do not edit directly |
+| `index.html` | The visualization (Graph tab + Schema tab) |
