@@ -1,18 +1,16 @@
 @prefix schema: <https://schema.org/> .
 @prefix ex: <https://brain-bbqs.org/vocab/> .
 @prefix person: <https://brain-bbqs.org/person/> .
+@prefix pub: <https://brain-bbqs.org/pub/> .
+@prefix wg: <https://brain-bbqs.org/wg/> .
+@prefix org: <https://brain-bbqs.org/org/> .
+@prefix claim: <https://brain-bbqs.org/claim/> .
+@prefix graph: <https://brain-bbqs.org/graph/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-@prefix pub:    <https://brain-bbqs.org/pub/> .
-@prefix org:    <https://brain-bbqs.org/org/> .
-@prefix wg:     <https://brain-bbqs.org/wg/> .
-@prefix claim:  <https://brain-bbqs.org/claim/> .
-@prefix prov:   <http://www.w3.org/ns/prov#> .
-@prefix dct:    <http://purl.org/dc/terms/> .
-@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
-@prefix graph:  <https://brain-bbqs.org/graph/> .
-
-# Generated: 2026-08-28T13:41:11Z
-
+# Generated: 2026-08-28T14:04:47Z
 # Source: people.csv (241 rows) + publications.csv (45 rows)
 
 graph:core {
