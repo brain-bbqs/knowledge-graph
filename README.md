@@ -1,4 +1,4 @@
-# BRAIN BBQS Knowledge Graph · GitHub Pages
+# BRAIN BBQS Knowledge Graph
 
 Interactive visualization of the consortium knowledge graph — people, publications, and working groups — with full L1/L2/L3 provenance layers.
 
