@@ -1,0 +1,1177 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# BRAIN BBQS Knowledge Graph — Curator Config
+# ──────────────────────────────────────────────────────────────────────────────
+#
+# Edit this file to curate people, publications, and authorship claims.
+# Push to main → GitHub Action regenerates kg.trig automatically.
+#
+# Identify people by their primary email address.
+# Claim status options: Verified | Pending | Disputed | Retracted  (or leave "")
+# Security label options: Internal | Public
+# ──────────────────────────────────────────────────────────────────────────────
+
+# ── Identity claims (L2 curation) ────────────────────────────────────────────
+# These control ex:claimStatus and ex:confidence on each person's identity claim.
+# Fill in as you review and confirm each consortium member.
+
+people:
+  abigayle.fogarty@mssm.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  adam.friedman2@mssm.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  adam@adamnoah.com:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  bhisea@chop.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  alenarto@g.ucla.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  adallave@g.ucla.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  acabral30@gatech.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  aw4614@nyu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  sharksinmyhead@gmail.com:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  alireza.kazemi@utah.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  alvarovh@umich.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  amelia.johnson.aj764@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  amrita.nair@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  a.macaskill@ucl.ac.uk:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  anibalsolon@utexas.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  anirvan.nandy@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  estesa@uw.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  awu36@gatech.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  arina.knowlton@nih.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  arish.alreja@pitt.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  afeinsinger@mednet.ucla.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  asg50@pitt.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  aydintasevac@gmail.com:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  bmimica@princeton.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  bolveczky@gmail.com:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  pesaran@upenn.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  brandon.brooks-patton@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  brendan.ito@nyulangone.org:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  brent.kious@hsc.utah.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  bey2103@cumc.columbia.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  brian.gitahi@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  bleonard@mit.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  brock.wester@jhuapl.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  caleb.kemere@rice.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  calebsj@sas.upenn.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  casey.halpern@pennmedicine.upenn.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  zhangcy@mit.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  charles.mikell@stonybrook.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  cheryl.corcoran@mssm.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  christina.hatch@nih.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  christina.liu@nih.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  crozell@gatech.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  ckendell@seas.upenn.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  cody.c.baker.phd@gmail.com:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  cory.inman@psych.utah.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  cs5360@nyu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  crystal.lantz@nih.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  dhs1@nyu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  dana.schloesser@nih.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  danielwesson@ufl.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  ddd@upenn.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  david.schoppik@nyulangone.org:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  david.kennedy@umassmed.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  david.ostry@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  ds5577@nyu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  dayu.lin@nyulangone.org:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  deepa.purushothaman@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  samaras@cs.stonybrook.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  dima@basis.ai:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  duncan1@upenn.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  djarecka@mit.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  kuschnere@chop.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  emily@basis.ai:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  ertin.1@osu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  kleineuw@uw.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  eyttri@andrew.cmu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  erik.c.johnson@jhuapl.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  eunyoung.kim@nih.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  evadyer@gatech.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  stellachang1114@g.ucla.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  firooz@seas.upenn.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  vitalef@pennmedicine.upenn.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  gsahyoun@email.unc.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  gsahyoun@unc.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  ghp2114@cumc.columbia.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  g-shepherd@northwestern.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  grace.hwang@nih.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  gfield@duke.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  han.yi@jhuapl.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  holly.moore@nih.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  hz2555@columbia.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  hongli.wang@berkeley.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  jbeehner@umich.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  jg2269@cumc.columbia.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  boccanfj@pennmedicine.upenn.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  zw24@cornell.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  jylboline@gmail.com:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  simmonsj@mail.nih.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  reiling1@msu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  jarl.haggerty@pennmedicine.upenn.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  jeffmun@uw.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  jeffrey.walker@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  walkerjd@uchicago.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  grammer@ucla.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  jkw131@psu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  jrogers@northwestern.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  jwelshp@gmail.com:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  jongwoon.kim@nyulangone.org:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  joostw@seas.upenn.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  jorge.ortiz@rutgers.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  joseph.colonel@mssm.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  joseph.monaco@nih.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  joseph.neimat@louisville.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  joshua.jacobs@columbia.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  joshua.wu@duke.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  joy.hirsch@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  jylboline@informedminds.info:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  kailin.zhuang@berkeley.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  karen.david@nih.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  kari.johnson@nih.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  karmiella.ferster@mssm.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  kgothard@arizona.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  kate.macduffie@seattlechildrens.org:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  katherine.nagel@nyumc.org:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  katherine.dokholyan@mssm.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  katherine.scangos@pennmedicine.upenn.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  kaysuninf@gmail.com:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  shepard@ee.columbia.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  ka0002@pennmedicine.upenn.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  kostas@cis.upenn.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  ksw5570@psu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  kebouchard@berkeley.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  cz2715@columbia.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  latanebullock@g.harvard.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  lcabrera@psu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  lauren.diaz@jhuapl.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  lensky.augustin@psych.utah.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  wilbrecht@berkeley.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  blaskey@chop.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  lizzy.ankudowich@nih.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  la.garcia@utah.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  bloyl@chop.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  luke.shaw@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  gao0624@gmail.com:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  mansi@oeb.harvard.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  mbaylis@berkeley.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  marcschm@sas.upenn.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  marcela.benitez@emory.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  marcia.patchan@jhuapl.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  mark.tiede@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  shanechi@usc.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  mattson.ogg@jhuapl.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  mauricio.rangel-gomez@nih.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  mvallejomartelo@mednet.ucla.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  mvperdue16@gmail.com:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  meghan.cum@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  mekline@mit.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  mengsen@msu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  merav.sabri@nih.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  mpg8611@nyu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  michael.tadross@duke.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  kimm8@chop.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  ming.zhan@nih.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  monika.jadi@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  muhammad.parvaz@mssm.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  nikbakht@mit.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  npadillacoreano@ufl.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  nanthia@ucla.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  neha.thomas@jhuapl.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  nelleke.vanwouwe@louisville.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  nicole.guittari@jhuapl.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  nicole.stock@jhuapl.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  nm4075@nyu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  nima_d@mit.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  nishant.rao@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  sugavanam.3@osu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  ovm24@drexel.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  oruebel@lbl.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  azizeddi@usc.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  pmcgrath7@gatech.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  Petar.Djuric@stonybrook.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  pgrover@andrew.cmu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  rahul.hingorani@jhuapl.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  ralph@basis.ai:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  rishi.suresh1@pennmedicine.upenn.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  robert.froemke@med.nyu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  rly@lbl.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  sandy.hider@jhuapl.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  sankar.alagapan@gatech.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  sgoering@uw.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  sara.sanchez.alonso@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  satra@mit.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  sequioasmith@ufl.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  shannon.gourley@emory.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  sflagel@med.umich.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  shreya.saxena@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  sx67@scarletmail.rutgers.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  Sima.mofakham@stonybrookmedicine.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  sjuliani@andrew.cmu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  smprince@lbl.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  stephen.heisig@mssm.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  steve.chang@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  sulstice@mit.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  taliaroman1@g.ucla.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  talmo@salk.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  tstjohn@uw.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  te137@echo.rutgers.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  taylor.wise@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  tekraj@mit.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  teneille.brown@law.utah.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  tjernigan@ucsd.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  timbr@uw.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  timothy.dunn@duke.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  robertstim@chop.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  tdaniel60@gatech.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  tlancaster6@gatech.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  talbarran3@gatech.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  klibaite@fas.harvard.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  uros.topalovic@duke.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  varun516@mit.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  vijay@physics.upenn.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  vincent.gracco@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  vprakash@miami.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  wanchenlin@berkeley.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  weikang.shi@yale.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  wn15@rice.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  y.li7@columbia.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  yankun.xu@duke.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  yoh@dartmouth.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  yizuo@ucsc.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  yibei@mit.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  yuan.luo@nih.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  yunsoo.kim@stonybrook.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  chang.1560@osu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  yvonne.bennett@nih.gov:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+  zhengkua@andrew.cmu.edu:
+    claim_status: ""
+    confidence: ""
+    notes: ""
+
+
+# ── Manual authorship links ───────────────────────────────────────────────────
+# Add authorship edges that weren't captured by ORCID matching.
+# pmid: PubMed ID of the publication
+# person_email: email matching a person above
+# claim_status: Verified | Pending | Disputed
+# evidence: URL supporting the claim (optional)
+#
+# Example:
+# authorship:
+#   - pmid: "39680425"
+#     person_email: "ds5577@nyu.edu"
+#     claim_status: Pending
+#     evidence: "https://doi.org/10.7554/eLife.93754"
+
+authorship: []
+
+
+# ── Security label overrides (L3) ────────────────────────────────────────────
+# Override the default security label for specific people.
+# Default for people is "Internal". Leave empty to keep defaults.
+# Options: Internal | Public
+#
+# Example:
+# security:
+#   "some.person@example.com":
+#     label: Public
+#     policy: policy-public-read
+
+security: {}
