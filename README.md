@@ -2,8 +2,6 @@
 
 Interactive visualization of the consortium knowledge graph — people, publications, and working groups — with full L1/L2/L3 provenance layers.
 
-**Live site:** `https://brain-bbqs.github.io/knowledge-graph/`
-
 ---
 
 ## Curator workflow 
