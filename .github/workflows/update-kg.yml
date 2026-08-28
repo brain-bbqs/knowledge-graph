@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - config.yaml
+      - schema.yaml
       - people.csv
       - publications.csv
       - generate_kg.py

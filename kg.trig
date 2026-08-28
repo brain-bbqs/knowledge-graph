@@ -1,6 +1,7 @@
 @prefix schema: <https://schema.org/> .
-@prefix ex:     <https://brain-bbqs.org/vocab/> .
+@prefix ex: <https://brain-bbqs.org/vocab/> .
 @prefix person: <https://brain-bbqs.org/person/> .
+
 @prefix pub:    <https://brain-bbqs.org/pub/> .
 @prefix org:    <https://brain-bbqs.org/org/> .
 @prefix wg:     <https://brain-bbqs.org/wg/> .
@@ -11,6 +12,7 @@
 @prefix graph:  <https://brain-bbqs.org/graph/> .
 
 # Generated: 2026-08-28T13:41:11Z
+
 # Source: people.csv (241 rows) + publications.csv (45 rows)
 
 graph:core {
@@ -18,146 +20,146 @@ graph:core {
 person:25b356ed-4392-46ab-a8ae-723007fb9820
   a schema:Person
   ; schema:name "Abigayle Fogarty"
+  ; schema:email "abigayle.fogarty@mssm.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Icahn School of Medicine at Mount Sinai" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "abigayle.fogarty@mssm.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:0e40f968-3467-456a-b549-fae44df02de1
   a schema:Person
   ; schema:name "Adam Friedman"
+  ; schema:email "adam.friedman2@mssm.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Icahn School of Medicine at Mount Sinai" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "adam.friedman2@mssm.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:44304438-eaf2-4000-87ab-c83ba00472ca
   a schema:Person
   ; schema:name "Adam Noah"
+  ; schema:email "adam@adamnoah.com"
   ; schema:affiliation [ a schema:Organization ; schema:name "Yale University" ]
   ; ex:consortiumRole "Co-Investigator, Research Staff (Scientist and others)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-9773-2790" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "adam@adamnoah.com"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-9773-2790" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:afa4ba56-05c0-46b4-9fec-9e77e355e7be
   a schema:Person
   ; schema:name "Aditya Bhise"
+  ; schema:email "bhisea@chop.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "CHILDREN'S HOSP OF PHILADELPHIA" ]
   ; ex:consortiumRole "Clinical Research Coordinator"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-9144-172X" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "bhisea@chop.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-9144-172X" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:76c07e4e-cb5e-44d9-9fc1-c28161960ec9
   a schema:Person
   ; schema:name "Agatha Lenartowicz"
+  ; schema:email "alenarto@g.ucla.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF CALIFORNIA LOS ANGELES" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:url "www.agathalenartowicz.com"
+  ; ex:memberOf wg:WG-Analytics
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-8015-8251" ]
   ; schema:identifier [ schema:propertyID "GoogleScholar" ; schema:value "AWOkpNcAAAAJ" ]
-  ; ex:memberOf wg:WG-Analytics
-  ; schema:email "alenarto@g.ucla.edu"
+  ; schema:url "www.agathalenartowicz.com"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:73263a75-ff7f-4f28-a2bf-0a6c0f121243
   a schema:Person
   ; schema:name "Alessandra Dallavecchia"
+  ; schema:email "adallave@g.ucla.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UCLA" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-4023-5141" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "adallave@g.ucla.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-4023-5141" ]
   ; prov:generatedAtTime "2026-08-26 21:28:30.952603+00"^^xsd:dateTime .
 
 person:48d3af59-2a49-4b25-b124-4e95ea366542
   a schema:Person
   ; schema:name "Alex Cabral"
+  ; schema:email "acabral30@gatech.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Georgia Tech" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "acabral30@gatech.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:9ff326e3-f123-4d27-9f6e-2063b2da23fe
   a schema:Person
   ; schema:name "Alex Williams"
+  ; schema:email "aw4614@nyu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "New York University" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-5853-103X" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "aw4614@nyu.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-5853-103X" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:49d73b8e-c794-48f5-8155-19e2bde865a4
   a schema:Person
   ; schema:name "Alik S. Widge"
+  ; schema:email "sharksinmyhead@gmail.com"
   ; schema:affiliation [ a schema:Organization ; schema:name "COLUMBIA UNIVERSITY HEALTH SCIENCES" ]
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF MINNESOTA" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:url "https://reporter.nih.gov/search/results?pi_id=6998694"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-1160-1503" ]
-  ; schema:email "sharksinmyhead@gmail.com"
+  ; schema:url "https://reporter.nih.gov/search/results?pi_id=6998694"
   ; prov:generatedAtTime "2026-08-26 21:26:20.263303+00"^^xsd:dateTime .
 
 person:58837953-1c21-4dbf-b293-c1cd3ac25354
   a schema:Person
   ; schema:name "Alireza Kazemi"
+  ; schema:email "alireza.kazemi@utah.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Utah" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-8944-1459" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "alireza.kazemi@utah.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-8944-1459" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:e333d557-07da-417f-95e2-f10af7553044
   a schema:Person
   ; schema:name "Álvaro Vega Hidalgo"
+  ; schema:email "alvarovh@umich.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Michigan" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-4088-8027" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "alvarovh@umich.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-4088-8027" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:6e5c5559-931a-49d7-8640-bcac43a319a2
   a schema:Person
   ; schema:name "Amelia Johnson"
+  ; schema:email "amelia.johnson.aj764@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Yale University" ]
   ; ex:consortiumRole "research assistant"
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "amelia.johnson.aj764@yale.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:d57721ca-55a4-49fe-87ce-d4b6851409dd
   a schema:Person
   ; schema:name "Amrita Nair"
+  ; schema:email "amrita.nair@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Yale university" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
-  ; schema:email "amrita.nair@yale.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:81184cd1-60bb-4a2f-b52e-b7e4f37c06cc
   a schema:Person
   ; schema:name "Andrew MacAskill"
+  ; schema:email "a.macaskill@ucl.ac.uk"
   ; schema:affiliation [ a schema:Organization ; schema:name "UCL" ]
   ; ex:consortiumRole "Co-Investigator"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-0196-3779" ]
-  ; schema:email "a.macaskill@ucl.ac.uk"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:9a334950-2041-4e76-b53b-35769309bfc7
@@ -169,44 +171,44 @@ person:9a334950-2041-4e76-b53b-35769309bfc7
 person:ab105a16-c539-4394-a395-46caa3b1de57
   a schema:Person
   ; schema:name "Anirvan Nandy"
+  ; schema:email "anirvan.nandy@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "YALE UNIVERSITY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-4225-5349" ]
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "anirvan.nandy@yale.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-4225-5349" ]
   ; prov:generatedAtTime "2026-08-26 21:27:12.22589+00"^^xsd:dateTime .
 
 person:9929cc8f-8e32-40cf-b3ec-7c517f054930
   a schema:Person
   ; schema:name "Annette Estes"
+  ; schema:email "estesa@uw.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Washington" ]
   ; ex:consortiumRole "Co-Investigator"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-2687-4155" ]
-  ; schema:email "estesa@uw.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:9bd46b7d-62d8-4531-afea-77178cd24219
   a schema:Person
   ; schema:name "anqi wu"
+  ; schema:email "awu36@gatech.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "georgia institute of technology" ]
   ; ex:consortiumRole "Co-Investigator"
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "awu36@gatech.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:e26d868f-f252-4306-8def-0023da48868a
   a schema:Person
   ; schema:name "Arina Knowlton"
+  ; schema:email "arina.knowlton@nih.gov"
   ; schema:affiliation [ a schema:Organization ; schema:name "NIH/NIMH" ]
   ; ex:consortiumRole "NIH Program"
-  ; schema:email "arina.knowlton@nih.gov"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:47163df7-f592-43da-805a-f0f9619282c9
   a schema:Person
   ; schema:name "Arish Alreja"
-  ; schema:affiliation [ a schema:Organization ; schema:name "PITT" ]
   ; schema:email "arish.alreja@pitt.edu"
+  ; schema:affiliation [ a schema:Organization ; schema:name "PITT" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:38db2a70-c62c-4c2b-9a61-7a580156039f
@@ -218,154 +220,154 @@ person:38db2a70-c62c-4c2b-9a61-7a580156039f
 person:fd7496a7-7f0c-4b64-a6dd-b97f9954da23
   a schema:Person
   ; schema:name "Ashley Feinsinger"
+  ; schema:email "afeinsinger@mednet.ucla.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UCLA" ]
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-0251-8810" ]
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "afeinsinger@mednet.ucla.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-0251-8810" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:0e71e774-7754-4096-b22c-af426ebae4a3
   a schema:Person
   ; schema:name "Avniel Ghuman"
+  ; schema:email "asg50@pitt.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Pittsburgh" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:email "asg50@pitt.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:1f5e8565-93b6-4d90-94ad-cd44b20eca6f
   a schema:Person
   ; schema:name "Aydin Tasevac"
+  ; schema:email "aydintasevac@gmail.com"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Utah" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "aydintasevac@gmail.com"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:627da185-0c0d-48f5-b68d-bfe1dc976571
   a schema:Person
   ; schema:name "Bartul Mimica"
+  ; schema:email "bmimica@princeton.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Princeton Neuroscience Institute" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-6404-0560" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "bmimica@princeton.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-6404-0560" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:526eb63b-840a-4d58-925c-6ecf666fe436
   a schema:Person
   ; schema:name "Bence P Olveczky"
+  ; schema:email "bolveczky@gmail.com"
   ; schema:affiliation [ a schema:Organization ; schema:name "DUKE UNIVERSITY" ]
   ; schema:affiliation [ a schema:Organization ; schema:name "HARVARD UNIVERSITY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:url "https://reporter.nih.gov/search/results?pi_id=9361217"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-0208-5793" ]
-  ; schema:email "bolveczky@gmail.com"
+  ; schema:url "https://reporter.nih.gov/search/results?pi_id=9361217"
   ; prov:generatedAtTime "2026-08-26 21:26:20.263303+00"^^xsd:dateTime .
 
 person:d265b89e-46e6-4a15-94c4-48e98416ac49
   a schema:Person
   ; schema:name "Bijan Pesaran"
+  ; schema:email "pesaran@upenn.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Pennsylvania" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:url "https://www.pesaranlab.org"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-8380-4043" ]
-  ; schema:identifier [ schema:propertyID "GoogleScholar" ; schema:value "fKsY32YAAAAJ&hl" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "pesaran@upenn.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-8380-4043" ]
+  ; schema:identifier [ schema:propertyID "GoogleScholar" ; schema:value "fKsY32YAAAAJ&hl" ]
+  ; schema:url "https://www.pesaranlab.org"
   ; prov:generatedAtTime "2026-08-26 17:18:19.287154+00"^^xsd:dateTime .
 
 person:9cf4bba5-e7cb-4022-b64f-571a7aac913c
   a schema:Person
   ; schema:name "Brandon Brooks-Patton"
+  ; schema:email "brandon.brooks-patton@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Yale University" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:email "brandon.brooks-patton@yale.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:7d65f0aa-ab58-4598-93f6-8d95fa282983
   a schema:Person
   ; schema:name "Brendan Ito"
+  ; schema:email "brendan.ito@nyulangone.org"
   ; schema:affiliation [ a schema:Organization ; schema:name "NYU Langone" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "brendan.ito@nyulangone.org"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:591812cc-0d3c-478c-b39b-46c207fcff03
   a schema:Person
   ; schema:name "Brent Kious"
+  ; schema:email "brent.kious@hsc.utah.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Utah" ]
   ; ex:consortiumRole "Co-Investigator"
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "brent.kious@hsc.utah.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:cbc5d361-b832-4bb9-b5dc-cbbe5e3440a7
   a schema:Person
   ; schema:name "Brett E Youngerman"
+  ; schema:email "bey2103@cumc.columbia.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "COLUMBIA UNIVERSITY HEALTH SCIENCES" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:url "https://reporter.nih.gov/search/results?pi_id=16101509"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-8264-0476" ]
-  ; schema:email "bey2103@cumc.columbia.edu"
+  ; schema:url "https://reporter.nih.gov/search/results?pi_id=16101509"
   ; prov:generatedAtTime "2026-08-26 19:29:26.951636+00"^^xsd:dateTime .
 
 person:b6553ddc-8cb6-44ae-97ac-c001b8507816
   a schema:Person
   ; schema:name "Brian Gitahi"
+  ; schema:email "brian.gitahi@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Yale University" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "brian.gitahi@yale.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:26aeca49-33ce-4f65-8540-92be9adab5e5
   a schema:Person
   ; schema:name "Brian Leonard"
-  ; schema:affiliation [ a schema:Organization ; schema:name "Massachusetts Institute of Technology" ]
   ; schema:email "bleonard@mit.edu"
+  ; schema:affiliation [ a schema:Organization ; schema:name "Massachusetts Institute of Technology" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:6c29ca85-4754-4a2f-969d-73a1d82e9dfb
   a schema:Person
   ; schema:name "Brock Wester"
+  ; schema:email "brock.wester@jhuapl.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "JOHNS HOPKINS UNIVERSITY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-1500-2143" ]
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "brock.wester@jhuapl.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-1500-2143" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:c01cc3c1-56ac-4af6-bb45-98ff5c93608f
   a schema:Person
   ; schema:name "Caleb Kemere"
+  ; schema:email "caleb.kemere@rice.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "RICE UNIVERSITY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-2054-0234" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "caleb.kemere@rice.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-2054-0234" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:fe80ae36-7bca-4b3c-9dea-fd006ffab1d9
   a schema:Person
   ; schema:name "Caleb Scott-Joseph"
+  ; schema:email "calebsj@sas.upenn.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Pennsylvania" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:email "calebsj@sas.upenn.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:b2e00482-01a7-4a99-8e41-0d3e7aea05c3
   a schema:Person
   ; schema:name "Casey Harrison Halpern"
+  ; schema:email "casey.halpern@pennmedicine.upenn.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Pennsylvania" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:email "casey.halpern@pennmedicine.upenn.edu"
   ; prov:generatedAtTime "2026-08-18 14:35:56.511107+00"^^xsd:dateTime .
 
 person:2c049d83-b501-4fe5-a2cd-54f0cce6185e
@@ -377,192 +379,192 @@ person:2c049d83-b501-4fe5-a2cd-54f0cce6185e
 person:f7ef0d2b-920e-4be9-9b84-de0d6684530f
   a schema:Person
   ; schema:name "Charles Mikell"
+  ; schema:email "charles.mikell@stonybrook.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Stonybrook" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-0701-2325" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "charles.mikell@stonybrook.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-0701-2325" ]
   ; prov:generatedAtTime "2026-08-26 19:29:26.951636+00"^^xsd:dateTime .
 
 person:a7ea7cfc-b22b-4392-ac27-4999cba496fb
   a schema:Person
   ; schema:name "Cheryl Corcoran"
+  ; schema:email "cheryl.corcoran@mssm.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "ICAHN SCHOOL OF MEDICINE AT MOUNT SINAI" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "cheryl.corcoran@mssm.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:754f6bf7-9bc1-47e4-ad68-b47562e0d01f
   a schema:Person
   ; schema:name "Christina Hatch"
-  ; schema:affiliation [ a schema:Organization ; schema:name "National Institutes of Health" ]
   ; schema:email "christina.hatch@nih.gov"
+  ; schema:affiliation [ a schema:Organization ; schema:name "National Institutes of Health" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:c3c235c0-42ea-4bb0-83fb-d183ab602263
   a schema:Person
   ; schema:name "Christina Liu"
-  ; schema:affiliation [ a schema:Organization ; schema:name "National Institutes of Health" ]
   ; schema:email "christina.liu@nih.gov"
+  ; schema:affiliation [ a schema:Organization ; schema:name "National Institutes of Health" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:3c4bfa09-f26a-4918-84e6-0f6f7f457521
   a schema:Person
   ; schema:name "Christopher Rozell"
+  ; schema:email "crozell@gatech.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "GEORGIA INSTITUTE OF TECHNOLOGY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-5173-1661" ]
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "crozell@gatech.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-5173-1661" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:d13edcfa-5290-4503-915c-67b4e41e6065
   a schema:Person
   ; schema:name "Claire Kendell"
+  ; schema:email "ckendell@seas.upenn.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Pennsylvania" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-1896-4698" ]
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "ckendell@seas.upenn.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-1896-4698" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:06fb3187-c680-414d-95bc-6a84f90da898
   a schema:Person
   ; schema:name "Cody Baker"
+  ; schema:email "cody.c.baker.phd@gmail.com"
   ; schema:affiliation [ a schema:Organization ; schema:name "Dartmouth College" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-0829-4790" ]
-  ; schema:identifier [ schema:propertyID "GoogleScholar" ; schema:value "https://scholar.google.com/citations?user=kqXKPnAAAAAJ&hl=en" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "cody.c.baker.phd@gmail.com"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-0829-4790" ]
+  ; schema:identifier [ schema:propertyID "GoogleScholar" ; schema:value "https://scholar.google.com/citations?user=kqXKPnAAAAAJ&hl=en" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:f7440f36-7bf3-4fa1-9502-7969f6fc6a1f
   a schema:Person
   ; schema:name "Cory Inman"
+  ; schema:email "cory.inman@psych.utah.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UTAH STATE HIGHER EDUCATION SYSTEM--UNIVERSITY OF UTAH" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "cory.inman@psych.utah.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:93447677-b9aa-4ee6-8fe7-7d06b1d0c013
   a schema:Person
   ; schema:name "Cristina Savin"
+  ; schema:email "cs5360@nyu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "NEW YORK UNIVERSITY SCHOOL OF MEDICINE" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-3414-8244" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "cs5360@nyu.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-3414-8244" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:d5e4f90d-2458-452a-b7d9-0075b4be9802
   a schema:Person
   ; schema:name "Crystal Lantz"
-  ; ex:consortiumRole "NIH Program"
   ; schema:email "crystal.lantz@nih.gov"
+  ; ex:consortiumRole "NIH Program"
   ; prov:generatedAtTime "2026-07-13 12:00:20.761081+00"^^xsd:dateTime .
 
 person:451ac298-4444-4575-99d2-a7f33b41406d
   a schema:Person
   ; schema:name "Dan Sanes"
+  ; schema:email "dhs1@nyu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "NEW YORK UNIVERSITY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-3783-6165" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "dhs1@nyu.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-3783-6165" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:82cab64f-83e0-4467-8d85-6bd5beb4921b
   a schema:Person
   ; schema:name "Dana Schloesser"
+  ; schema:email "dana.schloesser@nih.gov"
   ; schema:affiliation [ a schema:Organization ; schema:name "NIH/OBSSR" ]
   ; ex:consortiumRole "NIH Program"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "dana.schloesser@nih.gov"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:82751e5a-0987-474a-98b9-7ae068507ce6
   a schema:Person
   ; schema:name "Daniel W Wesson"
+  ; schema:email "danielwesson@ufl.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF FLORIDA" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; schema:url "https://reporter.nih.gov/search/results?pi_id=9643974"
-  ; schema:email "danielwesson@ufl.edu"
   ; prov:generatedAtTime "2026-08-26 21:27:12.22589+00"^^xsd:dateTime .
 
 person:aefd64de-51c3-4eda-8ef3-498fd2efed10
   a schema:Person
   ; schema:name "Darrell De Freitas"
+  ; schema:email "ddd@upenn.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UPenn / Pennsieve" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-3717-3007" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "ddd@upenn.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-3717-3007" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:f8fcad5f-803a-4cd5-8e03-1d7604ca98f8
   a schema:Person
   ; schema:name "David  Schoppik"
+  ; schema:email "david.schoppik@nyulangone.org"
   ; schema:affiliation [ a schema:Organization ; schema:name "NEW YORK UNIVERSITY SCHOOL OF MEDICINE" ]
   ; ex:consortiumRole "Assistant Professor"
   ; schema:url "https://reporter.nih.gov/search/results?pi_id=9172467"
-  ; schema:email "david.schoppik@nyulangone.org"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:f1ff1881-82e7-4d8a-ad77-28efb05a4890
   a schema:Person
   ; schema:name "David Kennedy"
+  ; schema:email "david.kennedy@umassmed.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "MASSACHUSETTS INSTITUTE OF TECHNOLOGY" ]
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIV OF MASSACHUSETTS MED SCH WORCESTER" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-9377-0797" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "david.kennedy@umassmed.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-9377-0797" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:8d233602-8c01-4847-ae37-fcb6cd055267
   a schema:Person
   ; schema:name "David Ostry"
+  ; schema:email "david.ostry@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Yale Child Study Center" ]
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:email "david.ostry@yale.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:edf92e19-cd5f-4cf6-9d51-6d371c6cff52
   a schema:Person
   ; schema:name "David Schneider"
+  ; schema:email "ds5577@nyu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "NEW YORK UNIVERSITY" ]
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF ALABAMA AT BIRMINGHAM" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-8945-2024" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "ds5577@nyu.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-8945-2024" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:8c409880-03c5-4730-b397-0745b74df42f
   a schema:Person
   ; schema:name "Dayu Lin"
+  ; schema:email "dayu.lin@nyulangone.org"
   ; schema:affiliation [ a schema:Organization ; schema:name "NEW YORK UNIVERSITY SCHOOL OF MEDICINE" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-2006-0791" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "dayu.lin@nyulangone.org"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-2006-0791" ]
   ; prov:generatedAtTime "2026-08-12 20:10:56.949668+00"^^xsd:dateTime .
 
 person:8736c0bb-39e2-411a-bb7e-72d9c2f09fdc
@@ -574,33 +576,33 @@ person:8736c0bb-39e2-411a-bb7e-72d9c2f09fdc
 person:589278f9-9638-4d92-9b4d-dc10f3f5f0a0
   a schema:Person
   ; schema:name "Dimitris Samaras"
+  ; schema:email "samaras@cs.stonybrook.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Sony Brook University" ]
   ; ex:consortiumRole "Consultant"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-1373-0294" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "samaras@cs.stonybrook.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-1373-0294" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:8b883b79-01a5-4a2f-90c6-effbce0df0a6
   a schema:Person
   ; schema:name "Dmitry Batenkov"
+  ; schema:email "dima@basis.ai"
   ; schema:affiliation [ a schema:Organization ; schema:name "Basis Research Institute" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-2679-0138" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "dima@basis.ai"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-2679-0138" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:2c3ed28e-b458-4ac5-aaff-ae7a319bcbb0
   a schema:Person
   ; schema:name "Dominique Duncan"
+  ; schema:email "duncan1@upenn.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Pennsylvania" ]
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-6154-9262" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "duncan1@upenn.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-6154-9262" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:15333100-117f-44b1-897b-511195aab76f
@@ -612,94 +614,94 @@ person:15333100-117f-44b1-897b-511195aab76f
 person:0d6dc865-4be5-4eab-917e-baf9b9398fb1
   a schema:Person
   ; schema:name "Emily Kuschner"
+  ; schema:email "kuschnere@chop.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "CHOP/UPenn" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-1251-1468" ]
-  ; schema:email "kuschnere@chop.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:42343ac3-9721-45ce-905d-190bf8a5ffa4
   a schema:Person
   ; schema:name "Emily Mackevicius"
+  ; schema:email "emily@basis.ai"
   ; schema:affiliation [ a schema:Organization ; schema:name "Basis Research Institute" ]
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-6593-4398" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "emily@basis.ai"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-6593-4398" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:214ad725-2efe-4034-9d4d-d0784b3e2068
   a schema:Person
   ; schema:name "Emre Ertin"
+  ; schema:email "ertin.1@osu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF CALIFORNIA LOS ANGELES" ]
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF MEMPHIS" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-7815-0728" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "ertin.1@osu.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-7815-0728" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:03efd1b7-e5d9-4de2-a0d4-22159f478d6b
   a schema:Person
   ; schema:name "Eran Klein"
+  ; schema:email "kleineuw@uw.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Oregon Health and Science University" ]
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Washington" ]
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-0132-5777" ]
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "kleineuw@uw.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-0132-5777" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:847323c3-9bda-4dc1-a7ba-4762877eb212
   a schema:Person
   ; schema:name "Eric Yttri"
+  ; schema:email "eyttri@andrew.cmu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "CARNEGIE-MELLON UNIVERSITY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-7214-1481" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "eyttri@andrew.cmu.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-7214-1481" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:fe79ef5c-430e-4129-807d-9628c0cc00d2
   a schema:Person
   ; schema:name "Erik Johnson"
+  ; schema:email "erik.c.johnson@jhuapl.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "JHU/APL" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-7397-8531" ]
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "erik.c.johnson@jhuapl.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-7397-8531" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:b08d83c8-bd53-4e65-a5b7-194aeb8110d7
   a schema:Person
   ; schema:name "Eunyoung Kim"
+  ; schema:email "eunyoung.kim@nih.gov"
   ; schema:affiliation [ a schema:Organization ; schema:name "NIH/NIMH/BRAIN Initiative" ]
   ; ex:consortiumRole "NIH Program"
-  ; schema:email "eunyoung.kim@nih.gov"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:df09e3e5-4c8d-4bac-a700-1ac71b424cfa
   a schema:Person
   ; schema:name "Eva Dyer"
+  ; schema:email "evadyer@gatech.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "GEORGIA INSTITUTE OF TECHNOLOGY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-6755-0259" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "evadyer@gatech.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-6755-0259" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:83b4214e-58e9-4e26-b32f-57e48e64480d
   a schema:Person
   ; schema:name "Fang Yu Chang"
+  ; schema:email "stellachang1114@g.ucla.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UCLA" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-5511-3876" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "stellachang1114@g.ucla.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-5511-3876" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:a9a6ec0a-0da6-4b05-bb34-5084d0bdb4c8
@@ -711,17 +713,17 @@ person:a9a6ec0a-0da6-4b05-bb34-5084d0bdb4c8
 person:6d12fe45-f956-4f01-9a5e-3cdc47dd6ae9
   a schema:Person
   ; schema:name "Firooz Aflatouni"
+  ; schema:email "firooz@seas.upenn.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Pennsylvania" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:email "firooz@seas.upenn.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:da40977d-e7ea-4d66-8f3a-66751e3f4698
   a schema:Person
   ; schema:name "Flavia Vitale"
+  ; schema:email "vitalef@pennmedicine.upenn.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Pennsylvania" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:email "vitalef@pennmedicine.upenn.edu"
   ; prov:generatedAtTime "2026-08-18 14:30:18.193465+00"^^xsd:dateTime .
 
 person:db3664dc-fbc1-4f65-9822-5871d92e905a
@@ -736,140 +738,140 @@ person:db3664dc-fbc1-4f65-9822-5871d92e905a
 person:e1c5b819-ef75-4de9-9a3a-1aad9f4a5170
   a schema:Person
   ; schema:name "Gabriella"
-  ; schema:affiliation [ a schema:Organization ; schema:name "UNC" ]
   ; schema:email "gsahyoun@email.unc.edu"
+  ; schema:affiliation [ a schema:Organization ; schema:name "UNC" ]
   ; prov:generatedAtTime "2026-08-13 14:33:08.719038+00"^^xsd:dateTime .
 
 person:2af1e903-1322-4197-badc-b6f339909370
   a schema:Person
   ; schema:name "Gabriella Sahyoun"
+  ; schema:email "gsahyoun@unc.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of North Carolina at Chapel Hill" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:email "gsahyoun@unc.edu"
   ; prov:generatedAtTime "2026-08-19 20:18:49.802138+00"^^xsd:dateTime .
 
 person:fe69e4da-1b82-4751-a04d-00642950103c
   a schema:Person
   ; schema:name "Gaurav Patel"
+  ; schema:email "ghp2114@cumc.columbia.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Columbia University" ]
   ; ex:consortiumRole "Co-Investigator"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-0028-2098" ]
-  ; schema:email "ghp2114@cumc.columbia.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:9dc36d12-9ffa-42fa-b51d-798e9d827bd8
   a schema:Person
   ; schema:name "Gordon Shepherd"
+  ; schema:email "g-shepherd@northwestern.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "NORTHWESTERN UNIVERSITY AT CHICAGO" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:email "g-shepherd@northwestern.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:1e22ec9a-d957-46a7-868e-e1b8f25a901a
   a schema:Person
   ; schema:name "Grace Hwang"
+  ; schema:email "grace.hwang@nih.gov"
   ; schema:affiliation [ a schema:Organization ; schema:name "NIH" ]
   ; ex:consortiumRole "NIH Program"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-3335-8688" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "grace.hwang@nih.gov"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-3335-8688" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:0363e75e-d8c2-4af8-96a6-4534c9de52ff
   a schema:Person
   ; schema:name "Gregory Darin Field"
+  ; schema:email "gfield@duke.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "DUKE UNIVERSITY" ]
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF CALIFORNIA LOS ANGELES" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:url "https://reporter.nih.gov/search/results?pi_id=11483919"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-7461-8610" ]
-  ; schema:email "gfield@duke.edu"
+  ; schema:url "https://reporter.nih.gov/search/results?pi_id=11483919"
   ; prov:generatedAtTime "2026-08-26 21:26:20.263303+00"^^xsd:dateTime .
 
 person:f9013fb9-c001-4921-82d0-925f6928110e
   a schema:Person
   ; schema:name "Han Yi"
+  ; schema:email "han.yi@jhuapl.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Johns Hopkins University Applied Physics Laboratory" ]
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-7152-3712" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "han.yi@jhuapl.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-7152-3712" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:ea888d2a-5eb1-43fc-af88-891a8b325afd
   a schema:Person
   ; schema:name "Holly Moore"
+  ; schema:email "holly.moore@nih.gov"
   ; schema:affiliation [ a schema:Organization ; schema:name "NIH" ]
   ; ex:consortiumRole "NIH Program"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "holly.moore@nih.gov"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:c1f28505-ffa5-4873-8ef8-4efee625ae7a
   a schema:Person
   ; schema:name "Hongkun Zhu"
+  ; schema:email "hz2555@columbia.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Columbia Univeristy" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0007-2560-9639" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "hz2555@columbia.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0007-2560-9639" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:45704456-4840-48e2-8d99-dd09dc509e41
   a schema:Person
   ; schema:name "Hongli Wang"
+  ; schema:email "hongli.wang@berkeley.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UC Berkeley" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "hongli.wang@berkeley.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:42ed8955-1ce8-45ae-a2e2-58f94e191f80
   a schema:Person
   ; schema:name "Jacinta Beehner"
+  ; schema:email "jbeehner@umich.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF MICHIGAN AT ANN ARBOR" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-6566-6872" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "jbeehner@umich.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-6566-6872" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:0aa1adf0-c841-4513-928b-260afbff27ae
   a schema:Person
   ; schema:name "Jack Grinband"
+  ; schema:email "jg2269@cumc.columbia.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "ICAHN SCHOOL OF MEDICINE AT MOUNT SINAI" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; schema:url "https://reporter.nih.gov/search/results?pi_id=1922654"
-  ; schema:email "jg2269@cumc.columbia.edu"
   ; prov:generatedAtTime "2026-08-26 21:26:20.263303+00"^^xsd:dateTime .
 
 person:a33e0881-43a9-406a-be48-5c59cd411860
   a schema:Person
   ; schema:name "Jacqueline Boccanfuso"
+  ; schema:email "boccanfj@pennmedicine.upenn.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Pennsylvania" ]
   ; schema:affiliation [ a schema:Organization ; schema:name "Pennsieve" ]
   ; ex:consortiumRole "Project Manager"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-1307-2268" ]
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "boccanfj@pennmedicine.upenn.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-1307-2268" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:200ceb1a-739b-4fa1-b259-93aeefbce55b
   a schema:Person
   ; schema:name "Jane  Wang"
+  ; schema:email "zw24@cornell.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "NEW YORK UNIVERSITY SCHOOL OF MEDICINE" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; schema:url "https://reporter.nih.gov/search/results?pi_id=79020074"
-  ; schema:email "zw24@cornell.edu"
   ; prov:generatedAtTime "2026-08-26 21:33:01.520265+00"^^xsd:dateTime .
 
 person:7040e06c-adca-4319-bfa6-d80009b4cfd4
@@ -881,48 +883,48 @@ person:7040e06c-adca-4319-bfa6-d80009b4cfd4
 person:203fd2b8-7e20-4acd-97f2-0bf787fdfbb3
   a schema:Person
   ; schema:name "Janine Simmons"
+  ; schema:email "simmonsj@mail.nih.gov"
   ; schema:affiliation [ a schema:Organization ; schema:name "NIH/OBSSR" ]
   ; ex:consortiumRole "NIH Program"
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "simmonsj@mail.nih.gov"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:5b833684-d9a0-4df4-ac5c-4cc8ccc52c92
   a schema:Person
   ; schema:name "Jared Reiling"
+  ; schema:email "reiling1@msu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "MICHIGAN STATE UNIVERSITY" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:url "https://jreiling1.github.io/"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-1942-237X" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "reiling1@msu.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-1942-237X" ]
+  ; schema:url "https://jreiling1.github.io/"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:36b4ca07-7ea2-455e-9981-9da6234fcc68
   a schema:Person
   ; schema:name "Jarl Haggerty"
+  ; schema:email "jarl.haggerty@pennmedicine.upenn.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Pennsylvania" ]
   ; ex:consortiumRole "Application Developer"
-  ; schema:email "jarl.haggerty@pennmedicine.upenn.edu"
   ; prov:generatedAtTime "2026-08-20 21:09:39.693497+00"^^xsd:dateTime .
 
 person:8f382f08-c089-4b30-9401-531521e9269e
   a schema:Person
   ; schema:name "Jeff Munson"
+  ; schema:email "jeffmun@uw.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Washington" ]
   ; ex:consortiumRole "Co-Investigator, Data Manager/Submitter"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-1798-8927" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "jeffmun@uw.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-1798-8927" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:9652fe43-6b38-478d-a2c0-4aee1f0ca1c8
   a schema:Person
   ; schema:name "Jeffery Walker"
+  ; schema:email "jeffrey.walker@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "YALE UNIVERSITY" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "jeffrey.walker@yale.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:6d4d8971-86df-4b05-a1d5-122f2add703d
@@ -934,40 +936,40 @@ person:6d4d8971-86df-4b05-a1d5-122f2add703d
 person:41b2db5b-71fc-4e4b-8b2d-11bbdc4c2d18
   a schema:Person
   ; schema:name "Jennie Grammer"
+  ; schema:email "grammer@ucla.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF CALIFORNIA LOS ANGELES" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "grammer@ucla.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:c0280164-d6b7-4196-9ebf-2d3506dfeb2f
   a schema:Person
   ; schema:name "Jennifer Wagner"
+  ; schema:email "jkw131@psu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Penn State University" ]
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-2278-0306" ]
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "jkw131@psu.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-2278-0306" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:50289f42-2f53-4ec2-bd71-8168cb068d42
   a schema:Person
   ; schema:name "John  Rogers"
+  ; schema:email "jrogers@northwestern.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF PITTSBURGH AT PITTSBURGH" ]
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:email "jrogers@northwestern.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:a96e39ca-bb46-4c31-8742-5c16ef49154f
   a schema:Person
   ; schema:name "John Welsh"
+  ; schema:email "jwelshp@gmail.com"
   ; schema:affiliation [ a schema:Organization ; schema:name "SEATTLE CHILDREN'S HOSPITAL" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-1012-4360" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "jwelshp@gmail.com"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-1012-4360" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00]"^^xsd:dateTime .
 
 person:41dea08c-4869-40d2-9950-4261986392b1
@@ -981,253 +983,253 @@ person:41dea08c-4869-40d2-9950-4261986392b1
 person:1e633755-3bf2-4917-b90d-b000bd21411e
   a schema:Person
   ; schema:name "Jongwoon Kim"
+  ; schema:email "jongwoon.kim@nyulangone.org"
   ; schema:affiliation [ a schema:Organization ; schema:name "NYU" ]
   ; schema:affiliation [ a schema:Organization ; schema:name "Columbia University" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:email "jongwoon.kim@nyulangone.org"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:1a7e3c30-709b-4017-ae57-f4f7252c9315
   a schema:Person
   ; schema:name "Joost Wagenaar"
+  ; schema:email "joostw@seas.upenn.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Pennsylvania" ]
   ; ex:consortiumRole "Data Infrastructure support"
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "joostw@seas.upenn.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:2b95e3a8-0938-49fc-9e16-9043a8eebb59
   a schema:Person
   ; schema:name "Jorge Ortiz"
+  ; schema:email "jorge.ortiz@rutgers.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "COLUMBIA UNIVERSITY HEALTH SCIENCES" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-3325-1298" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "jorge.ortiz@rutgers.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-3325-1298" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:adb0503e-adbc-420c-b9fd-89332760c674
   a schema:Person
   ; schema:name "Joseph Colonel"
+  ; schema:email "joseph.colonel@mssm.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Psychiatry" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0000-5516-9231" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "joseph.colonel@mssm.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0000-5516-9231" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:f9f24553-c42a-42c0-bf47-4a394251e1b0
   a schema:Person
   ; schema:name "Joseph Monaco"
+  ; schema:email "joseph.monaco@nih.gov"
   ; schema:affiliation [ a schema:Organization ; schema:name "NIH/BRAIN" ]
   ; ex:consortiumRole "NIH Program"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-0792-8322" ]
-  ; schema:email "joseph.monaco@nih.gov"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:3bce9664-be62-45ef-93e6-7f6c0af639b3
   a schema:Person
   ; schema:name "Joseph Neimat"
+  ; schema:email "joseph.neimat@louisville.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Louisville" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "joseph.neimat@louisville.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:b7dd300c-2899-4d41-963f-e5909891ba4c
   a schema:Person
   ; schema:name "Joshua Jacobs"
+  ; schema:email "joshua.jacobs@columbia.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "COLUMBIA UNIVERSITY HEALTH SCIENCES" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-1807-6882" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "joshua.jacobs@columbia.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-1807-6882" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:5fdfb8bc-8da1-48ea-8287-b5899c639571
   a schema:Person
   ; schema:name "Joshua Wu"
+  ; schema:email "joshua.wu@duke.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "DUKE" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "joshua.wu@duke.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:6d94768e-5f0f-47ea-afba-8b9c977b72a5
   a schema:Person
   ; schema:name "Joy Hirsch"
+  ; schema:email "joy.hirsch@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "YALE UNIVERSITY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:email "joy.hirsch@yale.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:5b42d42e-0023-430c-a8d5-f165d6ce8826
   a schema:Person
   ; schema:name "Jyl Boline"
+  ; schema:email "jylboline@informedminds.info"
   ; schema:affiliation [ a schema:Organization ; schema:name "Informed Minds Inc." ]
   ; ex:consortiumRole "Project Manager"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-5232-8364" ]
-  ; schema:email "jylboline@informedminds.info"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:6406a1d0-f81c-4975-9e25-b29fd3fc4898
   a schema:Person
   ; schema:name "Kailin Zhuang"
+  ; schema:email "kailin.zhuang@berkeley.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of California" ]
   ; schema:affiliation [ a schema:Organization ; schema:name "Berkeley" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-9233-534X" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "kailin.zhuang@berkeley.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-9233-534X" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:017f3522-7288-4efc-8e32-4ecec7d6d7ed
   a schema:Person
   ; schema:name "Karen David"
+  ; schema:email "karen.david@nih.gov"
   ; schema:affiliation [ a schema:Organization ; schema:name "NIH" ]
   ; ex:consortiumRole "NIH Program"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0002-6652-2283" ]
-  ; schema:email "karen.david@nih.gov"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:f66e5087-aa21-4f12-b9e6-c25796a7d415
   a schema:Person
   ; schema:name "Kari Johnson"
+  ; schema:email "kari.johnson@nih.gov"
   ; schema:affiliation [ a schema:Organization ; schema:name "NIH" ]
   ; ex:consortiumRole "NIH Program"
-  ; schema:email "kari.johnson@nih.gov"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:69b111db-c684-4f73-85eb-156c77402bc9
   a schema:Person
   ; schema:name "Karmiella Ferster"
+  ; schema:email "karmiella.ferster@mssm.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Icahn School of Medicine at Mount Sinai" ]
   ; ex:consortiumRole "Research Staff (Scientist and others), Admin"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0001-3106-1979" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "karmiella.ferster@mssm.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0001-3106-1979" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:bb06ade1-aa49-4b4b-b064-100d1186baca
   a schema:Person
   ; schema:name "Katalin Gothard"
+  ; schema:email "kgothard@arizona.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "The University of Arizona" ]
   ; ex:consortiumRole "con sultant"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-9642-2985" ]
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "kgothard@arizona.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-9642-2985" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:6a9b234d-5378-4db6-ad9a-a05abded1637
   a schema:Person
   ; schema:name "Kate MacDuffie"
+  ; schema:email "kate.macduffie@seattlechildrens.org"
   ; schema:affiliation [ a schema:Organization ; schema:name "Seattle Children's Research Institute" ]
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-1252-4373" ]
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "kate.macduffie@seattlechildrens.org"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-1252-4373" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:9d7a13b8-629e-4edb-a4d1-d5f5f4768b0c
   a schema:Person
   ; schema:name "Katherine  Nagel"
+  ; schema:email "katherine.nagel@nyumc.org"
   ; schema:affiliation [ a schema:Organization ; schema:name "NEW YORK UNIVERSITY SCHOOL OF MEDICINE" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; schema:url "https://reporter.nih.gov/search/results?pi_id=10793375"
-  ; schema:email "katherine.nagel@nyumc.org"
   ; prov:generatedAtTime "2026-08-26 21:27:12.22589+00"^^xsd:dateTime .
 
 person:47e388ee-7bae-42f0-ad25-c03291936a61
   a schema:Person
   ; schema:name "Katherine Dokholyan"
+  ; schema:email "katherine.dokholyan@mssm.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Icahn School of Medicine At Mount Sinai" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "katherine.dokholyan@mssm.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:ebe13346-0d61-4e78-88d3-977dd2a626a0
   a schema:Person
   ; schema:name "Katherine W Scangos"
+  ; schema:email "katherine.scangos@pennmedicine.upenn.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Pennsylvania" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-7983-7767" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "katherine.scangos@pennmedicine.upenn.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-7983-7767" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:1ff27c7d-e3a6-45a9-9ed4-c577e6a1e572
   a schema:Person
   ; schema:name "Kay Sun"
+  ; schema:email "kaysuninf@gmail.com"
   ; schema:affiliation [ a schema:Organization ; schema:name "Columbia Univerisity / Mount Sanai volunteer" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "kaysuninf@gmail.com"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:a2c24934-3b1b-4ae2-a932-45409b8f52fa
   a schema:Person
   ; schema:name "Kenneth Shepard"
+  ; schema:email "shepard@ee.columbia.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "NEW YORK UNIVERSITY SCHOOL OF MEDICINE" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "shepard@ee.columbia.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:7b9a90c7-4f4d-4251-923c-8d870842744b
   a schema:Person
   ; schema:name "Keyvan Ansarino"
+  ; schema:email "ka0002@pennmedicine.upenn.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Perelman School of Medicine University of Pennsylvania" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "ka0002@pennmedicine.upenn.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:e798fd42-dbfd-491e-bf22-38dd5a1b2bbe
   a schema:Person
   ; schema:name "KOSTAS  DANIILIDIS"
+  ; schema:email "kostas@cis.upenn.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF PENNSYLVANIA" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; schema:url "https://reporter.nih.gov/search/results?pi_id=7030030"
-  ; schema:email "kostas@cis.upenn.edu"
   ; prov:generatedAtTime "2026-08-26 21:27:12.22589+00"^^xsd:dateTime .
 
 person:ceab2082-50e1-4b58-a9b0-3b4967ceaf4e
   a schema:Person
   ; schema:name "Kris Williams"
+  ; schema:email "ksw5570@psu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Pennsylvania State University" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "ksw5570@psu.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:3cfcd917-5af5-4e8b-a2bc-366aff193892
   a schema:Person
   ; schema:name "Kristofer Bouchard"
+  ; schema:email "kebouchard@berkeley.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UCB" ]
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-1974-4603" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "kebouchard@berkeley.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-1974-4603" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:fe5e3acd-b87a-4d11-a1cc-c9e3ec5e2d64
   a schema:Person
   ; schema:name "Kun Zhao"
+  ; schema:email "cz2715@columbia.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Columbia University" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "cz2715@columbia.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:3a2df811-62d7-47e6-9c1d-18a400809a4c
@@ -1239,51 +1241,51 @@ person:3a2df811-62d7-47e6-9c1d-18a400809a4c
 person:9bb6b455-257a-41e0-81bf-e40670f158bd
   a schema:Person
   ; schema:name "Laura Yenisa Cabrera Trujillo"
+  ; schema:email "lcabrera@psu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "PENNSYLVANIA STATE UNIVERSITY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-6220-7096" ]
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "lcabrera@psu.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-6220-7096" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:36d6d77c-635b-42a4-ac1c-d78cc7e2f004
   a schema:Person
   ; schema:name "Lauren Diaz"
+  ; schema:email "lauren.diaz@jhuapl.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "JHU/APL" ]
   ; ex:consortiumRole "Ember/DCAIC team"
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "lauren.diaz@jhuapl.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:d2e6634c-f1fb-4b87-8ebd-f36c165fd81a
   a schema:Person
   ; schema:name "Lensky Augustin"
+  ; schema:email "lensky.augustin@psych.utah.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Utah" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "lensky.augustin@psych.utah.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:36a28dc0-49da-45df-815f-36c51a7948a3
   a schema:Person
   ; schema:name "Linda Wilbrecht"
+  ; schema:email "wilbrecht@berkeley.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF CALIFORNIA BERKELEY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-3199-9049" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "wilbrecht@berkeley.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-3199-9049" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:a1b5cc89-7a91-4480-9105-012e81fef5ad
   a schema:Person
   ; schema:name "Lisa Blaskey"
+  ; schema:email "blaskey@chop.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Children's Hospital of Philadelphia" ]
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-5909-3622" ]
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "blaskey@chop.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-5909-3622" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:92647fd1-ec09-488c-9dbf-e8f8d06b2df9
@@ -1295,14 +1297,14 @@ person:92647fd1-ec09-488c-9dbf-e8f8d06b2df9
 person:ba4ef5e5-bff2-4e1c-b821-51e14d3ef360
   a schema:Person
   ; schema:name "Luis Garcia"
+  ; schema:email "la.garcia@utah.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Utah" ]
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-5111-0694" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "la.garcia@utah.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-5111-0694" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:002e5609-1019-4e0e-85dd-3702f7a0a2fd
@@ -1314,161 +1316,161 @@ person:002e5609-1019-4e0e-85dd-3702f7a0a2fd
 person:89077e82-bc4a-4166-90ce-2ee4771d7ef2
   a schema:Person
   ; schema:name "Luke Shaw"
+  ; schema:email "luke.shaw@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Yale University" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-3886-9740" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "luke.shaw@yale.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-3886-9740" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:e6a87f1b-4fea-4450-8125-20943b56760c
   a schema:Person
   ; schema:name "Mang Gao"
+  ; schema:email "gao0624@gmail.com"
   ; schema:affiliation [ a schema:Organization ; schema:name "Northwestern University" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0002-0379-8655" ]
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "gao0624@gmail.com"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0002-0379-8655" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:eedc7ea5-6502-48f5-8203-e2c3da37778c
   a schema:Person
   ; schema:name "Mansi  Srivastava"
+  ; schema:email "mansi@oeb.harvard.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "HARVARD UNIVERSITY" ]
   ; ex:consortiumRole "Assistant Professor"
   ; schema:url "https://reporter.nih.gov/search/results?pi_id=14227655"
-  ; schema:email "mansi@oeb.harvard.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:55b2ec7e-e8da-4656-b62e-a76ab2fa31d4
   a schema:Person
   ; schema:name "Mara Baylis"
+  ; schema:email "mbaylis@berkeley.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UC Berkeley" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "MARABAYLIS" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "mbaylis@berkeley.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "MARABAYLIS" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:1e91330a-0f00-45ad-a600-7a3922538595
   a schema:Person
   ; schema:name "Marc Schmidt"
+  ; schema:email "marcschm@sas.upenn.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF PENNSYLVANIA" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "marcschm@sas.upenn.edu"
   ; prov:generatedAtTime "2026-08-26 21:27:12.22589+00"^^xsd:dateTime .
 
 person:30ae389d-d578-4b00-8091-6269412cc194
   a schema:Person
   ; schema:name "Marcela Benitez"
+  ; schema:email "marcela.benitez@emory.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF MICHIGAN AT ANN ARBOR" ]
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:email "marcela.benitez@emory.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:e81d9271-49b7-4925-bb78-5b96a5e44b2b
   a schema:Person
   ; schema:name "Marcia Patchan"
+  ; schema:email "marcia.patchan@jhuapl.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "JHU/APL" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-0485-0403" ]
-  ; schema:email "marcia.patchan@jhuapl.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:913fa9bb-e80f-4c48-ad22-2a260ee92e3c
   a schema:Person
   ; schema:name "Mark Tiede"
+  ; schema:email "mark.tiede@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Dept. Psychiatry" ]
   ; schema:affiliation [ a schema:Organization ; schema:name "Yale U." ]
   ; ex:consortiumRole "Co-Investigator"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "mark.tiede@yale.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:a56cbb5d-bde0-4c4f-8afa-9c4fc9587d90
   a schema:Person
   ; schema:name "Maryam Shanechi"
+  ; schema:email "shanechi@usc.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF SOUTHERN CALIFORNIA" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "shanechi@usc.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:7c5deb0d-69ef-4b29-9688-210b9e5f127b
   a schema:Person
   ; schema:name "Mattson Ogg"
+  ; schema:email "mattson.ogg@jhuapl.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Johns Hopkins Applied Physics Laboratory" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0004-5583-0586" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "mattson.ogg@jhuapl.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0004-5583-0586" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:03fb31a2-688f-4168-97a3-f0e20da2d189
   a schema:Person
   ; schema:name "Mauricio Rangel-Gomez"
+  ; schema:email "mauricio.rangel-gomez@nih.gov"
   ; schema:affiliation [ a schema:Organization ; schema:name "NIMH" ]
   ; ex:consortiumRole "NIH Program"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "mauricio.rangel-gomez@nih.gov"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:7ed983ec-22da-40d6-9384-db7f7036447a
   a schema:Person
   ; schema:name "Mauricio Vallejo Martelo"
+  ; schema:email "mvallejomartelo@mednet.ucla.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UCLA" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-8922-6895" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "mvallejomartelo@mednet.ucla.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-8922-6895" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:a43bb7f5-946a-42c9-b344-33013685a2e1
   a schema:Person
   ; schema:name "Meaghan Perdue"
+  ; schema:email "mvperdue16@gmail.com"
   ; schema:affiliation [ a schema:Organization ; schema:name "UMass Chan Medical School" ]
   ; ex:consortiumRole "Admin"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-6113-9175" ]
-  ; schema:email "mvperdue16@gmail.com"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:a1a24acf-ee3c-4cc6-abcc-2c7e793b83c8
   a schema:Person
   ; schema:name "Meghan Cum"
+  ; schema:email "meghan.cum@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Yale University" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0004-9299-992X" ]
-  ; schema:email "meghan.cum@yale.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:719874ac-d2e2-4d8b-886a-a7d83906063d
   a schema:Person
   ; schema:name "Melissa Kline Struhl"
+  ; schema:email "mekline@mit.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Massachusetts Institute of Technology" ]
   ; ex:consortiumRole "Research Staff (Scientist and others), (DCAIC)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-2217-9331" ]
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "mekline@mit.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-2217-9331" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:211b7c3b-e6a3-4775-82bb-456b8c975bb1
   a schema:Person
   ; schema:name "Mengsen Zhang"
+  ; schema:email "mengsen@msu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "MICHIGAN STATE UNIVERSITY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-3085-152X" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "mengsen@msu.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-3085-152X" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:c26cd395-f8db-4ada-bc0d-891c13cdaa64
@@ -1480,31 +1482,31 @@ person:c26cd395-f8db-4ada-bc0d-891c13cdaa64
 person:b45cd454-efe9-40c3-a73b-bfc217e7fa82
   a schema:Person
   ; schema:name "Michael Genecin"
+  ; schema:email "mpg8611@nyu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "New York University" ]
   ; schema:affiliation [ a schema:Organization ; schema:name "Center for Neural Science" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0006-3931-7752" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "mpg8611@nyu.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0006-3931-7752" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:88befad8-be4c-4008-8359-3cc0539cdc62
   a schema:Person
   ; schema:name "Michael Tadross"
+  ; schema:email "michael.tadross@duke.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "DUKE UNIVERSITY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-7752-6380" ]
-  ; schema:email "michael.tadross@duke.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:ed63bba6-4da2-4da7-b8a1-d7c161daad00
   a schema:Person
   ; schema:name "Mina Kim"
+  ; schema:email "kimm8@chop.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Children's Hospital of Philadelphia" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-2019-5944" ]
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "kimm8@chop.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-2019-5944" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:edec3550-7c91-4308-beb1-4ab747abddf2
@@ -1516,50 +1518,50 @@ person:edec3550-7c91-4308-beb1-4ab747abddf2
 person:bbf1c2a3-36fd-4740-ab32-57ad5b3cf915
   a schema:Person
   ; schema:name "Monika P. Jadi"
+  ; schema:email "monika.jadi@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "YALE UNIVERSITY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; schema:url "https://reporter.nih.gov/search/results?pi_id=11331514"
-  ; schema:email "monika.jadi@yale.edu"
   ; prov:generatedAtTime "2026-08-26 21:27:12.22589+00"^^xsd:dateTime .
 
 person:fa027455-f5ab-4b34-b1d9-5623b8a6f3e8
   a schema:Person
   ; schema:name "Muhammad Parvaz"
+  ; schema:email "muhammad.parvaz@mssm.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "ICAHN SCHOOL OF MEDICINE AT MOUNT SINAI" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-2671-2327" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "muhammad.parvaz@mssm.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-2671-2327" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:a7db30d9-b044-413e-96ac-e89fd546dd83
   a schema:Person
   ; schema:name "Nader Nikbakht"
+  ; schema:email "nikbakht@mit.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "MASSACHUSETTS INSTITUTE OF TECHNOLOGY" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-9726-9115" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "nikbakht@mit.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-9726-9115" ]
   ; prov:generatedAtTime "2026-08-24 16:15:57.383669+00"^^xsd:dateTime .
 
 person:0bd3fab5-9f8f-450d-aa49-b4b06dae3bcf
   a schema:Person
   ; schema:name "Nancy Padilla Coreano"
+  ; schema:email "npadillacoreano@ufl.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF FLORIDA" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:email "npadillacoreano@ufl.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:cb84a80d-ad3a-445c-9fb8-288db9631150
   a schema:Person
   ; schema:name "NANTHIA W SUTHANA"
+  ; schema:email "nanthia@ucla.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "DUKE UNIVERSITY" ]
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF CALIFORNIA LOS ANGELES" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; schema:url "https://reporter.nih.gov/search/results?pi_id=8630217"
-  ; schema:email "nanthia@ucla.edu"
   ; prov:generatedAtTime "2026-08-26 21:27:12.22589+00"^^xsd:dateTime .
 
 person:dc1a0c02-8697-4c88-83a3-721e0a1ce6e5
@@ -1575,38 +1577,38 @@ person:dc1a0c02-8697-4c88-83a3-721e0a1ce6e5
 person:80f1f5cb-53bf-422e-8572-8ffa983f304c
   a schema:Person
   ; schema:name "Neha Thomas"
+  ; schema:email "neha.thomas@jhuapl.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "JHU APL" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "neha.thomas@jhuapl.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:f43ec754-d7f0-4aa4-bebc-9d06d978ebff
   a schema:Person
   ; schema:name "Nelleke van Wouwe"
-  ; schema:affiliation [ a schema:Organization ; schema:name "Louisville" ]
   ; schema:email "nelleke.vanwouwe@louisville.edu"
+  ; schema:affiliation [ a schema:Organization ; schema:name "Louisville" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:a8d59adb-db17-4414-a4fe-54f13030eaeb
   a schema:Person
   ; schema:name "Nicole Guittari"
+  ; schema:email "nicole.guittari@jhuapl.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Johns Hopkins Applied Physics Laboratory/EMBER" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "nicole.guittari@jhuapl.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:e30da67e-dece-471d-85e4-0532a146de98
   a schema:Person
   ; schema:name "Nicole Stock"
+  ; schema:email "nicole.stock@jhuapl.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "JHU/APL" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "nicole.stock@jhuapl.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:57ea92ae-464a-48ae-9fe8-df3496d7fd71
@@ -1618,10 +1620,10 @@ person:57ea92ae-464a-48ae-9fe8-df3496d7fd71
 person:525a9caa-4229-4d20-a9c9-7161a9f76595
   a schema:Person
   ; schema:name "Niegil Francis"
+  ; schema:email "nm4075@nyu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "New York University" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "nm4075@nyu.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:ee0f4e5e-9775-414b-a070-182544503f94
@@ -1633,50 +1635,50 @@ person:ee0f4e5e-9775-414b-a070-182544503f94
 person:0c1840ba-79da-46cd-8fe0-2e379f82fe88
   a schema:Person
   ; schema:name "Nima Dehghani"
+  ; schema:email "nima_d@mit.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "MASSACHUSETTS INSTITUTE OF TECHNOLOGY" ]
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-2032-8903" ]
-  ; schema:email "nima_d@mit.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:b183ad82-c36b-42f4-b769-eb2ab2060c0b
   a schema:Person
   ; schema:name "Nishant Rao"
+  ; schema:email "nishant.rao@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Yale University" ]
   ; ex:consortiumRole "Research Staff (Scientist and others), Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0007-4272-8189" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "nishant.rao@yale.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0007-4272-8189" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:6cd4ac5b-cd19-45b7-b3c0-d8ac5673fa64
   a schema:Person
   ; schema:name "Nithin Sugavanam"
+  ; schema:email "sugavanam.3@osu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Ohio State university" ]
   ; ex:consortiumRole "Research Staff (Scientist and others), Postdoc/Grad Student"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "sugavanam.3@osu.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:d9668aa0-fb5d-4278-89ae-c20afcfb3d5d
   a schema:Person
   ; schema:name "Olha Metenko"
+  ; schema:email "ovm24@drexel.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UPenn - Dr. Duncan" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:email "ovm24@drexel.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:8ebda3f2-cc1a-4d94-8545-ed8ce0619f8b
   a schema:Person
   ; schema:name "Oliver Ruebel"
+  ; schema:email "oruebel@lbl.gov"
   ; schema:affiliation [ a schema:Organization ; schema:name "Lawrence Berkeley National Laboratory" ]
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-9902-1984" ]
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "oruebel@lbl.gov"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-9902-1984" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:ef25d4e2-94f6-43ba-82e4-429287fdd3b3
@@ -1688,251 +1690,251 @@ person:ef25d4e2-94f6-43ba-82e4-429287fdd3b3
 person:9cf73a72-5bd7-4c92-a264-a30d97825af2
   a schema:Person
   ; schema:name "Parastoo Azizeddin"
-  ; schema:affiliation [ a schema:Organization ; schema:name "USC" ]
   ; schema:email "azizeddi@usc.edu"
+  ; schema:affiliation [ a schema:Organization ; schema:name "USC" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:ba1c6c07-31ef-44ba-8447-4cd57464d871
   a schema:Person
   ; schema:name "Patrick McGrath"
+  ; schema:email "pmcgrath7@gatech.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "GEORGIA INSTITUTE OF TECHNOLOGY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-1598-3746" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "pmcgrath7@gatech.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-1598-3746" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:d88983b7-8760-4b2a-9185-31b7eb1f9009
   a schema:Person
   ; schema:name "Petar M Djuric"
+  ; schema:email "Petar.Djuric@stonybrook.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "STATE UNIVERSITY NEW YORK STONY BROOK" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:email "Petar.Djuric@stonybrook.edu"
   ; prov:generatedAtTime "2026-08-26 19:29:26.951636+00"^^xsd:dateTime .
 
 person:8024a245-a4ad-432b-9d87-c8aff484c141
   a schema:Person
   ; schema:name "Pulkit  Grover"
+  ; schema:email "pgrover@andrew.cmu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "CARNEGIE-MELLON UNIVERSITY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; schema:url "https://reporter.nih.gov/search/results?pi_id=12197198"
-  ; schema:email "pgrover@andrew.cmu.edu"
   ; prov:generatedAtTime "2026-08-26 21:27:12.22589+00"^^xsd:dateTime .
 
 person:ca651e64-ce92-4fe2-8fdd-27737f59f125
   a schema:Person
   ; schema:name "Rahul Hingorani"
+  ; schema:email "rahul.hingorani@jhuapl.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "JHU/APL" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "rahul.hingorani@jhuapl.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:83f45525-4f0c-41a5-b2ea-5f4bbdcb31e5
   a schema:Person
   ; schema:name "Ralph Peterson"
+  ; schema:email "ralph@basis.ai"
   ; schema:affiliation [ a schema:Organization ; schema:name "Basis Research Institute / NYU" ]
   ; ex:consortiumRole "Research Staff (Scientist and others), Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-2692-5955" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "ralph@basis.ai"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-2692-5955" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:30d04472-1edf-487a-b75e-fdec86d076aa
   a schema:Person
   ; schema:name "Rishi Suresh"
+  ; schema:email "rishi.suresh1@pennmedicine.upenn.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Pennsylvania" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
-  ; schema:email "rishi.suresh1@pennmedicine.upenn.edu"
   ; prov:generatedAtTime "2026-08-20 21:06:51.528671+00"^^xsd:dateTime .
 
 person:9304ae20-fba9-461e-8184-0db375b1fd42
   a schema:Person
   ; schema:name "Robert Froemke"
+  ; schema:email "robert.froemke@med.nyu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "NEW YORK UNIVERSITY SCHOOL OF MEDICINE" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-1230-6811" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "robert.froemke@med.nyu.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-1230-6811" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:5c7c9b06-f9e1-4335-adb3-f09782447f55
   a schema:Person
   ; schema:name "Ryan Ly"
+  ; schema:email "rly@lbl.gov"
   ; schema:affiliation [ a schema:Organization ; schema:name "Lawrence Berkeley National Lab" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-9238-0642" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "rly@lbl.gov"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-9238-0642" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:c318494c-1f41-4c39-9f62-90b0e891bda8
   a schema:Person
   ; schema:name "Sandy Hider"
+  ; schema:email "sandy.hider@jhuapl.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Johns Hopkins" ]
   ; schema:affiliation [ a schema:Organization ; schema:name "APL" ]
   ; ex:consortiumRole "Software Developer"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0002-0323-6986" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "sandy.hider@jhuapl.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0002-0323-6986" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:1ef1d572-450d-428c-a301-14804489041a
   a schema:Person
   ; schema:name "Sankar Alagapan"
+  ; schema:email "sankar.alagapan@gatech.edu"
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-2056-5450" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "sankar.alagapan@gatech.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-2056-5450" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:a81da99e-060a-4ed3-83a8-432e01cd1391
   a schema:Person
   ; schema:name "Sara Goering"
+  ; schema:email "sgoering@uw.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Washington" ]
   ; ex:consortiumRole "Co-Investigator"
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "sgoering@uw.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:f255132c-ad2b-4d98-a099-34af9e115764
   a schema:Person
   ; schema:name "Sara Sanchez-Alonso"
+  ; schema:email "sara.sanchez.alonso@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Yale University" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "sara.sanchez.alonso@yale.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:8baebd5b-7d23-49cf-afe8-a9c97c16808e
   a schema:Person
   ; schema:name "Satrajit Sujit Ghosh"
+  ; schema:email "satra@mit.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "MASSACHUSETTS INSTITUTE OF TECHNOLOGY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-6911-4929" ]
-  ; schema:email "satra@mit.edu"
   ; prov:generatedAtTime "2026-08-26 19:29:26.951636+00"^^xsd:dateTime .
 
 person:83d00b16-dd61-411d-9f73-ca3996a58567
   a schema:Person
   ; schema:name "Sequioa Smith"
+  ; schema:email "sequioasmith@ufl.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Florida" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-4704-2852" ]
-  ; schema:email "sequioasmith@ufl.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:404b5a82-9328-490b-8abc-917e87cba714
   a schema:Person
   ; schema:name "Shannon Gourley"
+  ; schema:email "shannon.gourley@emory.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Emory University" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-7783-9379" ]
-  ; schema:email "shannon.gourley@emory.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:ca045f91-4fd6-4c49-8700-51f1494c8235
   a schema:Person
   ; schema:name "Shelly Flagel"
+  ; schema:email "sflagel@med.umich.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF MICHIGAN AT ANN ARBOR" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "sflagel@med.umich.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:5ffdcb2e-b5c1-4c13-81ed-ccec5f1b5e2e
   a schema:Person
   ; schema:name "Shreya  Saxena"
+  ; schema:email "shreya.saxena@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF FLORIDA" ]
   ; schema:affiliation [ a schema:Organization ; schema:name "YALE UNIVERSITY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; schema:url "https://reporter.nih.gov/search/results?pi_id=15537186"
-  ; schema:email "shreya.saxena@yale.edu"
   ; prov:generatedAtTime "2026-08-26 21:27:12.22589+00"^^xsd:dateTime .
 
 person:2508a389-2a36-474b-bd05-68e6a409508e
   a schema:Person
   ; schema:name "Shuren Xia"
+  ; schema:email "sx67@scarletmail.rutgers.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Rutgers University" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0002-9213-1384" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "sx67@scarletmail.rutgers.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0002-9213-1384" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:ad10698e-5956-4ef9-bcaa-aa6ef5b88861
   a schema:Person
   ; schema:name "Sima Mofakham"
+  ; schema:email "Sima.mofakham@stonybrookmedicine.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Stonybrookmedicine" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-4509-6080" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "Sima.mofakham@stonybrookmedicine.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-4509-6080" ]
   ; prov:generatedAtTime "2026-08-26 19:29:26.951636+00"^^xsd:dateTime .
 
 person:493b20e2-09b4-49c3-b5be-06fbba4cb789
   a schema:Person
   ; schema:name "Sofia Juliani"
+  ; schema:email "sjuliani@andrew.cmu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Carnegie Mellon University" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "sjuliani@andrew.cmu.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:6bea0171-a806-4886-bcf4-c90149bb359f
   a schema:Person
   ; schema:name "Stephanie Prince"
+  ; schema:email "smprince@lbl.gov"
   ; schema:affiliation [ a schema:Organization ; schema:name "Lawrence Berkeley National Laboratory" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-3083-6955" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "smprince@lbl.gov"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-3083-6955" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:2db9ea7b-7dfd-477b-9f99-7661d0fc0689
   a schema:Person
   ; schema:name "stephen heisig"
+  ; schema:email "stephen.heisig@mssm.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Icahn School of Medicine" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "stephen.heisig@mssm.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:d86109b4-5ce2-4b9e-8d03-6e7ffbb1123f
   a schema:Person
   ; schema:name "Steve Chang"
+  ; schema:email "steve.chang@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "YALE UNIVERSITY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-4160-7549" ]
-  ; schema:email "steve.chang@yale.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00]"^^xsd:dateTime .
 
 person:0ebb5b1a-b96b-41f6-a1b8-54b6e818b231
   a schema:Person
   ; schema:name "Suliman Sharif"
+  ; schema:email "sulstice@mit.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Massachusetts Institute of Technology" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-1342-9258" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "sulstice@mit.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-1342-9258" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:7d177d37-27a6-4b10-8763-74ab20844adf
@@ -1944,66 +1946,66 @@ person:7d177d37-27a6-4b10-8763-74ab20844adf
 person:d701d2a3-e653-4480-aca8-0ede748ef075
   a schema:Person
   ; schema:name "Talia V Roman Lopez"
+  ; schema:email "taliaroman1@g.ucla.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UCLA" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-5038-5445" ]
-  ; schema:email "taliaroman1@g.ucla.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:97f777fd-fce8-45b1-820c-ae1f9883cfe6
   a schema:Person
   ; schema:name "Talmo Pereira"
+  ; schema:email "talmo@salk.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "NEW YORK UNIVERSITY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-9075-8365" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "talmo@salk.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0001-9075-8365" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:4c849182-8130-4133-aeeb-583a116265d0
   a schema:Person
   ; schema:name "Tanya St. John"
+  ; schema:email "tstjohn@uw.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Washington Autism Center" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000000324485797" ]
-  ; schema:email "tstjohn@uw.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:ad33e833-5d7b-4f15-8f52-3766b26cdc42
   a schema:Person
   ; schema:name "Taqiya Ehsan"
+  ; schema:email "te137@echo.rutgers.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Rutgers University" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "te137@echo.rutgers.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:197c9d72-659f-4c22-b953-bf1a87e2cd9e
   a schema:Person
   ; schema:name "Taylor Wise"
+  ; schema:email "taylor.wise@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Yale University" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-9937-3493" ]
-  ; schema:email "taylor.wise@yale.edu"
   ; prov:generatedAtTime "2026-08-12 19:53:11.695172+00"^^xsd:dateTime .
 
 person:4222bd44-4a84-4855-87b8-5cd091d81e67
   a schema:Person
   ; schema:name "Tekraj Chhetri"
-  ; schema:affiliation [ a schema:Organization ; schema:name "MASSACHUSETTS INSTITUTE OF TECHNOLOGY" ]
-  ; schema:url "https://reporter.nih.gov/search/results?pi_id=9215633"
-  ; ex:memberOf wg:WG-Analytics
   ; schema:email "tekraj@mit.edu"
+  ; schema:affiliation [ a schema:Organization ; schema:name "MASSACHUSETTS INSTITUTE OF TECHNOLOGY" ]
+  ; ex:memberOf wg:WG-Analytics
+  ; schema:url "https://reporter.nih.gov/search/results?pi_id=9215633"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:366038c1-bd80-4355-b8a4-980d09e77b03
   a schema:Person
   ; schema:name "Teneille Brown"
+  ; schema:email "teneille.brown@law.utah.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Utah" ]
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-3398-163X" ]
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "teneille.brown@law.utah.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-3398-163X" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:0a734229-1db9-4115-bb2a-49bf989ae759
@@ -2015,17 +2017,17 @@ person:0a734229-1db9-4115-bb2a-49bf989ae759
 person:e14f8833-3768-49de-bcf4-f565cade6242
   a schema:Person
   ; schema:name "Test User"
+  ; schema:email "ndrnkbkht@gmail.com"
   ; schema:affiliation [ a schema:Organization ; schema:name "MIT" ]
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "ndrnkbkht@gmail.com"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:cdb87930-eb8e-46c5-931c-705244898d4e
   a schema:Person
   ; schema:name "test-user-tier1"
+  ; schema:email "bbqs.test.user.tier1@gmail.com"
   ; schema:affiliation [ a schema:Organization ; schema:name "MIT" ]
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "bbqs.test.user.tier1@gmail.com"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:365312d8-4254-407b-81db-fd2619a6799d
@@ -2043,78 +2045,78 @@ person:120f2ea8-83d1-4dea-8788-0cfa198a2b6c
 person:2d6da24f-72ab-4a6a-a69e-7d8af9ae8896
   a schema:Person
   ; schema:name "Thore Bergman"
+  ; schema:email "thore@umich.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Michigan" ]
   ; ex:consortiumRole "Field site director, collaborator"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-9615-5001" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "thore@umich.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-9615-5001" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:2d7f5c82-fce0-45f1-a783-4a6c8227db20
   a schema:Person
   ; schema:name "Tianqing Li"
+  ; schema:email "tianqing.li@duke.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Duke University" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "tianqing.li@duke.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:9c463b0b-efe7-4486-9118-d11985efb7b6
   a schema:Person
   ; schema:name "Tim Brown"
+  ; schema:email "timbr@uw.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Washington School of Medicine" ]
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "timbr@uw.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:8e863d7a-68c8-41be-9e48-afa21b4d07c0
   a schema:Person
   ; schema:name "Timothy Dunn"
+  ; schema:email "timothy.dunn@duke.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "DUKE UNIVERSITY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "timothy.dunn@duke.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:c513c629-cc53-4b42-9902-54322bc96d61
   a schema:Person
   ; schema:name "Timothy P Roberts"
+  ; schema:email "robertstim@chop.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "CHILDREN'S HOSP OF PHILADELPHIA" ]
   ; schema:affiliation [ a schema:Organization ; schema:name "SEATTLE CHILDREN'S HOSPITAL" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
-  ; schema:url "https://reporter.nih.gov/search/results?pi_id=6282327"
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "robertstim@chop.edu"
+  ; schema:url "https://reporter.nih.gov/search/results?pi_id=6282327"
   ; prov:generatedAtTime "2026-08-26 21:27:12.22589+00"^^xsd:dateTime .
 
 person:1699c91f-494e-4407-8326-002ab0062ca9
   a schema:Person
   ; schema:name "Tristan Daniel"
+  ; schema:email "tdaniel60@gatech.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Georgia Institute of Technology" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
-  ; schema:email "tdaniel60@gatech.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:626e8d46-e167-4857-86fe-a1628e0df89c
   a schema:Person
   ; schema:name "Tucker Lancaster"
+  ; schema:email "tlancaster6@gatech.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Georgia institute of technology" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
   ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-4074-7128" ]
-  ; schema:email "tlancaster6@gatech.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:8eedb2ea-389c-4f30-85f3-44e58a9c5103
   a schema:Person
   ; schema:name "Tyler Albarran"
+  ; schema:email "talbarran3@gatech.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Georgia Institute of Technology" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0009-1642-4549" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "talbarran3@gatech.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0009-1642-4549" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:50800231-0c66-4adf-a7fa-c96d56050111
@@ -2126,11 +2128,11 @@ person:50800231-0c66-4adf-a7fa-c96d56050111
 person:8626c6f7-cdf9-4739-9db3-7fd10da77f38
   a schema:Person
   ; schema:name "Uros Topalovic"
+  ; schema:email "uros.topalovic@duke.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Duke University" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-4005-7979" ]
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "uros.topalovic@duke.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-4005-7979" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:85ad3945-2f88-4673-9246-1da97b433c67
@@ -2142,154 +2144,154 @@ person:85ad3945-2f88-4673-9246-1da97b433c67
 person:d184fe4e-9040-46ff-a6d8-90e1386d7305
   a schema:Person
   ; schema:name "Vijay  Balasubramanian"
+  ; schema:email "vijay@physics.upenn.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UNIVERSITY OF PENNSYLVANIA" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; schema:url "https://reporter.nih.gov/search/results?pi_id=10062621"
-  ; schema:email "vijay@physics.upenn.edu"
   ; prov:generatedAtTime "2026-08-26 21:27:12.22589+00"^^xsd:dateTime .
 
 person:cade9fda-3be9-4e39-824f-18816e6279c0
   a schema:Person
   ; schema:name "Vincent Gracco"
+  ; schema:email "vincent.gracco@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Yale University" ]
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:email "vincent.gracco@yale.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:e906851d-aeb9-4197-8b63-7e5c2b2a161a
   a schema:Person
   ; schema:name "Vivek Prakash"
+  ; schema:email "vprakash@miami.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "University of Miami" ]
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-4569-6462" ]
   ; ex:memberOf wg:WG-Analytics
-  ; schema:email "vprakash@miami.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-4569-6462" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:d9e4273a-3164-4026-8ac7-8d353f4682cb
   a schema:Person
   ; schema:name "Wan Chen Lin"
+  ; schema:email "wanchenlin@berkeley.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UC Berkeley" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "wanchenlin@berkeley.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:92313efb-4452-4ae1-8e48-42168f073ac6
   a schema:Person
   ; schema:name "Weikang Shi"
+  ; schema:email "weikang.shi@yale.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Yale" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:email "weikang.shi@yale.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:e62c179c-5837-4bcd-af3f-9e5d538454b3
   a schema:Person
   ; schema:name "William Nacci"
+  ; schema:email "wn15@rice.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Rice University" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0000-9565-0783" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "wn15@rice.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0009-0000-9565-0783" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:bb2c1a71-08ea-4220-9312-f3681d0fedf4
   a schema:Person
   ; schema:name "Yangjia Li"
+  ; schema:email "y.li7@columbia.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Columbia University" ]
   ; ex:consortiumRole "Research Staff (Scientist and others)"
-  ; schema:email "y.li7@columbia.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:0d778939-989a-457b-8170-a8893f6bb58b
   a schema:Person
   ; schema:name "Yankun Xu"
+  ; schema:email "yankun.xu@duke.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "DUKE" ]
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-4410-4106" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "yankun.xu@duke.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0002-4410-4106" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:7c9455a5-ff3b-4153-a653-c41b69b2a23f
   a schema:Person
   ; schema:name "Yaroslav Halchenko"
+  ; schema:email "yoh@dartmouth.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "Dartmouth college" ]
   ; ex:consortiumRole "Co-Investigator"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-3456-2493" ]
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "yoh@dartmouth.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-3456-2493" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:1f7fe717-5a8f-45d9-875e-b12dd240fb9b
   a schema:Person
   ; schema:name "Yi Zuo"
+  ; schema:email "yizuo@ucsc.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "UCSC" ]
   ; ex:consortiumRole "Co-Investigator"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "yizuo@ucsc.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:9fa26c09-e111-45ba-b1c1-647e5e0d6356
   a schema:Person
   ; schema:name "Yibei Chen"
+  ; schema:email "yibei@mit.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "MIT" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
-  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-2882-0900" ]
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "yibei@mit.edu"
+  ; schema:identifier [ schema:propertyID "ORCID" ; schema:value "0000-0003-2882-0900" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:db350c42-3085-4579-bd09-69e33da82eb4
   a schema:Person
   ; schema:name "Yuan Luo"
-  ; schema:affiliation [ a schema:Organization ; schema:name "National Institutes of Health" ]
   ; schema:email "yuan.luo@nih.gov"
+  ; schema:affiliation [ a schema:Organization ; schema:name "National Institutes of Health" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:3f65db5d-6ebf-4399-a83d-ffab38cc42b8
   a schema:Person
   ; schema:name "Yunsoo Kim"
-  ; schema:affiliation [ a schema:Organization ; schema:name "Stonybrook" ]
   ; schema:email "yunsoo.kim@stonybrook.edu"
+  ; schema:affiliation [ a schema:Organization ; schema:name "Stonybrook" ]
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:18c7d5ae-968c-480a-b66e-0d288993dd50
   a schema:Person
   ; schema:name "Yuyi Chang"
+  ; schema:email "chang.1560@osu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "The Ohio State University" ]
   ; ex:consortiumRole "Postdoc/Grad Student"
   ; ex:memberOf wg:WG-Analytics
   ; ex:memberOf wg:WG-Devices
-  ; schema:email "chang.1560@osu.edu"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:25b33a7f-11a6-4fbe-85fa-c040e0629db4
   a schema:Person
   ; schema:name "Yvonne M Bennett"
+  ; schema:email "yvonne.bennett@nih.gov"
   ; schema:affiliation [ a schema:Organization ; schema:name "NIMH" ]
   ; ex:memberOf wg:WG-Devices
   ; ex:memberOf wg:WG-ELSI
   ; ex:memberOf wg:WG-Standards
-  ; schema:email "yvonne.bennett@nih.gov"
   ; prov:generatedAtTime "2026-08-12 18:54:15.533077+00"^^xsd:dateTime .
 
 person:bb4daeed-e4e8-4ed3-8f57-8ac245b4d4c0
   a schema:Person
   ; schema:name "Zheng  Kuang"
+  ; schema:email "zhengkua@andrew.cmu.edu"
   ; schema:affiliation [ a schema:Organization ; schema:name "CARNEGIE-MELLON UNIVERSITY" ]
   ; ex:consortiumRole "Principal Investigator (PI)"
   ; schema:url "https://reporter.nih.gov/search/results?pi_id=12046106"
-  ; schema:email "zhengkua@andrew.cmu.edu"
   ; prov:generatedAtTime "2026-08-26 21:27:12.22589+00]"^^xsd:dateTime .
 
 pub:34f1b5d7-0c09-4ad2-810f-9ffb8646fb4e

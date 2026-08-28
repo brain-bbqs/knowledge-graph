@@ -1,0 +1,359 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# BRAIN BBQS Knowledge Graph — Schema Definition
+# ──────────────────────────────────────────────────────────────────────────────
+#
+# This file defines the STRUCTURE of the knowledge graph.
+# Edit here to add node types, properties, relationships, and layers.
+# The visualization and kg.trig are both generated from this file.
+#
+# Glossary:
+#   node type  → a category of thing (Person, Publication, Working Group…)
+#   property   → a fact about a node (name, email, year published…)
+#   edge        → a relationship between two nodes (Person → authored → Publication)
+#   named graph → a container that groups triples by purpose (core data, claims, access…)
+#   L1 / L2 / L3 → provenance layers (evidence → curation status → access control)
+# ──────────────────────────────────────────────────────────────────────────────
+
+
+# ── RDF prefixes (vocabulary namespaces) ─────────────────────────────────────
+# These are the short aliases used in the TriG file.
+# Add a new prefix here if you introduce a new vocabulary.
+
+prefixes:
+  schema: "https://schema.org/"
+  ex:     "https://brain-bbqs.org/vocab/"
+  person: "https://brain-bbqs.org/person/"
+  pub:    "https://brain-bbqs.org/pub/"
+  wg:     "https://brain-bbqs.org/wg/"
+  org:    "https://brain-bbqs.org/org/"
+  claim:  "https://brain-bbqs.org/claim/"
+  graph:  "https://brain-bbqs.org/graph/"
+  prov:   "http://www.w3.org/ns/prov#"
+  dct:    "http://purl.org/dc/terms/"
+  xsd:    "http://www.w3.org/2001/XMLSchema#"
+
+
+# ── Named graphs (the five containers in the TriG file) ─────────────────────
+# Each named graph holds a different kind of information.
+# layer: which provenance layer this graph represents (core | L1 | L2 | L3 | derived)
+# color: how it appears in the visualization
+
+named_graphs:
+
+  core:
+    label:       "Core Entities"
+    description: "Canonical facts — who someone is, what a paper says, which group they belong to."
+    layer:       core
+    color:       "#58a6ff"
+
+  claims:
+    label:       "Claims"
+    description: "Every assertion in graph:core gets a matching Claim node here that tracks curation state (L2) and source evidence (L1)."
+    layer:       L2
+    color:       "#d2a8ff"
+
+  derived:
+    label:       "Derived Links"
+    description: "Edges computed from data — e.g. ORCID-matched authorship. Also where manually added links land."
+    layer:       derived
+    color:       "#3fb950"
+
+  access:
+    label:       "Access Control"
+    description: "Security labels and access policies for every entity (L3)."
+    layer:       L3
+    color:       "#79c0ff"
+
+  provenance:
+    label:       "Provenance"
+    description: "Who ingested each record and when (L1)."
+    layer:       L1
+    color:       "#f0883e"
+
+
+# ── Node types ────────────────────────────────────────────────────────────────
+# Each node type is a category of thing in the graph.
+# rdf_type:     the RDF class this maps to (e.g. schema:Person)
+# iri_prefix:   the IRI namespace prefix for IRIs of this type (e.g. person:)
+# id_column:    which CSV column holds the unique ID for each row
+# shape:        how it looks in the visualization (circle | rect | diamond)
+# color:        fill color in the visualization
+# label_property: which property is shown as the node label
+# graph:        which named graph holds this node's core triples
+# properties:   list of facts you can record about nodes of this type
+
+node_types:
+
+  Person:
+    rdf_type:       "schema:Person"
+    iri_prefix:     "person"
+    id_column:      "person_id"
+    shape:          circle
+    color:          "#1c2128"
+    stroke:         "#3fb950"
+    label_property: "schema:name"
+    graph:          core
+    default_security_label: Internal
+    default_access_policy:  policy-consortium-read
+    properties:
+      - predicate: "schema:name"
+        label:      "Full Name"
+        required:   true
+        csv_column: name
+
+      - predicate: "schema:email"
+        label:      "Email"
+        csv_column: email_primary
+
+      - predicate: "schema:affiliation"
+        label:      "Institution"
+        csv_column: institution_name
+        object_type: Organization
+        ref_style:   blank
+        # Comma-separated in the CSV; each becomes a separate affiliation triple
+        multi_value: true
+        separator:   ","
+
+      - predicate: "ex:consortiumRole"
+        label:      "Consortium Role"
+        csv_column: role
+
+      - predicate: "ex:memberOf"
+        label:      "Working Group"
+        csv_column: working_groups
+        object_type: WorkingGroup
+        multi_value: true
+        separator:   ";"
+
+      - predicate: "schema:identifier"
+        label:      "ORCID"
+        csv_column: orcid
+        identifier_scheme: ORCID
+
+      - predicate: "schema:identifier"
+        label:      "Google Scholar ID"
+        csv_column: scholar_id
+        identifier_scheme: GoogleScholar
+
+      - predicate: "schema:identifier"
+        label:      "NIH RePORTER ID"
+        csv_column: reporter_profile_id
+        identifier_scheme: NIH_RePORTER
+
+      - predicate: "schema:url"
+        label:      "Profile URL"
+        csv_column: profile_url
+
+      - predicate: "prov:generatedAtTime"
+        label:      "Last Updated"
+        csv_column: generated_at
+        datatype:   "xsd:dateTime"
+
+
+  Publication:
+    rdf_type:       "schema:ScholarlyArticle"
+    iri_prefix:     "pub"
+    id_column:      "publication_id"
+    shape:          rect
+    color:          "#1c2128"
+    stroke:         "#a5d6ff"
+    label_property: "dct:title"
+    graph:          core
+    default_security_label: Public
+    default_access_policy:  policy-public-read
+    properties:
+      - predicate: "dct:title"
+        label:      "Title"
+        required:   true
+        csv_column: title
+
+      - predicate: "schema:isPartOf"
+        label:      "Journal"
+        csv_column: journal
+        object_type: Periodical
+        rdf_type:    "schema:Periodical"
+        ref_style:   blank
+
+      - predicate: "schema:datePublished"
+        label:      "Year"
+        csv_column: year
+        datatype:   "xsd:gYear"
+
+      - predicate: "schema:identifier"
+        label:      "DOI"
+        csv_column: doi
+        identifier_scheme: DOI
+
+      - predicate: "schema:identifier"
+        label:      "PubMed ID"
+        csv_column: pmid
+        identifier_scheme: PMID
+
+      - predicate: "schema:url"
+        label:      "URL"
+        csv_column: url
+
+      - predicate: "ex:citationCount"
+        label:      "Citations"
+        csv_column: citations
+        datatype:   "xsd:integer"
+
+      - predicate: "ex:relativeCitationRatio"
+        label:      "Relative Citation Ratio"
+        csv_column: rcr
+        datatype:   "xsd:decimal"
+
+      - predicate: "schema:keywords"
+        label:      "Keywords"
+        csv_column: keywords
+        multi_value: true
+        separator:   ";"
+
+      - predicate: "prov:generatedAtTime"
+        label:      "Last Updated"
+        csv_column: generated_at
+        datatype:   "xsd:dateTime"
+
+
+  WorkingGroup:
+    rdf_type:       "ex:WorkingGroup"
+    iri_prefix:     "wg"
+    shape:          diamond
+    color:          "#f0883e"
+    stroke:         "#8b949e"
+    label_property: "schema:name"
+    graph:          core
+    # WorkingGroups are synthesized from Person.working_groups values — no CSV of their own
+    synthesized_from: Person.working_groups
+    properties:
+      - predicate: "schema:name"
+        label:      "Name"
+        required:   true
+
+
+  Organization:
+    rdf_type:       "schema:Organization"
+    iri_prefix:     "org"
+    shape:          rect
+    color:          "#21262d"
+    stroke:         "#8b949e"
+    label_property: "schema:name"
+    graph:          core
+    # Organizations are synthesized as blank nodes from Person.institution_name
+    synthesized_from: Person.institution_name
+    properties:
+      - predicate: "schema:name"
+        label:      "Name"
+        required:   true
+
+
+# ── Edge types ────────────────────────────────────────────────────────────────
+# Relationships between node types.
+# source / target: the node types this edge connects
+# graph: which named graph this edge lives in
+# auto_match: if set, edges are computed automatically from CSV data
+
+edge_types:
+
+  memberOf:
+    predicate:   "ex:memberOf"
+    label:       "Member Of"
+    source:      Person
+    target:      WorkingGroup
+    graph:       core
+    color:       "#30363d"
+    style:       solid
+    auto_match:  Person.working_groups
+
+  author:
+    predicate:   "schema:author"
+    label:       "Author Of"
+    source:      Person
+    target:      Publication
+    graph:       derived
+    color:       "#388bfd"
+    style:       dashed
+    auto_match:  orcid          # matched via author_orcids column in publications.csv
+    claim_type:  authorship
+
+  affiliation:
+    predicate:   "schema:affiliation"
+    label:       "Affiliated With"
+    source:      Person
+    target:      Organization
+    graph:       core
+    color:       "#484f58"
+    style:       dotted
+    auto_match:  Person.institution_name
+
+
+# ── Claim schema (L1 + L2 provenance layer) ──────────────────────────────────
+# Every triple in graph:core gets a reified Claim node in graph:claims.
+# This section defines what fields a Claim can carry.
+
+claim_schema:
+  rdf_type:   "ex:Claim"
+  iri_prefix: "claim"
+
+  fields:
+    - predicate: "ex:claimStatus"
+      label:     "Claim Status"
+      layer:     L2
+      allowed_values:
+        - Verified
+        - Pending
+        - Disputed
+        - Retracted
+      description: "How confident we are that this assertion is correct."
+
+    - predicate: "ex:confidence"
+      label:     "Confidence Score"
+      layer:     L2
+      datatype:  "xsd:decimal"
+      range:     [0.0, 1.0]
+      description: "Numeric confidence between 0 and 1."
+
+    - predicate: "ex:hasEvidence"
+      label:     "Evidence Source"
+      layer:     L1
+      description: "URL or document that supports this assertion."
+
+    - predicate: "ex:assertedIn"
+      label:     "Asserted In"
+      layer:     L1
+      description: "Dataset or document where this claim first appeared."
+
+    - predicate: "ex:curatorNote"
+      label:     "Curator Note"
+      layer:     L2
+      description: "Free-text note from the curator (Nadia, etc.)."
+
+
+# ── Access schema (L3 security layer) ────────────────────────────────────────
+# Defines the allowed security labels and access policies.
+# Every node gets a security label and access policy in graph:access.
+
+access_schema:
+  security_labels:
+    Internal:
+      description:  "Visible to consortium members only."
+      default_for:  [Person]
+      color:        "#58a6ff"
+
+    Public:
+      description:  "Publicly accessible."
+      default_for:  [Publication]
+      color:        "#3fb950"
+
+  access_policies:
+    policy-consortium-read:
+      label:       "Consortium Read"
+      description: "Any authenticated consortium member can read."
+    policy-public-read:
+      label:       "Public Read"
+      description: "Anyone on the internet can read."
+    policy-curator-read:
+      label:       "Curator Read"
+      description: "Curators only (restricted subset of consortium)."
+
+  tenant: "consortium-alpha"

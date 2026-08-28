@@ -247,6 +247,145 @@
     font-size: 11px;
     backdrop-filter: blur(4px);
   }
+
+  /* ── Tabs ── */
+  .tab-bar {
+    display: flex;
+    gap: 4px;
+    margin-left: 12px;
+  }
+  .tab-btn {
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 10px;
+  }
+  .tab-btn.active {
+    border-color: var(--border);
+    color: var(--text);
+    background: var(--bg);
+  }
+  .tab-btn:hover:not(.active) { color: var(--text); }
+
+  /* ── Schema view ── */
+  #schema-view {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 28px;
+    background: var(--bg);
+  }
+  .schema-h1 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .schema-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .schema-section {
+    margin-bottom: 32px;
+  }
+  .schema-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--muted);
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .schema-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  .schema-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .schema-card-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .schema-card-head .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .schema-card-head .card-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: auto;
+  }
+  .layer-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: .04em;
+  }
+  .layer-badge.core    { background: rgba(88,166,255,.15);  color: #58a6ff; }
+  .layer-badge.L1      { background: rgba(240,136,62,.15);  color: #f0883e; }
+  .layer-badge.L2      { background: rgba(210,168,255,.15); color: #d2a8ff; }
+  .layer-badge.L3      { background: rgba(121,192,255,.15); color: #79c0ff; }
+  .layer-badge.derived { background: rgba(63,185,80,.15);   color: #3fb950; }
+  .schema-card-body {
+    padding: 10px 14px;
+    font-size: 11px;
+  }
+  .schema-card-body .desc {
+    color: var(--muted);
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  .prop-table { width: 100%; border-collapse: collapse; }
+  .prop-table tr { border-bottom: 1px solid rgba(255,255,255,.04); }
+  .prop-table tr:last-child { border-bottom: none; }
+  .prop-table td { padding: 3px 0; vertical-align: top; line-height: 1.4; }
+  .prop-table .prop-label { color: var(--text); min-width: 120px; }
+  .prop-table .prop-pred  { color: var(--muted); font-family: monospace; font-size: 10px; }
+  .prop-table .prop-col   { color: #58a6ff; font-family: monospace; font-size: 10px; padding-left: 6px; }
+  .prop-table .prop-req   { color: #f85149; padding-left: 4px; font-size: 9px; }
+  .node-shape-icon { flex-shrink: 0; }
+  .edge-table { width: 100%; border-collapse: collapse; }
+  .edge-table th {
+    text-align: left;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--muted);
+    padding: 0 8px 6px 0;
+  }
+  .edge-table td {
+    padding: 5px 8px 5px 0;
+    font-size: 11px;
+    border-top: 1px solid rgba(255,255,255,.04);
+    color: var(--text);
+    vertical-align: top;
+  }
+  .edge-arrow { color: var(--muted); padding: 0 4px; }
+  .style-pill {
+    display: inline-block;
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
   .legend-title { font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 7px; font-weight: 600; }
   .legend-row { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; }
   .legend-row:last-child { margin-bottom: 0; }
@@ -265,6 +404,10 @@
     <line x1="11" y1="9" x2="15" y2="13" stroke="#8b949e" stroke-width="1"/>
   </svg>
   <h1>BRAIN BBQS · Knowledge Graph</h1>
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="graph">Graph</button>
+    <button class="tab-btn" data-tab="schema">Schema</button>
+  </div>
   <span class="badge" id="quad-count">Loading…</span>
   <span class="subtitle">TriG · L1/L2/L3 provenance layers</span>
 </header>
@@ -348,10 +491,10 @@
     <div class="sidebar-section" style="margin-top:auto;">
       <h3>Edit the graph</h3>
       <p style="color:var(--muted);font-size:11px;line-height:1.5">
-        Edit <code style="color:var(--accent)">kg.trig</code> directly on GitHub to update claims,
-        confidence scores, and security labels. L2 fields: <code>ex:claimStatus</code>,
-        <code>ex:confidence</code>. L3 fields: <code>ex:securityLabel</code>,
-        <code>ex:accessPolicy</code>.
+        Edit <code style="color:var(--accent)">config.yaml</code> on GitHub to set claim status,
+        add manual authorship links, or override security labels.<br><br>
+        Edit <code style="color:#d2a8ff">schema.yaml</code> to change node types, properties, or
+        provenance layers. See the <b>Schema</b> tab above.
       </p>
     </div>
 
@@ -400,10 +543,13 @@
 
 </div>
 
+<div id="schema-view" style="display:none"></div>
+
 <div id="tooltip"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/n3@1.22.3/browser/n3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 <script>
 // ── Prefix expansions ────────────────────────────────────────────────────────
 const NS = {
@@ -858,6 +1004,196 @@ let searchTimer;
 document.getElementById('search-box').addEventListener('input', () => {
   clearTimeout(searchTimer);
   searchTimer = setTimeout(drawFiltered, 200);
+});
+
+// ── Schema tab ───────────────────────────────────────────────────────────────
+let schemaLoaded = false;
+
+async function loadSchema() {
+  if (schemaLoaded) return;
+  schemaLoaded = true;
+  const view = document.getElementById('schema-view');
+  view.innerHTML = '<div style="padding:40px;color:var(--muted)">Loading schema.yaml…</div>';
+  let schema;
+  try {
+    const res  = await fetch('schema.yaml');
+    const text = await res.text();
+    schema = jsyaml.load(text);
+  } catch (e) {
+    view.innerHTML = `<div style="padding:40px;color:#f85149">Failed to load schema.yaml: ${e.message}</div>`;
+    return;
+  }
+  renderSchema(schema, view);
+}
+
+function renderSchema(schema, view) {
+  const h = [];
+  h.push('<div class="schema-h1">Knowledge Graph Schema</div>');
+  h.push('<div class="schema-sub">Edit <code style="color:var(--accent)">schema.yaml</code> to change node types, properties, edges, and provenance layers.</div>');
+
+  // ── Named Graphs ────────────────────────────────────────────────────────
+  h.push('<div class="schema-section">');
+  h.push('<div class="schema-section-title">Named Graphs (5 containers)</div>');
+  h.push('<div class="schema-grid">');
+  const graphs = schema.named_graphs || {};
+  for (const [id, g] of Object.entries(graphs)) {
+    const layer = g.layer || id;
+    const badgeCls = ['core','L1','L2','L3','derived'].includes(layer) ? layer : 'core';
+    h.push(`<div class="schema-card">
+      <div class="schema-card-head" style="border-left:3px solid ${g.color||'#58a6ff'}">
+        <div>
+          <div class="card-title">graph:${id}</div>
+        </div>
+        <span class="layer-badge ${badgeCls}">${layer}</span>
+      </div>
+      <div class="schema-card-body">
+        <div class="desc">${esc(g.description || '')}</div>
+      </div>
+    </div>`);
+  }
+  h.push('</div></div>');
+
+  // ── Node Types ──────────────────────────────────────────────────────────
+  h.push('<div class="schema-section">');
+  h.push('<div class="schema-section-title">Node Types</div>');
+  h.push('<div class="schema-grid">');
+  const nodeTypes = schema.node_types || {};
+  for (const [name, nt] of Object.entries(nodeTypes)) {
+    const shapeIcon = nodeShapeIcon(name, nt);
+    const props = nt.properties || [];
+    let propsHtml = '<table class="prop-table">';
+    for (const p of props) {
+      const req = p.required ? '<span class="prop-req">required</span>' : '';
+      const col = p.csv_column ? `<span class="prop-col">${esc(p.csv_column)}</span>` : '';
+      const scheme = p.identifier_scheme ? ` <span style="color:#d2a8ff;font-size:9px">[${esc(p.identifier_scheme)}]</span>` : '';
+      const dtype = p.datatype ? ` <span style="color:#8b949e;font-size:9px">${esc(p.datatype)}</span>` : '';
+      propsHtml += `<tr>
+        <td class="prop-label">${esc(p.label||'')}${req}</td>
+        <td class="prop-pred">${esc(p.predicate||'')}${scheme}${dtype}</td>
+        ${col ? `<td class="prop-col">${esc(p.csv_column)}</td>` : '<td></td>'}
+      </tr>`;
+    }
+    propsHtml += '</table>';
+    const synth = nt.synthesized_from
+      ? `<div style="color:var(--muted);font-size:10px;margin-bottom:6px">Synthesized from: <code style="color:#d2a8ff">${esc(nt.synthesized_from)}</code></div>`
+      : '';
+    h.push(`<div class="schema-card">
+      <div class="schema-card-head" style="border-left:3px solid ${nt.stroke||nt.color||'#58a6ff'}">
+        ${shapeIcon}
+        <div>
+          <div class="card-title">${esc(name)}</div>
+          <div style="font-size:10px;color:var(--muted)">${esc(nt.rdf_type||'')} · ${esc(nt.iri_prefix||'')}:</div>
+        </div>
+        <span class="card-sub">${esc(nt.graph||'core')}</span>
+      </div>
+      <div class="schema-card-body">${synth}${propsHtml}</div>
+    </div>`);
+  }
+  h.push('</div></div>');
+
+  // ── Edge Types ──────────────────────────────────────────────────────────
+  h.push('<div class="schema-section">');
+  h.push('<div class="schema-section-title">Edge Types</div>');
+  h.push('<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:2px 16px 2px">');
+  h.push('<table class="edge-table"><thead><tr><th>Name</th><th>Source → Target</th><th>Predicate</th><th>Graph</th><th>Style</th></tr></thead><tbody>');
+  for (const [name, et] of Object.entries(schema.edge_types || {})) {
+    const stylePill = `<span class="style-pill">${esc(et.style||'solid')}</span>`;
+    h.push(`<tr>
+      <td style="font-weight:600">${esc(name)}</td>
+      <td>${esc(et.source||'')} <span class="edge-arrow">→</span> ${esc(et.target||'')}</td>
+      <td style="font-family:monospace;font-size:10px;color:var(--muted)">${esc(et.predicate||'')}</td>
+      <td style="color:var(--muted)">${esc(et.graph||'')}</td>
+      <td>${stylePill}</td>
+    </tr>`);
+  }
+  h.push('</tbody></table></div></div>');
+
+  // ── Claim Schema ────────────────────────────────────────────────────────
+  const cs = schema.claim_schema || {};
+  if (cs.fields) {
+    h.push('<div class="schema-section">');
+    h.push('<div class="schema-section-title">Claim Schema (L1 + L2 provenance)</div>');
+    h.push('<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:2px 16px 2px">');
+    h.push('<table class="edge-table"><thead><tr><th>Field</th><th>Predicate</th><th>Layer</th><th>Description</th></tr></thead><tbody>');
+    for (const f of cs.fields) {
+      const badgeCls = f.layer || 'L2';
+      h.push(`<tr>
+        <td style="font-weight:600">${esc(f.label||'')}</td>
+        <td style="font-family:monospace;font-size:10px;color:var(--muted)">${esc(f.predicate||'')}</td>
+        <td><span class="layer-badge ${badgeCls}">${esc(f.layer||'')}</span></td>
+        <td style="color:var(--muted)">${esc(f.description||'')}${f.allowed_values ? ' ['+f.allowed_values.join(' | ')+']' : ''}</td>
+      </tr>`);
+    }
+    h.push('</tbody></table></div></div>');
+  }
+
+  // ── Access Schema ───────────────────────────────────────────────────────
+  const as = schema.access_schema || {};
+  if (as.security_labels || as.access_policies) {
+    h.push('<div class="schema-section">');
+    h.push('<div class="schema-section-title">Access Schema (L3 security)</div>');
+    h.push('<div class="schema-grid">');
+    for (const [label, sl] of Object.entries(as.security_labels || {})) {
+      h.push(`<div class="schema-card">
+        <div class="schema-card-head" style="border-left:3px solid ${sl.color||'#58a6ff'}">
+          <div class="card-title">${esc(label)}</div>
+          <span class="layer-badge L3">L3</span>
+        </div>
+        <div class="schema-card-body">
+          <div class="desc">${esc(sl.description||'')}</div>
+          <div style="color:var(--muted);font-size:10px">Default for: ${(sl.default_for||[]).join(', ')}</div>
+        </div>
+      </div>`);
+    }
+    h.push('</div>');
+    if (as.access_policies) {
+      h.push('<div style="margin-top:10px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:2px 16px 2px">');
+      h.push('<table class="edge-table"><thead><tr><th>Policy</th><th>Label</th><th>Description</th></tr></thead><tbody>');
+      for (const [id, pol] of Object.entries(as.access_policies)) {
+        h.push(`<tr>
+          <td style="font-family:monospace;font-size:10px">${esc(id)}</td>
+          <td style="font-weight:600">${esc(pol.label||'')}</td>
+          <td style="color:var(--muted)">${esc(pol.description||'')}</td>
+        </tr>`);
+      }
+      h.push('</tbody></table></div>');
+    }
+    h.push('</div>');
+  }
+
+  view.innerHTML = h.join('');
+}
+
+function nodeShapeIcon(name, nt) {
+  const stroke = nt.stroke || nt.color || '#8b949e';
+  const fill   = nt.color  || '#1c2128';
+  const shape  = nt.shape  || 'circle';
+  if (shape === 'diamond') {
+    return `<svg class="node-shape-icon" width="22" height="22" viewBox="-12 -12 24 24"><polygon points="0,-10 10,0 0,10 -10,0" fill="${fill}" stroke="${stroke}" stroke-width="1.5"/></svg>`;
+  } else if (shape === 'rect') {
+    return `<svg class="node-shape-icon" width="22" height="22" viewBox="0 0 22 22"><rect x="1" y="5" width="20" height="12" rx="2" fill="${fill}" stroke="${stroke}" stroke-width="1.5"/></svg>`;
+  } else {
+    return `<svg class="node-shape-icon" width="22" height="22"><circle cx="11" cy="11" r="9" fill="${fill}" stroke="${stroke}" stroke-width="1.5"/></svg>`;
+  }
+}
+
+// ── Tab switching ─────────────────────────────────────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const workspace   = document.querySelector('.workspace');
+    const schemaView  = document.getElementById('schema-view');
+    if (tab === 'schema') {
+      workspace.style.display  = 'none';
+      schemaView.style.display = 'flex';
+      loadSchema();
+    } else {
+      workspace.style.display  = 'flex';
+      schemaView.style.display = 'none';
+    }
+  });
 });
 
 // ── Boot ─────────────────────────────────────────────────────────────────────
