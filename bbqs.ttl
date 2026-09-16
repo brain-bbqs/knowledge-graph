@@ -15,7 +15,7 @@
 
 bbqs:BBQS a ex:Consortium ;
     schema:name        "BRAIN BBQS" ;
-    schema:description "BRAIN Behavior Quantification and Standardization consortium" ;
+    schema:description "BRAIN Behavior Quantification and Synchronization consortium" ;
     schema:url         <https://brain-bbqs.org/> .
 
 
