@@ -2,293 +2,110 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>BRAIN BBQS · Knowledge Graph</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BRAIN BBQS</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: #0d1117;
-    color: #e6edf3;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 13px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+  body { margin: 0; background: #0d1117; overflow: hidden; }
+  svg  { width: 100vw; height: 100vh; }
+  text { font: 11px sans-serif; fill: #e6edf3; pointer-events: none; }
+  #tip {
+    position: fixed; background: #161b22; border: 1px solid #30363d;
+    border-radius: 6px; padding: 6px 10px; font: 12px sans-serif;
+    color: #e6edf3; pointer-events: none; opacity: 0; transition: opacity .1s;
   }
-
-  header {
-    padding: 10px 16px;
-    background: #161b22;
-    border-bottom: 1px solid #30363d;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-  }
-  header h1 { font-size: 14px; font-weight: 600; }
-  header .sub { font-size: 11px; color: #8b949e; margin-left: auto; }
-
-  #canvas { flex: 1; overflow: hidden; }
-  svg { width: 100%; height: 100%; }
-
-  .node { cursor: pointer; }
-  .node circle, .node rect, .node polygon { stroke-width: 1.5; }
-  .node text { pointer-events: none; font-size: 11px; fill: #e6edf3; user-select: none; }
-  .node.faded { opacity: .2; }
-  .node.selected circle, .node.selected rect, .node.selected polygon { stroke: #fff; stroke-width: 2.5; }
-
-  .link { stroke-opacity: .5; }
-
-  #tooltip {
-    position: fixed;
-    background: #1c2128;
-    border: 1px solid #30363d;
-    border-radius: 6px;
-    padding: 7px 11px;
-    font-size: 12px;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity .1s;
-    max-width: 220px;
-    line-height: 1.5;
-    z-index: 10;
-  }
-  #tooltip.on { opacity: 1; }
-  #tooltip .t-type { font-size: 10px; color: #8b949e; }
-
-  .legend {
-    position: absolute;
-    bottom: 16px;
-    left: 16px;
-    background: rgba(22,27,34,.92);
-    border: 1px solid #30363d;
-    border-radius: 8px;
-    padding: 10px 13px;
-    font-size: 11px;
-    backdrop-filter: blur(4px);
-  }
-  .legend-title { font-size: 10px; text-transform: uppercase; letter-spacing: .05em; color: #8b949e; margin-bottom: 7px; font-weight: 600; }
-  .legend-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
-  .legend-row:last-child { margin-bottom: 0; }
-  .ldot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-
-  #loading {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #8b949e;
-    font-size: 13px;
-    gap: 10px;
-    flex-direction: column;
-  }
-  .spinner {
-    width: 28px; height: 28px;
-    border: 2.5px solid #30363d;
-    border-top-color: #58a6ff;
-    border-radius: 50%;
-    animation: spin .8s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
-
-<header>
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-    <circle cx="10" cy="10" r="9" stroke="#58a6ff" stroke-width="1.5"/>
-    <circle cx="10" cy="6"  r="2" fill="#58a6ff"/>
-    <circle cx="6"  cy="14" r="2" fill="#f0883e"/>
-    <circle cx="14" cy="14" r="2" fill="#3fb950"/>
-    <line x1="10" y1="8" x2="6"  y2="12" stroke="#8b949e"/>
-    <line x1="10" y1="8" x2="14" y2="12" stroke="#8b949e"/>
-  </svg>
-  <h1>BRAIN BBQS · Knowledge Graph</h1>
-  <span class="sub" id="stat">Loading…</span>
-</header>
-
-<div id="canvas" style="position:relative">
-  <div id="loading"><div class="spinner"></div>Parsing Turtle…</div>
-  <svg id="svg"><g id="root"></g></svg>
-  <div class="legend" id="legend" style="display:none">
-    <div class="legend-title">Node type</div>
-  </div>
-</div>
-
-<div id="tooltip"></div>
-
+<svg><g id="g"></g></svg>
+<div id="tip"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/n3@1.22.3/browser/n3.min.js"></script>
 <script>
-// ── Type → visual config ─────────────────────────────────────────────────────
-const TYPE_CONFIG = {
-  'https://brain-bbqs.org/vocab/Consortium':   { label: 'Consortium',   color: '#f0c040', r: 18 },
-  'https://brain-bbqs.org/vocab/Project':      { label: 'Project',      color: '#58a6ff', r: 12 },
-  'https://brain-bbqs.org/vocab/WorkingGroup': { label: 'Working Group',color: '#f0883e', r: 12 },
-  'https://brain-bbqs.org/vocab/Announcement': { label: 'Announcement', color: '#ff7b72', r: 10 },
-  'https://schema.org/Event':                  { label: 'Event',        color: '#3fb950', r: 10 },
-  'https://brain-bbqs.org/vocab/Product':      { label: 'Product',      color: '#d2a8ff', r: 10 },
-  'https://schema.org/Person':                 { label: 'Person',       color: '#79c0ff', r: 8  },
+const COLORS = {
+  'https://brain-bbqs.org/vocab/Consortium':   '#f0c040',
+  'https://brain-bbqs.org/vocab/Project':      '#58a6ff',
+  'https://brain-bbqs.org/vocab/WorkingGroup': '#f0883e',
+  'https://brain-bbqs.org/vocab/Announcement': '#ff7b72',
+  'https://brain-bbqs.org/vocab/Product':      '#d2a8ff',
+  'https://schema.org/Event':                  '#3fb950',
+  'https://schema.org/Person':                 '#79c0ff',
 };
-const DEFAULT_CONFIG = { label: 'Node', color: '#8b949e', r: 8 };
+const SIZE = {
+  'https://brain-bbqs.org/vocab/Consortium': 18,
+};
+const RDF_TYPE   = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type';
+const SCHEMA_NAME= 'https://schema.org/name';
 
-const RDF_TYPE  = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type';
-const SCHEMA_NAME = 'https://schema.org/name';
+async function main() {
+  const text = await fetch('bbqs.ttl').then(r => r.text());
+  const quads = [];
+  new N3.Parser({ format: 'Turtle' }).parse(text, (e, q) => q && quads.push(q));
 
-function shortLabel(iri) {
-  return iri.replace(/.*[/#]/, '');
-}
-
-// ── Load + parse ──────────────────────────────────────────────────────────────
-async function boot() {
-  let text;
-  try {
-    const r = await fetch('bbqs.ttl');
-    text = await r.text();
-  } catch(e) {
-    document.getElementById('loading').innerHTML =
-      `<span style="color:#f85149">Failed to load bbqs.ttl — serve via HTTP.</span>`;
-    return;
+  const typeOf = {}, nameOf = {};
+  for (const {subject:{value:s}, predicate:{value:p}, object:{value:o, termType}} of quads) {
+    if (p === RDF_TYPE) typeOf[s] = o;
+    if (p === SCHEMA_NAME && termType === 'Literal') nameOf[s] = o;
   }
 
-  const parser = new N3.Parser({ format: 'Turtle' });
-  const quads  = [];
-  parser.parse(text, (err, q) => { if (q) quads.push(q); });
+  const nodes = Object.entries(typeOf)
+    .filter(([,t]) => COLORS[t])
+    .map(([id, type]) => ({ id, type, label: nameOf[id] || id.replace(/.*[/#]/, '') }));
 
-  // Build node map from typed subjects
-  const nodes = {};
-  const nameMap = {};
-  const typeMap = {};
-
-  for (const q of quads) {
-    const s = q.subject.value, p = q.predicate.value, o = q.object.value;
-    if (p === RDF_TYPE) typeMap[s] = o;
-    if (p === SCHEMA_NAME && q.object.termType === 'Literal') nameMap[s] = o;
-  }
-
-  for (const [iri, type] of Object.entries(typeMap)) {
-    nodes[iri] = {
-      id:    iri,
-      type,
-      label: nameMap[iri] || shortLabel(iri),
-      cfg:   TYPE_CONFIG[type] || DEFAULT_CONFIG,
-    };
-  }
-
-  // Build edges (only between known nodes)
+  const nodeSet = new Set(nodes.map(n => n.id));
+  const seen = new Set();
   const links = [];
-  const seen  = new Set();
-  for (const q of quads) {
-    const s = q.subject.value, p = q.predicate.value, o = q.object.value;
-    if (p === RDF_TYPE) continue;
-    if (nodes[s] && nodes[o]) {
-      const key = `${s}|${o}`;
-      if (!seen.has(key)) { seen.add(key); links.push({ source: s, target: o, pred: p }); }
-    }
+  for (const {subject:{value:s}, predicate:{value:p}, object:{value:o}} of quads) {
+    if (p === RDF_TYPE || !nodeSet.has(s) || !nodeSet.has(o)) continue;
+    const k = s + o;
+    if (!seen.has(k)) { seen.add(k); links.push({ source: s, target: o }); }
   }
 
-  document.getElementById('loading').style.display = 'none';
-  document.getElementById('stat').textContent =
-    `${Object.keys(nodes).length} nodes · ${links.length} edges · ${quads.length} triples`;
+  const W = innerWidth, H = innerHeight;
+  const svg = d3.select('svg');
+  const g   = d3.select('#g');
+  const tip = document.getElementById('tip');
 
-  buildLegend();
-  render(Object.values(nodes), links);
-}
-
-// ── Legend ────────────────────────────────────────────────────────────────────
-function buildLegend() {
-  const leg = document.getElementById('legend');
-  leg.style.display = 'block';
-  for (const [, cfg] of Object.entries(TYPE_CONFIG)) {
-    const row = document.createElement('div');
-    row.className = 'legend-row';
-    row.innerHTML = `<div class="ldot" style="background:${cfg.color}"></div>${cfg.label}`;
-    leg.appendChild(row);
-  }
-}
-
-// ── Render ────────────────────────────────────────────────────────────────────
-function render(nodes, links) {
-  const wrap = document.getElementById('canvas');
-  const W = wrap.clientWidth, H = wrap.clientHeight;
-
-  const svg  = d3.select('#svg');
-  const root = d3.select('#root');
-
-  const zoom = d3.zoom().scaleExtent([.05, 8])
-    .on('zoom', e => root.attr('transform', e.transform));
-  svg.call(zoom).call(zoom.transform, d3.zoomIdentity.translate(W/2, H/2).scale(.7));
-  svg.on('click', () => selectNode(null));
+  svg.call(d3.zoom().scaleExtent([.05,8]).on('zoom', e => g.attr('transform', e.transform)))
+     .call(d3.zoom().transform, d3.zoomIdentity.translate(W/2, H/2).scale(.8));
 
   const sim = d3.forceSimulation(nodes)
-    .force('link', d3.forceLink(links).id(d=>d.id).distance(80).strength(.5))
-    .force('charge', d3.forceManyBody().strength(d => d.cfg.r > 14 ? -800 : -200))
-    .force('collide', d3.forceCollide(d => d.cfg.r + 6))
+    .force('link',   d3.forceLink(links).id(d=>d.id).distance(80).strength(.5))
+    .force('charge', d3.forceManyBody().strength(-250))
+    .force('collide',d3.forceCollide(20))
     .force('x', d3.forceX(0).strength(.04))
     .force('y', d3.forceY(0).strength(.04));
 
-  const linkSel = root.selectAll('.link')
-    .data(links).join('line')
-    .attr('class', 'link')
-    .attr('stroke', '#30363d')
-    .attr('stroke-width', 1);
+  const link = g.selectAll('line').data(links).join('line')
+    .attr('stroke', '#30363d').attr('stroke-opacity', .6);
 
-  const tip = document.getElementById('tooltip');
-
-  const nodeSel = root.selectAll('.node')
-    .data(nodes, d=>d.id).join('g')
-    .attr('class', 'node')
-    .on('click', (ev, d) => { ev.stopPropagation(); selectNode(d, nodeSel); })
+  const node = g.selectAll('g.n').data(nodes, d=>d.id).join('g').attr('class','n')
+    .style('cursor','pointer')
     .on('mouseover', (ev, d) => {
-      tip.innerHTML = `<strong>${d.label}</strong><br><span class="t-type">${d.cfg.label}</span>`;
-      tip.classList.add('on');
+      tip.style.opacity = 1;
+      tip.textContent = d.label;
     })
-    .on('mousemove', ev => {
-      tip.style.left = (ev.clientX + 14) + 'px';
-      tip.style.top  = (ev.clientY - 10) + 'px';
-    })
-    .on('mouseout', () => tip.classList.remove('on'))
+    .on('mousemove', ev => { tip.style.left=(ev.clientX+12)+'px'; tip.style.top=(ev.clientY-8)+'px'; })
+    .on('mouseout',  () => tip.style.opacity = 0)
     .call(d3.drag()
-      .on('start', (ev,d) => { if (!ev.active) sim.alphaTarget(.3).restart(); d.fx=d.x; d.fy=d.y; })
-      .on('drag',  (ev,d) => { d.fx=ev.x; d.fy=ev.y; })
-      .on('end',   (ev,d) => { if (!ev.active) sim.alphaTarget(0); d.fx=null; d.fy=null; })
-    );
+      .on('start',(ev,d)=>{ if(!ev.active) sim.alphaTarget(.3).restart(); d.fx=d.x; d.fy=d.y; })
+      .on('drag', (ev,d)=>{ d.fx=ev.x; d.fy=ev.y; })
+      .on('end',  (ev,d)=>{ if(!ev.active) sim.alphaTarget(0); d.fx=d.fy=null; }));
 
-  nodeSel.append('circle')
-    .attr('r', d => d.cfg.r)
-    .attr('fill', d => d.cfg.color + '22')
-    .attr('stroke', d => d.cfg.color);
+  node.append('circle')
+    .attr('r',    d => SIZE[d.type] || 9)
+    .attr('fill', d => (COLORS[d.type]||'#8b949e')+'22')
+    .attr('stroke',d=> COLORS[d.type]||'#8b949e')
+    .attr('stroke-width', 1.5);
 
-  nodeSel.append('text')
-    .attr('dy', d => d.cfg.r + 12)
-    .attr('text-anchor', 'middle')
-    .attr('fill', '#c9d1d9')
-    .attr('font-size', d => d.cfg.r > 14 ? 12 : 10)
+  node.append('text').attr('dy', d=>(SIZE[d.type]||9)+12).attr('text-anchor','middle')
     .text(d => d.label);
 
   sim.on('tick', () => {
-    linkSel
-      .attr('x1', d=>d.source.x).attr('y1', d=>d.source.y)
-      .attr('x2', d=>d.target.x).attr('y2', d=>d.target.y);
-    nodeSel.attr('transform', d=>`translate(${d.x},${d.y})`);
+    link.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y)
+        .attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+    node.attr('transform', d=>`translate(${d.x},${d.y})`);
   });
 }
-
-function selectNode(d, nodeSel) {
-  if (!nodeSel) return;
-  if (!d) {
-    nodeSel.classed('faded', false).classed('selected', false);
-    return;
-  }
-  nodeSel
-    .classed('selected', n => n.id === d.id)
-    .classed('faded',    n => n.id !== d.id);
-}
-
-boot();
+main();
 </script>
 </body>
 </html>
