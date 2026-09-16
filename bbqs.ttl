@@ -14,108 +14,173 @@
 # ── Consortium ────────────────────────────────────────────────────────────────
 
 bbqs:BBQS a ex:Consortium ;
-    schema:name        "BRAIN BBQS" ;
-    schema:description "BRAIN Behavior Quantification and Synchronization consortium" ;
-    schema:url         <https://brain-bbqs.org/> .
+    schema:name             "BRAIN BBQS" ;
+    schema:description      "BRAIN Behavior Quantification and Synchronization consortium" ;
+    schema:url              <https://brain-bbqs.org/> ;
+    schema:foundingDate     "2022"^^xsd:gYear ;
+    schema:funder           <https://www.nih.gov/> ;
+    schema:sameAs           <https://reporter.nih.gov/project-details/PLACEHOLDER> ;
+    schema:contactPoint     <mailto:contact@brain-bbqs.org> ;
+    schema:keywords         "behavior, neuroscience, quantification, synchronization, standardization" .
 
 
 # ── Working Groups ────────────────────────────────────────────────────────────
 
 bbqs:wg-analytics a ex:WorkingGroup ;
-    schema:name  "WG-Analytics" ;
-    ex:partOf    bbqs:BBQS .
+    schema:name             "WG-Analytics" ;
+    schema:parentOrganization bbqs:BBQS ;
+    schema:description      "Data analysis and computational methods" .
 
 bbqs:wg-elsi a ex:WorkingGroup ;
-    schema:name  "WG-ELSI" ;
-    ex:partOf    bbqs:BBQS .
+    schema:name             "WG-ELSI" ;
+    schema:parentOrganization bbqs:BBQS ;
+    schema:description      "Ethical, legal, and social implications" .
 
 bbqs:wg-hardware a ex:WorkingGroup ;
-    schema:name  "WG-Hardware" ;
-    ex:partOf    bbqs:BBQS .
+    schema:name             "WG-Hardware" ;
+    schema:parentOrganization bbqs:BBQS ;
+    schema:description      "Standardized hardware and arena design" .
 
 bbqs:wg-software a ex:WorkingGroup ;
-    schema:name  "WG-Software" ;
-    ex:partOf    bbqs:BBQS .
+    schema:name             "WG-Software" ;
+    schema:parentOrganization bbqs:BBQS ;
+    schema:description      "Open-source software tools and pipelines" .
 
 
 # ── Projects ──────────────────────────────────────────────────────────────────
 
-bbqs:project-species a ex:Project ;
-    schema:name      "Species Comparison" ;
-    ex:projectType   "Species" ;
-    ex:partOf        bbqs:BBQS .
+bbqs:project-species a ex:Project, schema:ResearchProject ;
+    schema:name             "Species Comparison" ;
+    schema:description      "Cross-species behavioral phenotyping and comparison" ;
+    schema:parentOrganization bbqs:BBQS ;
+    schema:keywords         "species, phenotyping, behavior" ;
+    schema:funding          bbqs:grant-nih-brain-1 .
 
-bbqs:project-marr a ex:Project ;
-    schema:name      "BBQS-Marr Object" ;
-    ex:projectType   "MarrObject" ;
-    schema:description "Causal knowledge graph (in progress)" ;
-    ex:partOf        bbqs:BBQS .
+bbqs:project-marr a ex:Project, schema:ResearchProject ;
+    schema:name             "BBQS-Marr Object" ;
+    schema:description      "Causal knowledge graph (in progress)" ;
+    schema:parentOrganization bbqs:BBQS ;
+    schema:keywords         "causal, knowledge graph, Marr" .
 
-bbqs:project-grants a ex:Project ;
-    schema:name      "Grant Metadata" ;
-    ex:projectType   "GrantAdmin" ;
-    ex:partOf        bbqs:BBQS .
+bbqs:project-grants a ex:Project, schema:ResearchProject ;
+    schema:name             "Grant Metadata" ;
+    schema:description      "Administrative tracking of consortium grants and funding" ;
+    schema:parentOrganization bbqs:BBQS .
+
+
+# ── Grants ────────────────────────────────────────────────────────────────────
+
+bbqs:grant-nih-brain-1 a schema:MonetaryGrant ;
+    schema:name             "NIH BRAIN Initiative — BBQS Consortium Award" ;
+    schema:identifier       "PLACEHOLDER-GRANT-NUMBER" ;
+    schema:funder           <https://www.nih.gov/> ;
+    schema:startDate        "2022-09-01"^^xsd:date ;
+    schema:endDate          "2027-08-31"^^xsd:date ;
+    schema:fundedItem       bbqs:BBQS ;
+    schema:isPartOf         bbqs:BBQS .
 
 
 # ── Announcements ─────────────────────────────────────────────────────────────
 
-bbqs:ann-funding-1 a ex:Announcement ;
-    schema:name          "NIH BRAIN Initiative Funding Call" ;
-    ex:announcementType  "FundingCall" ;
-    schema:datePublished "2026-01-15"^^xsd:date ;
-    ex:partOf            bbqs:BBQS .
+bbqs:ann-funding-1 a ex:Announcement, schema:Grant ;
+    schema:name             "NIH BRAIN Initiative Funding Call" ;
+    schema:description      "Open funding opportunity for behavior quantification research" ;
+    schema:datePublished    "2026-01-15"^^xsd:date ;
+    schema:url              <https://grants.nih.gov/PLACEHOLDER> ;
+    schema:funder           <https://www.nih.gov/> ;
+    schema:isPartOf         bbqs:BBQS .
 
-bbqs:ann-job-1 a ex:Announcement ;
-    schema:name          "Postdoc Opening — Behavior Analysis" ;
-    ex:announcementType  "JobPosting" ;
-    schema:datePublished "2026-03-01"^^xsd:date ;
-    ex:partOf            bbqs:BBQS .
+bbqs:ann-job-1 a ex:Announcement, schema:JobPosting ;
+    schema:name             "Postdoc Opening — Behavior Analysis" ;
+    schema:datePosted       "2026-03-01"^^xsd:date ;
+    schema:validThrough     "2026-05-01"^^xsd:date ;
+    schema:hiringOrganization bbqs:BBQS ;
+    schema:employmentType   "FULL_TIME" ;
+    schema:description      "Postdoctoral position in automated behavior analysis" ;
+    schema:isPartOf         bbqs:BBQS .
 
-bbqs:ann-news-1 a ex:Announcement ;
-    schema:name          "BBQS Year-Two Progress Report" ;
-    ex:announcementType  "News" ;
-    schema:datePublished "2026-06-10"^^xsd:date ;
-    ex:partOf            bbqs:BBQS .
+bbqs:ann-news-1 a ex:Announcement, schema:NewsArticle ;
+    schema:name             "BBQS Year-Two Progress Report" ;
+    schema:headline         "BBQS Year-Two Progress Report" ;
+    schema:datePublished    "2026-06-10"^^xsd:date ;
+    schema:description      "Summary of consortium achievements in year two" ;
+    schema:isPartOf         bbqs:BBQS .
 
 
 # ── Events ────────────────────────────────────────────────────────────────────
 
 bbqs:event-annual-2026 a schema:Event ;
-    schema:name      "BBQS Annual Meeting 2026" ;
-    schema:startDate "2026-11-01"^^xsd:date ;
-    schema:location  "Boston, MA" ;
-    ex:partOf        bbqs:BBQS .
+    schema:name             "BBQS Annual Meeting 2026" ;
+    schema:startDate        "2026-11-01"^^xsd:date ;
+    schema:endDate          "2026-11-03"^^xsd:date ;
+    schema:location         "Boston, MA" ;
+    schema:eventAttendanceMode schema:OfflineEventAttendanceMode ;
+    schema:eventStatus      schema:EventScheduled ;
+    schema:organizer        bbqs:BBQS ;
+    schema:isPartOf         bbqs:BBQS .
 
 bbqs:event-hackathon-2026 a schema:Event ;
-    schema:name      "BBQS Data Hackathon" ;
-    schema:startDate "2026-07-14"^^xsd:date ;
-    schema:location  "Virtual" ;
-    ex:partOf        bbqs:BBQS .
+    schema:name             "BBQS Data Hackathon" ;
+    schema:startDate        "2026-07-14"^^xsd:date ;
+    schema:endDate          "2026-07-16"^^xsd:date ;
+    schema:location         "Virtual" ;
+    schema:eventAttendanceMode schema:OnlineEventAttendanceMode ;
+    schema:eventStatus      schema:EventScheduled ;
+    schema:organizer        bbqs:BBQS ;
+    schema:isPartOf         bbqs:BBQS .
 
 
 # ── Products ──────────────────────────────────────────────────────────────────
 
-bbqs:prod-openfield a ex:Product ;
-    schema:name     "OpenField Tracker" ;
-    ex:productType  "Software" ;
-    ex:partOf       bbqs:wg-software .
+bbqs:prod-openfield a ex:Product, schema:SoftwareApplication ;
+    schema:name             "OpenField Tracker" ;
+    schema:description      "Open-source tracking software for open-field behavioral assays" ;
+    schema:softwareVersion  "0.1.0" ;
+    schema:codeRepository   <https://github.com/brain-bbqs/openfield-tracker> ;
+    schema:license          <https://opensource.org/licenses/MIT> ;
+    schema:programmingLanguage "Python" ;
+    schema:isPartOf         bbqs:wg-software .
 
-bbqs:prod-arena a ex:Product ;
-    schema:name     "Standardized Arena Kit" ;
-    ex:productType  "Hardware" ;
-    ex:partOf       bbqs:wg-hardware .
+bbqs:prod-arena a ex:Product, schema:Product ;
+    schema:name             "Standardized Arena Kit" ;
+    schema:description      "Hardware kit for reproducible open-field behavioral experiments" ;
+    schema:manufacturer     bbqs:BBQS ;
+    schema:isPartOf         bbqs:wg-hardware .
 
-bbqs:prod-pose-model a ex:Product ;
-    schema:name     "BBQS Pose Model v1" ;
-    ex:productType  "Model" ;
-    ex:partOf       bbqs:wg-analytics .
+bbqs:prod-pose-model a ex:Product, schema:SoftwareApplication ;
+    schema:name             "BBQS Pose Model v1" ;
+    schema:description      "Pretrained pose estimation model for rodent behavior" ;
+    schema:softwareVersion  "1.0.0" ;
+    schema:codeRepository   <https://github.com/brain-bbqs/pose-model> ;
+    schema:applicationCategory "Machine Learning" ;
+    schema:isPartOf         bbqs:wg-analytics .
 
-bbqs:prod-behavior-algo a ex:Product ;
-    schema:name     "Behavior Segmentation Algorithm" ;
-    ex:productType  "Algorithm" ;
-    ex:partOf       bbqs:wg-analytics .
+bbqs:prod-behavior-algo a ex:Product, schema:SoftwareApplication ;
+    schema:name             "Behavior Segmentation Algorithm" ;
+    schema:description      "Unsupervised algorithm for segmenting continuous behavior streams" ;
+    schema:codeRepository   <https://github.com/brain-bbqs/behavior-segmentation> ;
+    schema:programmingLanguage "Python" ;
+    schema:isPartOf         bbqs:wg-analytics .
 
-bbqs:prod-rodent-dataset a ex:Product ;
-    schema:name     "Rodent Behavior Dataset 2025" ;
-    ex:productType  "Dataset" ;
-    ex:partOf       bbqs:project-species .
+bbqs:prod-rodent-dataset a ex:Product, schema:Dataset ;
+    schema:name             "Rodent Behavior Dataset 2025" ;
+    schema:description      "Annotated multi-species rodent behavior video dataset" ;
+    schema:datePublished    "2025-01-01"^^xsd:date ;
+    schema:license          <https://creativecommons.org/licenses/by/4.0/> ;
+    schema:measurementTechnique "Video tracking, pose estimation" ;
+    schema:variableMeasured "locomotion, grooming, rearing, social interaction" ;
+    schema:identifier       "PLACEHOLDER-DOI" ;
+    schema:isPartOf         bbqs:project-species .
+
+
+# ── People ────────────────────────────────────────────────────────────────────
+
+# bbqs:person-PLACEHOLDER a schema:Person ;
+#     schema:name        "First Last" ;
+#     schema:givenName   "First" ;
+#     schema:familyName  "Last" ;
+#     schema:jobTitle    "Principal Investigator" ;
+#     schema:affiliation bbqs:BBQS ;
+#     schema:worksFor    <https://mit.edu/> ;
+#     schema:sameAs      <https://orcid.org/0000-0000-0000-0000> ;
+#     schema:email       <mailto:placeholder@institution.edu> .
