@@ -29,22 +29,74 @@ bbqs:BBQS a ex:Consortium ;
 bbqs:wg-analytics a ex:WorkingGroup ;
     schema:name             "WG-Analytics" ;
     schema:parentOrganization bbqs:BBQS ;
-    schema:description      "Data analysis and computational methods" .
+    schema:description      "Developing shared analytical frameworks, pipelines, and computational methods for cross-project neural data analysis." .
+
+bbqs:wg-devices a ex:WorkingGroup ;
+    schema:name             "WG-Devices" ;
+    schema:parentOrganization bbqs:BBQS ;
+    schema:description      "Compiling best practices for multimodal data acquisition, device integration, calibration, and synchronization across laboratories." .
 
 bbqs:wg-elsi a ex:WorkingGroup ;
     schema:name             "WG-ELSI" ;
     schema:parentOrganization bbqs:BBQS ;
-    schema:description      "Ethical, legal, and social implications" .
+    schema:description      "Addressing ethical, legal, and social implications of brain research, ensuring responsible innovation and data governance." .
 
-bbqs:wg-hardware a ex:WorkingGroup ;
-    schema:name             "WG-Hardware" ;
+bbqs:wg-standards a ex:WorkingGroup ;
+    schema:name             "WG-Standards" ;
     schema:parentOrganization bbqs:BBQS ;
-    schema:description      "Standardized hardware and arena design" .
+    schema:description      "Establishing and promoting adoption of data standards for novel sensors and multimodal data integration to facilitate FAIR sharing." .
 
-bbqs:wg-software a ex:WorkingGroup ;
-    schema:name             "WG-Software" ;
-    schema:parentOrganization bbqs:BBQS ;
-    schema:description      "Open-source software tools and pipelines" .
+
+# ── Working Group Chairs ───────────────────────────────────────────────────────
+
+bbqs:person-kristofer-bouchard a schema:Person ;
+    schema:name             "Kristofer Bouchard" ;
+    schema:givenName        "Kristofer" ;
+    schema:familyName       "Bouchard" ;
+    schema:jobTitle         "Chair, WG-Analytics" ;
+    schema:affiliation      bbqs:wg-analytics .
+
+bbqs:person-han-yi a schema:Person ;
+    schema:name             "Han Yi" ;
+    schema:givenName        "Han" ;
+    schema:familyName       "Yi" ;
+    schema:jobTitle         "Chair, WG-Analytics" ;
+    schema:affiliation      bbqs:wg-analytics .
+
+bbqs:person-alireza-kazemi a schema:Person ;
+    schema:name             "Alireza Kazemi" ;
+    schema:givenName        "Alireza" ;
+    schema:familyName       "Kazemi" ;
+    schema:jobTitle         "Chair, WG-Devices" ;
+    schema:affiliation      bbqs:wg-devices .
+
+bbqs:person-uros-topalovic a schema:Person ;
+    schema:name             "Uros Topalovic" ;
+    schema:givenName        "Uros" ;
+    schema:familyName       "Topalovic" ;
+    schema:jobTitle         "Chair, WG-Devices" ;
+    schema:affiliation      bbqs:wg-devices .
+
+bbqs:person-laura-cabrera a schema:Person ;
+    schema:name             "Laura Cabrera" ;
+    schema:givenName        "Laura" ;
+    schema:familyName       "Cabrera" ;
+    schema:jobTitle         "Chair, WG-ELSI" ;
+    schema:affiliation      bbqs:wg-elsi .
+
+bbqs:person-oliver-ruebel a schema:Person ;
+    schema:name             "Oliver Ruebel" ;
+    schema:givenName        "Oliver" ;
+    schema:familyName       "Ruebel" ;
+    schema:jobTitle         "Chair, WG-Standards" ;
+    schema:affiliation      bbqs:wg-standards .
+
+bbqs:person-melissa-kline-struhl a schema:Person ;
+    schema:name             "Melissa Kline Struhl" ;
+    schema:givenName        "Melissa" ;
+    schema:familyName       "Kline Struhl" ;
+    schema:jobTitle         "Chair, WG-Standards" ;
+    schema:affiliation      bbqs:wg-standards .
 
 
 # ── Projects ──────────────────────────────────────────────────────────────────
@@ -139,13 +191,13 @@ bbqs:prod-openfield a ex:Product, schema:SoftwareApplication ;
     schema:codeRepository   <https://github.com/brain-bbqs/openfield-tracker> ;
     schema:license          <https://opensource.org/licenses/MIT> ;
     schema:programmingLanguage "Python" ;
-    schema:isPartOf         bbqs:wg-software .
+    schema:isPartOf         bbqs:wg-standards .
 
 bbqs:prod-arena a ex:Product, schema:Product ;
     schema:name             "Standardized Arena Kit" ;
     schema:description      "Hardware kit for reproducible open-field behavioral experiments" ;
     schema:manufacturer     bbqs:BBQS ;
-    schema:isPartOf         bbqs:wg-hardware .
+    schema:isPartOf         bbqs:wg-devices .
 
 bbqs:prod-pose-model a ex:Product, schema:SoftwareApplication ;
     schema:name             "BBQS Pose Model v1" ;
@@ -171,16 +223,3 @@ bbqs:prod-rodent-dataset a ex:Product, schema:Dataset ;
     schema:variableMeasured "locomotion, grooming, rearing, social interaction" ;
     schema:identifier       "PLACEHOLDER-DOI" ;
     schema:isPartOf         bbqs:project-species .
-
-
-# ── People ────────────────────────────────────────────────────────────────────
-
-# bbqs:person-PLACEHOLDER a schema:Person ;
-#     schema:name        "First Last" ;
-#     schema:givenName   "First" ;
-#     schema:familyName  "Last" ;
-#     schema:jobTitle    "Principal Investigator" ;
-#     schema:affiliation bbqs:BBQS ;
-#     schema:worksFor    <https://mit.edu/> ;
-#     schema:sameAs      <https://orcid.org/0000-0000-0000-0000> ;
-#     schema:email       <mailto:placeholder@institution.edu> .
