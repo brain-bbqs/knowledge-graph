@@ -35,8 +35,20 @@ const SIZE = {
 const RDF_TYPE   = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type';
 const SCHEMA_NAME= 'https://schema.org/name';
 
+function showError(msg) {
+  document.body.innerHTML = `<div style="color:#ff7b72;font:14px monospace;padding:40px;white-space:pre-wrap">${msg}</div>`;
+}
+
 async function main() {
-  const text = await fetch('bbqs.ttl').then(r => r.text());
+  let text;
+  try {
+    const res = await fetch('bbqs.ttl');
+    if (!res.ok) throw new Error(`HTTP ${res.status} fetching bbqs.ttl`);
+    text = await res.text();
+  } catch (e) {
+    showError('Could not load bbqs.ttl\n\n' + e.message + '\n\nAre you viewing this via a web server (GitHub Pages / localhost)?\nOpening index.html as a local file will block fetch().');
+    return;
+  }
   const quads = [];
   new N3.Parser({ format: 'Turtle' }).parse(text, (e, q) => q && quads.push(q));
 
