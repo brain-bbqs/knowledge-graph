@@ -1,914 +1,294 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>BRAIN BBQS Knowledge Graph Browser</title>
-<meta name="description" content="A text-first browser for the BRAIN BBQS knowledge graph." />
+<title>BRAIN BBQS Knowledge Graph</title>
+<meta name="description" content="Browse the BRAIN BBQS knowledge graph as a simple, expandable directory tree." />
 <style>
-  :root {
-    --bg: #f7f6f2;
-    --paper: #fffdfa;
-    --paper-2: #eeebe4;
-    --ink: #202126;
-    --muted: #6d716f;
-    --faint: #9da29d;
-    --line: #d9d5cb;
-    --line-strong: #b9b1a1;
-    --accent: #b55325;
-    --accent-2: #236b69;
-    --accent-3: #4b6f9f;
-    --accent-soft: #f4dfd2;
-    --focus: #1e5d96;
-    --shadow: 0 14px 38px rgba(35, 34, 30, 0.09);
-    --radius: 10px;
+  :root{
+    --bg:#0f1115; --panel:#151922; --line:#242a36; --text:#e6e9ef; --dim:#98a1b3;
+    --accent:#6ea8fe; --hit:#ffd479;
+    --Consortium:#f4a261; --WorkingGroup:#6ea8fe; --Project:#7ee0a8; --MonetaryGrant:#c792ea;
+    --Person:#ffd479; --Product:#59d1d6; --Announcement:#f28b82; --Event:#b0bec5; --Other:#8892a6;
   }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--bg);color:var(--text);
+       font:14px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+  header{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  h1{font-size:15px;margin:0;font-weight:600;letter-spacing:.02em}
+  .stats{color:var(--dim);font-size:12px}
+  .spacer{flex:1}
+  input[type=search]{background:var(--panel);border:1px solid var(--line);color:var(--text);
+       padding:7px 10px;border-radius:6px;min-width:220px;font:inherit;font-size:13px}
+  input[type=search]:focus{outline:none;border-color:var(--accent)}
+  button.tool{background:var(--panel);border:1px solid var(--line);color:var(--dim);
+       padding:7px 10px;border-radius:6px;cursor:pointer;font:inherit;font-size:12px}
+  button.tool:hover{color:var(--text);border-color:var(--accent)}
+  main{display:flex;height:calc(100% - 56px);min-height:0}
+  #tree{flex:1;overflow:auto;padding:14px 10px 60px}
+  #side{width:340px;border-left:1px solid var(--line);overflow:auto;padding:16px;background:var(--panel)}
+  @media (max-width:860px){ main{flex-direction:column} #side{width:auto;border-left:0;border-top:1px solid var(--line);max-height:45%} }
 
-  * { box-sizing: border-box; }
-  html { min-height: 100%; }
-  body {
-    min-height: 100%;
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    line-height: 1.45;
-  }
+  .row{display:flex;align-items:center;gap:6px;padding:2px 6px;border-radius:5px;cursor:pointer;white-space:nowrap}
+  .row:hover{background:#1c2230}
+  .row.sel{background:#22304a}
+  .row.hit .name{color:var(--hit)}
+  .row.faded{opacity:.28}
+  .twisty{width:14px;color:var(--dim);flex:0 0 14px;text-align:center}
+  .icon{color:var(--dim)}
+  .dot{width:8px;height:8px;border-radius:2px;flex:0 0 8px;display:inline-block}
+  .name{overflow:hidden;text-overflow:ellipsis}
+  .kind{color:var(--dim);font-size:11px}
+  .count{color:#657089;font-size:11px}
+  ul{list-style:none;margin:0;padding-left:16px;border-left:1px dashed #222836}
+  ul.root{padding-left:0;border-left:0}
+  li{margin:0}
 
-  a { color: var(--focus); text-decoration-thickness: 1px; text-underline-offset: 2px; }
-  button, input, select { font: inherit; }
-  button { cursor: pointer; }
-  .wrap { width: min(1180px, calc(100vw - 32px)); margin: 0 auto; }
-
-  header {
-    background: var(--paper);
-    border-bottom: 1px solid var(--line);
-  }
-  .topbar {
-    min-height: 76px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    padding: 16px 0;
-  }
-  h1 {
-    margin: 0;
-    font-size: clamp(22px, 3vw, 35px);
-    line-height: 1.05;
-    letter-spacing: 0;
-  }
-  .lede {
-    margin: 7px 0 0;
-    color: var(--muted);
-    max-width: 690px;
-  }
-  .stats {
-    flex: 0 0 auto;
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 8px;
-  }
-  .stat {
-    min-width: 92px;
-    padding: 9px 12px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--bg);
-    text-align: center;
-  }
-  .stat strong { display: block; font-size: 20px; line-height: 1; }
-  .stat span { color: var(--muted); font-size: 12px; }
-
-  .toolbar {
-    position: sticky;
-    top: 0;
-    z-index: 5;
-    border-bottom: 1px solid var(--line);
-    background: rgba(247, 246, 242, 0.94);
-    backdrop-filter: blur(10px);
-  }
-  .toolbar-inner {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 12px;
-    padding: 12px 0;
-    align-items: center;
-  }
-  #search {
-    width: 100%;
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius);
-    background: var(--paper);
-    color: var(--ink);
-    padding: 11px 13px;
-    min-height: 44px;
-  }
-  #search:focus { outline: 3px solid color-mix(in srgb, var(--focus), transparent 78%); border-color: var(--focus); }
-  .tabs {
-    display: inline-flex;
-    gap: 4px;
-    padding: 4px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--paper);
-  }
-  .tab {
-    border: 0;
-    border-radius: 7px;
-    background: transparent;
-    color: var(--muted);
-    min-height: 34px;
-    padding: 0 10px;
-    white-space: nowrap;
-  }
-  .tab[aria-selected="true"] { background: var(--ink); color: var(--paper); }
-
-  main { padding: 20px 0 40px; }
-  .view { display: none; }
-  .view.active { display: block; }
-  .loading, .error {
-    margin: 22px 0;
-    padding: 18px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--paper);
-    color: var(--muted);
-  }
-  .error { color: #8f2c1e; border-color: #d7a99e; background: #fff3ef; }
-
-  .section-title {
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: 12px;
-    margin: 0 0 12px;
-  }
-  .section-title h2 { margin: 0; font-size: 18px; letter-spacing: 0; }
-  .section-title p { margin: 0; color: var(--muted); font-size: 13px; }
-
-  .quick-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-    margin-bottom: 22px;
-  }
-  .quick-card {
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--paper);
-    padding: 14px;
-    box-shadow: var(--shadow);
-  }
-  .quick-card h3 { margin: 0 0 8px; font-size: 14px; }
-  .quick-card p { margin: 0 0 12px; color: var(--muted); font-size: 13px; }
-  .quick-card button, .small-button {
-    border: 1px solid var(--line-strong);
-    border-radius: 8px;
-    background: var(--paper);
-    color: var(--ink);
-    padding: 7px 9px;
-    font-size: 13px;
-  }
-  .quick-card button:hover, .small-button:hover { border-color: var(--ink); }
-
-  .category-list {
-    display: grid;
-    gap: 16px;
-  }
-  .category {
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--paper);
-    overflow: clip;
-  }
-  .category-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 12px 14px;
-    border-bottom: 1px solid var(--line);
-    background: var(--paper-2);
-  }
-  .category-head h3 { margin: 0; font-size: 15px; }
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    border-radius: 999px;
-    padding: 3px 9px;
-    background: var(--bg);
-    color: var(--muted);
-    font-size: 12px;
-    white-space: nowrap;
-  }
-  .dot { width: 8px; height: 8px; border-radius: 999px; background: var(--accent); }
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 0;
-  }
-  .node-card {
-    border: 0;
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    background: transparent;
-    min-height: 132px;
-    padding: 14px;
-    text-align: left;
-    color: inherit;
-  }
-  .node-card:hover { background: #fbf5ef; }
-  .node-card h4 { margin: 0 0 6px; font-size: 15px; letter-spacing: 0; }
-  .node-card p { margin: 0; color: var(--muted); font-size: 13px; }
-  .meta-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-  .tag { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 2px 7px; font-size: 11px; color: var(--muted); background: var(--paper); }
-
-  .split {
-    display: grid;
-    grid-template-columns: minmax(260px, 360px) 1fr;
-    gap: 16px;
-  }
-  .panel {
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--paper);
-    min-width: 0;
-  }
-  .panel-head { padding: 13px 14px; border-bottom: 1px solid var(--line); background: var(--paper-2); }
-  .panel-head h2, .panel-head h3 { margin: 0; font-size: 16px; }
-  .panel-body { padding: 14px; }
-  .item-list { display: grid; gap: 6px; max-height: 640px; overflow: auto; padding: 8px; }
-  .item-button {
-    width: 100%;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    background: transparent;
-    padding: 9px 10px;
-    text-align: left;
-    color: var(--ink);
-  }
-  .item-button:hover, .item-button.active { border-color: var(--line); background: var(--bg); }
-  .item-button strong { display: block; font-size: 13px; }
-  .item-button span { display: block; color: var(--muted); font-size: 12px; margin-top: 1px; }
-
-  .detail-title { display: flex; align-items: start; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
-  .detail-title h2 { margin: 0; font-size: 24px; line-height: 1.12; }
-  .kind { color: var(--accent); font-size: 12px; font-weight: 750; text-transform: uppercase; letter-spacing: 0.08em; }
-  .description { margin: 0 0 18px; color: var(--muted); max-width: 760px; }
-  .sentences { display: grid; gap: 9px; margin: 0 0 18px; padding: 0; list-style: none; }
-  .sentence {
-    border-left: 3px solid var(--accent-soft);
-    background: var(--bg);
-    padding: 9px 11px;
-    border-radius: 0 8px 8px 0;
-    font-size: 14px;
-  }
-  .sentence button {
-    border: 0;
-    padding: 0;
-    background: transparent;
-    color: var(--focus);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-  dl.properties { display: grid; grid-template-columns: minmax(120px, auto) 1fr; gap: 7px 12px; margin: 0; font-size: 13px; }
-  dl.properties dt { color: var(--muted); font-weight: 700; }
-  dl.properties dd { margin: 0; word-break: break-word; }
-
-  .answers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-  .answer-card {
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--paper);
-    overflow: clip;
-  }
-  .answer-card h3 { margin: 0; padding: 12px 14px; background: var(--paper-2); border-bottom: 1px solid var(--line); font-size: 15px; }
-  .answer-card ul { list-style: none; margin: 0; padding: 8px 14px 14px; display: grid; gap: 8px; }
-  .answer-card li { font-size: 14px; }
-  .answer-card button { border: 0; background: transparent; color: var(--focus); padding: 0; text-align: left; text-decoration: underline; text-underline-offset: 2px; }
-  .muted { color: var(--muted); }
-
-  .timeline { position: relative; display: grid; gap: 10px; }
-  .timeline::before { content: ""; position: absolute; top: 7px; bottom: 7px; left: 9px; width: 2px; background: var(--line); }
-  .time-row { position: relative; display: grid; grid-template-columns: 86px 1fr; gap: 14px; padding-left: 28px; }
-  .time-row::before { content: ""; position: absolute; top: 7px; left: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent-2); border: 2px solid var(--paper); }
-  .date { font-weight: 750; color: var(--accent-2); font-size: 13px; }
-  .time-card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); padding: 11px 12px; }
-  .time-card button { border: 0; background: transparent; color: var(--ink); padding: 0; font-weight: 750; text-align: left; }
-  .time-card p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
-
-  .path-controls { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; margin-bottom: 14px; }
-  select {
-    width: 100%;
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius);
-    background: var(--paper);
-    color: var(--ink);
-    min-height: 42px;
-    padding: 8px 10px;
-  }
-  .path-result { display: grid; gap: 10px; }
-  .path-step {
-    display: grid;
-    grid-template-columns: minmax(150px, 1fr) auto minmax(150px, 1fr);
-    gap: 10px;
-    align-items: center;
-    padding: 10px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--paper);
-  }
-  .relation { color: var(--accent); font-size: 12px; text-align: center; }
-
-  .map-layout { display: grid; grid-template-columns: 1fr 320px; gap: 16px; }
-  #mapSvg {
-    display: block;
-    width: 100%;
-    height: 620px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--paper);
-  }
-  .map-node { cursor: pointer; }
-  .map-node circle { stroke: var(--paper); stroke-width: 2px; }
-  .map-node text { font-size: 11px; fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 4px; pointer-events: none; }
-  .map-link { stroke: var(--line-strong); stroke-width: 1.2px; }
-
-  .empty { padding: 18px; color: var(--muted); text-align: center; }
-  mark { background: #ffe4ba; color: inherit; padding: 0 2px; border-radius: 3px; }
-
-  @media (max-width: 860px) {
-    .topbar, .toolbar-inner { display: block; }
-    .stats { grid-template-columns: repeat(2, 1fr); margin-top: 12px; }
-    .tabs { width: 100%; overflow-x: auto; margin-top: 10px; }
-    .tab { flex: 1 0 auto; }
-    .quick-grid, .answers, .split, .map-layout { grid-template-columns: 1fr; }
-    .path-controls, .path-step { grid-template-columns: 1fr; }
-    .relation { text-align: left; }
-    #mapSvg { height: 460px; }
-  }
+  #side h2{font-size:14px;margin:0 0 2px}
+  #side .type{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+  #side h3{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin:16px 0 6px;font-weight:600}
+  #side p{margin:0 0 6px;color:#ccd3e0;font-size:13px}
+  #side a{color:var(--accent);word-break:break-all}
+  .empty{color:var(--dim);font-size:13px}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;font-size:11px;color:var(--dim);padding:8px 18px;border-bottom:1px solid var(--line)}
+  .legend span{display:flex;align-items:center;gap:5px}
+  .jump{background:none;border:0;color:var(--accent);cursor:pointer;font:inherit;font-size:13px;padding:0;text-align:left}
+  .jump:hover{text-decoration:underline}
 </style>
 </head>
 <body>
 <header>
-  <div class="wrap topbar">
-    <div>
-      <h1>BRAIN BBQS Knowledge Graph</h1>
-      <p class="lede">A text-first browser for people, working groups, projects, events, products, and how they connect.</p>
-    </div>
-    <div class="stats" aria-live="polite">
-      <div class="stat"><strong id="nodeCount">—</strong><span>things</span></div>
-      <div class="stat"><strong id="linkCount">—</strong><span>connections</span></div>
-    </div>
-  </div>
+  <h1>BRAIN BBQS / knowledge graph</h1>
+  <span class="stats" id="stats">loading…</span>
+  <span class="spacer"></span>
+  <input type="search" id="q" placeholder="filter… (name, type, value)" />
+  <button class="tool" id="expand">expand all</button>
+  <button class="tool" id="collapse">collapse</button>
 </header>
-
-<div class="toolbar">
-  <div class="wrap toolbar-inner">
-    <input id="search" type="search" placeholder="Search the graph by name, description, role, link, or keyword" />
-    <nav class="tabs" aria-label="Knowledge graph views">
-      <button class="tab" type="button" data-view="browse" aria-selected="true">Browse</button>
-      <button class="tab" type="button" data-view="answers" aria-selected="false">Questions</button>
-      <button class="tab" type="button" data-view="explorer" aria-selected="false">Explorer</button>
-      <button class="tab" type="button" data-view="timeline" aria-selected="false">Timeline</button>
-      <button class="tab" type="button" data-view="paths" aria-selected="false">Paths</button>
-      <button class="tab" type="button" data-view="map" aria-selected="false">Map</button>
-    </nav>
-  </div>
-</div>
-
-<main class="wrap">
-  <div id="status" class="loading">Loading knowledge-graph.ttl…</div>
-
-  <section id="browse" class="view active" aria-label="Browse by category">
-    <div class="quick-grid" id="quickGrid"></div>
-    <div class="section-title">
-      <h2>Browse by type</h2>
-      <p id="browseHint">Open a card to read its connections as plain sentences.</p>
-    </div>
-    <div id="categoryList" class="category-list"></div>
-  </section>
-
-  <section id="answers" class="view" aria-label="Common questions"></section>
-
-  <section id="explorer" class="view" aria-label="Node explorer">
-    <div class="split">
-      <aside class="panel">
-        <div class="panel-head"><h2>Things in the graph</h2></div>
-        <div id="explorerList" class="item-list"></div>
-      </aside>
-      <article class="panel">
-        <div id="details" class="panel-body"></div>
-      </article>
-    </div>
-  </section>
-
-  <section id="timeline" class="view" aria-label="Timeline">
-    <div class="section-title">
-      <h2>Dates and milestones</h2>
-      <p>Events, announcements, grants, and dated resources.</p>
-    </div>
-    <div id="timelineList" class="timeline"></div>
-  </section>
-
-  <section id="paths" class="view" aria-label="Connection paths">
-    <div class="panel">
-      <div class="panel-head"><h2>Find a path between two things</h2></div>
-      <div class="panel-body">
-        <div class="path-controls">
-          <select id="pathStart" aria-label="Start node"></select>
-          <select id="pathEnd" aria-label="End node"></select>
-          <button id="pathButton" class="small-button" type="button">Find path</button>
-        </div>
-        <div id="pathResult" class="path-result"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="map" class="view" aria-label="Visual map">
-    <div class="section-title">
-      <h2>Small visual map</h2>
-      <p>This is just a backup view. The text views above are the main experience.</p>
-    </div>
-    <div class="map-layout">
-      <svg id="mapSvg" role="img" aria-label="Force-directed map of graph nodes"></svg>
-      <aside class="panel">
-        <div class="panel-head"><h3>Map selection</h3></div>
-        <div id="mapDetails" class="panel-body muted">Select a circle to see the same plain-language details.</div>
-      </aside>
-    </div>
-  </section>
+<div class="legend" id="legend"></div>
+<main>
+  <div id="tree"><p class="empty">Reading knowledge-graph.ttl…</p></div>
+  <aside id="side"><p class="empty">Select an item in the tree to see its details.</p></aside>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/n3@1/browser/n3.min.js"></script>
 <script>
 const TTL_FILE = "knowledge-graph.ttl";
 const RDF_TYPE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type";
-const TYPE_ORDER = ["Consortium", "WorkingGroup", "Person", "Project", "MonetaryGrant", "Announcement", "Event", "Product", "ResearchProject", "SoftwareApplication", "Dataset", "Other"];
-const TYPE_LABELS = {
-  Consortium: "Consortium",
-  WorkingGroup: "Working groups",
-  Person: "People",
-  Project: "Projects",
-  MonetaryGrant: "Grants",
-  Announcement: "Announcements",
-  Event: "Events",
-  Product: "Products",
-  ResearchProject: "Research projects",
-  SoftwareApplication: "Software",
-  Dataset: "Datasets",
-  Other: "Other"
-};
-const TYPE_COLORS = {
-  Consortium: "#b55325",
-  WorkingGroup: "#3f729f",
-  Person: "#4f7d5a",
-  Project: "#8a609d",
-  MonetaryGrant: "#a9851d",
-  Announcement: "#c85d36",
-  Event: "#237a76",
-  Product: "#64748b",
-  ResearchProject: "#8a609d",
-  SoftwareApplication: "#64748b",
-  Dataset: "#7b6d54",
-  Other: "#9a958c"
-};
+const TYPE_ORDER = ["Consortium","WorkingGroup","Project","MonetaryGrant","Person","Product","Announcement","Event"];
+const TYPE_LABELS = {Consortium:"consortium",WorkingGroup:"working group",Project:"project",MonetaryGrant:"grant",Person:"person",Product:"product",Announcement:"announcement",Event:"event",Other:"item"};
 const PREDICATE_WORDS = {
-  parentOrganization: "is part of",
-  affiliation: "is affiliated with",
-  funder: "is funded by",
-  sameAs: "also appears at",
-  contactPoint: "can be contacted at",
-  funding: "has funding from",
-  fundedItem: "funds",
-  isPartOf: "is part of",
-  hiringOrganization: "is hiring through",
-  organizer: "is organized by",
-  eventAttendanceMode: "has attendance mode",
-  eventStatus: "has event status",
-  manufacturer: "is made by",
-  codeRepository: "has code at",
-  license: "uses license",
-  url: "has website",
-  identifier: "has identifier",
-  keywords: "has keywords",
-  startDate: "starts",
-  endDate: "ends",
-  datePublished: "was published",
-  datePosted: "was posted",
-  validThrough: "is valid through",
-  jobTitle: "has role",
-  givenName: "has given name",
-  familyName: "has family name",
-  description: "is described as",
-  softwareVersion: "has software version",
-  programmingLanguage: "uses language",
-  applicationCategory: "has category",
-  measurementTechnique: "uses measurement technique",
-  variableMeasured: "measures",
-  location: "is located in",
-  foundingDate: "was founded",
-  headline: "has headline",
-  employmentType: "has employment type",
-  name: "is named"
+  parentOrganization:"is part of", affiliation:"is affiliated with", funder:"is funded by",
+  sameAs:"also appears at", contactPoint:"can be contacted at", funding:"has funding from",
+  fundedItem:"funds", isPartOf:"is part of", hiringOrganization:"is hiring through",
+  organizer:"is organized by", eventAttendanceMode:"attendance mode", eventStatus:"event status",
+  manufacturer:"is made by", codeRepository:"code at", license:"license", url:"website",
+  identifier:"identifier", keywords:"keywords", startDate:"starts", endDate:"ends",
+  datePublished:"published", datePosted:"posted", validThrough:"valid through",
+  jobTitle:"role", givenName:"given name", familyName:"family name", description:"description",
+  softwareVersion:"version", programmingLanguage:"language", applicationCategory:"category",
+  measurementTechnique:"measurement technique", variableMeasured:"measures", location:"location",
+  foundingDate:"founded", headline:"headline", employmentType:"employment type", name:"name"
 };
-const state = { data: null, query: "", selectedId: null, mapDrawn: false };
+const CHILD_PREDICATES = ["parentOrganization","affiliation","isPartOf","funding","memberOf","subOrganization"];
 
+const AMP = String.fromCharCode(38), LT = String.fromCharCode(60), GT = String.fromCharCode(62), QT = String.fromCharCode(34);
+const ENT = {}; ENT[38]=AMP+"amp;"; ENT[60]=AMP+"lt;"; ENT[62]=AMP+"gt;"; ENT[34]=AMP+"quot;";
+const esc = v => String(v ?? "").replace(/[&<>"]/g, c => ENT[c.charCodeAt(0)]);
 const $ = id => document.getElementById(id);
-const esc = value => String(value ?? "").replace(/[&<>\"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const isUrl = value => /^https?:\/\//.test(String(value)) || /^mailto:/.test(String(value));
-function localName(iri) {
-  if (!iri) return "";
-  if (iri.startsWith("mailto:")) return iri;
-  try {
-    const url = new URL(iri);
-    return decodeURIComponent((url.hash || url.pathname).split(/[\/#]/).filter(Boolean).pop() || iri);
-  } catch (_) {
-    const m = iri.match(/[#\/:]([^#\/:]+)$/);
-    return m ? decodeURIComponent(m[1]) : iri;
-  }
-}
-function predicateKey(iri) {
-  const key = localName(iri).replace(/^schema:/, "");
-  return key;
-}
-function labelPredicate(iriOrKey) {
-  const key = iriOrKey.includes("/") || iriOrKey.includes("#") ? predicateKey(iriOrKey) : iriOrKey;
-  return PREDICATE_WORDS[key] || key.replace(/([a-z])([A-Z])/g, "$1 $2").toLowerCase();
-}
-function primaryType(types) {
-  const names = types.map(localName);
-  return TYPE_ORDER.find(type => names.includes(type)) || "Other";
-}
-function typeName(type) { return TYPE_LABELS[type] || type; }
-function propValue(node, key) {
-  const prop = node.props.find(p => p.key === key);
-  return prop ? prop.value : "";
-}
-function nodeLabel(id) {
-  const node = state.data?.nodeById.get(id);
-  return node ? node.label : localName(id);
-}
-function valueHtml(value, isLink, id) {
-  if (id && state.data?.nodeById.has(id)) return `<button type="button" data-open="${esc(id)}">${esc(nodeLabel(id))}</button>`;
-  if (isLink || isUrl(value)) return `<a href="${esc(value)}" target="_blank" rel="noopener">${esc(value)}</a>`;
-  return esc(value);
-}
-function searchable(node) {
-  return [node.label, node.type, node.id, ...node.types.map(localName), ...node.props.flatMap(p => [p.label, p.value])].join(" ").toLowerCase();
-}
-function filteredNodes() {
-  if (!state.data) return [];
-  const q = state.query.trim().toLowerCase();
-  if (!q) return state.data.nodes;
-  return state.data.nodes.filter(node => searchable(node).includes(q));
-}
-function highlight(text) {
-  const q = state.query.trim();
-  if (!q) return esc(text);
-  const idx = String(text).toLowerCase().indexOf(q.toLowerCase());
-  if (idx < 0) return esc(text);
-  return esc(String(text).slice(0, idx)) + `<mark>${esc(String(text).slice(idx, idx + q.length))}</mark>` + esc(String(text).slice(idx + q.length));
-}
+const isUrl = v => /^https?:\/\//.test(String(v)) || /^mailto:/.test(String(v));
 
-async function loadGraph() {
-  const response = await fetch(TTL_FILE);
-  if (!response.ok) throw new Error(`Could not load ${TTL_FILE} (${response.status})`);
-  const ttl = await response.text();
-  const quads = new N3.Parser().parse(ttl);
-  const nodes = new Map();
-  const links = [];
-  const seenLinks = new Set();
+function localName(iri){
+  if(!iri) return "";
+  if(String(iri).startsWith("mailto:")) return iri;
+  try{ const u = new URL(iri); return decodeURIComponent((u.hash||u.pathname).split(/[\/#]/).filter(Boolean).pop()||iri); }
+  catch(_){ const m = String(iri).match(/[#\/:]([^#\/:]+)$/); return m ? decodeURIComponent(m[1]) : iri; }
+}
+const predicateKey = iri => localName(iri).replace(/^schema:/,"");
+function labelPredicate(k){ return PREDICATE_WORDS[k] || k.replace(/([a-z])([A-Z])/g,"$1 $2").toLowerCase(); }
+function primaryType(types){ const n = types.map(localName); return TYPE_ORDER.find(t=>n.includes(t)) || "Other"; }
 
-  function getNode(id) {
-    if (!nodes.has(id)) nodes.set(id, { id, label: localName(id), type: "Other", types: [], props: [], incoming: [], outgoing: [] });
-    return nodes.get(id);
-  }
+const state = { data:null, query:"", selectedId:null, open:new Set() };
 
-  for (const quad of quads) {
-    const subject = quad.subject.value;
-    const predicate = quad.predicate.value;
-    const object = quad.object;
-    const subjectNode = getNode(subject);
-    if (predicate === RDF_TYPE) {
-      subjectNode.types.push(object.value);
-      continue;
-    }
-    const key = predicateKey(predicate);
-    const label = labelPredicate(key);
-    if (object.termType === "Literal") {
-      if ((key === "name" || key === "headline" || predicate.endsWith("#label")) && subjectNode.label === localName(subject)) subjectNode.label = object.value;
-      subjectNode.props.push({ key, label, value: object.value, isLink: false, id: null });
+async function loadGraph(){
+  const res = await fetch(TTL_FILE);
+  if(!res.ok) throw new Error("Could not load " + TTL_FILE + " (" + res.status + ")");
+  const quads = new N3.Parser().parse(await res.text());
+  const nodes = new Map(); const links = [];
+  const get = id => { if(!nodes.has(id)) nodes.set(id,{id,label:localName(id),type:"Other",types:[],props:[],incoming:[],outgoing:[]}); return nodes.get(id); };
+  for(const q of quads){
+    const s = q.subject.value, p = q.predicate.value, o = q.object;
+    const sn = get(s);
+    if(p === RDF_TYPE){ sn.types.push(o.value); continue; }
+    const key = predicateKey(p), label = labelPredicate(key);
+    if(o.termType === "Literal"){
+      if((key === "name" || key === "headline" || p.endsWith("#label")) && sn.label === localName(s)) sn.label = o.value;
+      sn.props.push({key,label,value:o.value,isLink:false,id:null});
     } else {
-      const objectId = object.value;
-      getNode(objectId);
-      subjectNode.props.push({ key, label, value: localName(objectId), isLink: true, id: objectId });
-      const linkKey = `${subject}|${predicate}|${objectId}`;
-      if (!seenLinks.has(linkKey)) {
-        seenLinks.add(linkKey);
-        links.push({ source: subject, target: objectId, key, label });
-      }
+      const on = get(o.value);
+      sn.props.push({key,label,value:o.value,isLink:true,id:o.value});
+      const link = {source:s,target:o.value,key,label};
+      links.push(link); sn.outgoing.push(link); on.incoming.push(link);
     }
   }
+  for(const n of nodes.values()) n.type = primaryType(n.types);
+  return {nodes:[...nodes.values()], links, nodeById:nodes};
+}
 
-  const nodeList = Array.from(nodes.values());
-  for (const node of nodeList) node.type = primaryType(node.types);
-  const nodeById = new Map(nodeList.map(node => [node.id, node]));
-  for (const link of links) {
-    const source = nodeById.get(link.source);
-    const target = nodeById.get(link.target);
-    if (!source || !target) continue;
-    source.outgoing.push({ ...link, sourceNode: source, targetNode: target });
-    target.incoming.push({ ...link, sourceNode: source, targetNode: target });
+/* ---- build a directory-style hierarchy ---- */
+function buildTree(data){
+  const childrenOf = new Map(); const hasParent = new Set();
+  const addChild = (parent,child) => { if(!childrenOf.has(parent)) childrenOf.set(parent,[]); childrenOf.get(parent).push(child); };
+  const top = data.nodes.find(n => n.type === "Consortium")
+    || [...data.nodes].sort((a,b)=>(b.incoming.length+b.outgoing.length)-(a.incoming.length+a.outgoing.length))[0];
+  const topId = top ? top.id : null;
+  for(const l of data.links){
+    if(!CHILD_PREDICATES.includes(l.key)) continue;
+    if(!data.nodeById.get(l.source) || !data.nodeById.get(l.target)) continue;
+    if(hasParent.has(l.source) || l.source === topId) continue;
+    addChild(l.target, l.source); hasParent.add(l.source);
   }
-  nodeList.sort((a, b) => TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type) || a.label.localeCompare(b.label));
-  links.sort((a, b) => nodeLabel(a.source).localeCompare(nodeLabel(b.source)) || a.label.localeCompare(b.label));
-  return { nodes: nodeList, links, nodeById };
-}
 
-function renderAll() {
-  if (!state.data) return;
-  $("nodeCount").textContent = state.data.nodes.length;
-  $("linkCount").textContent = state.data.links.length;
-  renderQuickCards();
-  renderBrowse();
-  renderAnswers();
-  renderExplorerList();
-  renderDetails(state.selectedId || state.data.nodes[0]?.id);
-  renderTimeline();
-  renderPathSelectors();
-  if (document.querySelector('[data-view="map"]').getAttribute("aria-selected") === "true") drawMap();
-}
+  // fundedItem: grant funds a project -> project nests under grant only if unparented
+  for(const l of data.links){
+    if(l.key !== "fundedItem" || hasParent.has(l.target) || l.target === topId) continue;
 
-function renderQuickCards() {
-  const groups = groupByType(filteredNodes());
-  const cards = [
-    { title: "Working groups", type: "WorkingGroup", text: "Start with the organizing structure." },
-    { title: "People", type: "Person", text: "See chairs and affiliations." },
-    { title: "Projects and products", type: "Project", extraType: "Product", text: "Browse outputs, tools, datasets, and research." },
-    { title: "Events and announcements", type: "Event", extraType: "Announcement", text: "Find dated activities and calls." }
-  ];
-  $("quickGrid").innerHTML = cards.map(card => {
-    const count = (groups.get(card.type)?.length || 0) + (card.extraType ? (groups.get(card.extraType)?.length || 0) : 0);
-    return `<div class="quick-card"><h3>${esc(card.title)}</h3><p>${esc(card.text)}</p><button type="button" data-jump-type="${esc(card.type)}">${count} ${count === 1 ? "item" : "items"}</button></div>`;
-  }).join("");
-}
-
-function groupByType(nodes) {
-  const groups = new Map();
-  for (const node of nodes) {
-    if (!groups.has(node.type)) groups.set(node.type, []);
-    groups.get(node.type).push(node);
+    addChild(l.source, l.target); hasParent.add(l.target);
   }
-  return groups;
+  const roots = data.nodes.filter(n => !hasParent.has(n.id) && (n.props.length || childrenOf.has(n.id)));
+  const rank = n => TYPE_ORDER.indexOf(n.type) === -1 ? 99 : TYPE_ORDER.indexOf(n.type);
+  const sortIds = ids => ids.map(id=>data.nodeById.get(id)).sort((a,b)=> rank(a)-rank(b) || a.label.localeCompare(b.label));
+  roots.sort((a,b)=> rank(a)-rank(b) || a.label.localeCompare(b.label));
+  return {roots, childrenOf, sortIds};
 }
 
-function renderBrowse() {
-  const nodes = filteredNodes();
-  const groups = groupByType(nodes);
-  const html = TYPE_ORDER.filter(type => groups.has(type)).map(type => {
-    const items = groups.get(type);
-    return `<section class="category" id="cat-${esc(type)}">
-      <div class="category-head"><h3>${esc(typeName(type))}</h3><span class="pill"><span class="dot" style="background:${TYPE_COLORS[type] || TYPE_COLORS.Other}"></span>${items.length}</span></div>
-      <div class="cards">${items.map(node => nodeCard(node)).join("")}</div>
-    </section>`;
-  }).join("");
-  $("categoryList").innerHTML = html || `<div class="empty">No matches. Try another search.</div>`;
+function searchable(n){
+  return [n.label,n.type,n.id,...n.types.map(localName),...n.props.flatMap(p=>[p.label,p.value])].join(" ").toLowerCase();
 }
-function nodeCard(node) {
-  const description = propValue(node, "description") || propValue(node, "jobTitle") || propValue(node, "keywords") || node.id;
-  const meta = [node.outgoing.length ? `${node.outgoing.length} out` : "", node.incoming.length ? `${node.incoming.length} in` : ""].filter(Boolean);
-  return `<button type="button" class="node-card" data-open="${esc(node.id)}">
-    <h4>${highlight(node.label)}</h4>
-    <p>${highlight(description)}</p>
-    <div class="meta-row">${meta.map(m => `<span class="tag">${esc(m)}</span>`).join("")}</div>
-  </button>`;
+function matches(n){ return !state.query || searchable(n).includes(state.query); }
+
+let TREE = null;
+function subtreeMatches(id, seen){
+  seen = seen || new Set(); if(seen.has(id)) return false; seen.add(id);
+  const n = state.data.nodeById.get(id);
+  if(n && matches(n)) return true;
+  return (TREE.childrenOf.get(id)||[]).some(c => subtreeMatches(c, seen));
 }
 
-function renderAnswers() {
-  const data = state.data;
-  const byType = groupByType(data.nodes);
-  const workingGroups = byType.get("WorkingGroup") || [];
-  const people = byType.get("Person") || [];
-  const products = data.nodes.filter(n => ["Product", "SoftwareApplication", "Dataset"].includes(n.type));
-  const projects = data.nodes.filter(n => ["Project", "ResearchProject"].includes(n.type));
-  const grants = byType.get("MonetaryGrant") || [];
-
-  const chairsByGroup = workingGroups.map(group => {
-    const chairs = people.filter(person => person.outgoing.some(link => link.key === "affiliation" && link.target === group.id));
-    return `<li><button type="button" data-open="${esc(group.id)}">${esc(group.label)}</button>: ${chairs.length ? chairs.map(person => `<button type="button" data-open="${esc(person.id)}">${esc(person.label)}</button>`).join(", ") : `<span class="muted">No chair listed</span>`}</li>`;
-  }).join("");
-
-  const outputsByGroup = workingGroups.map(group => {
-    const owned = products.filter(item => item.outgoing.some(link => link.key === "isPartOf" && link.target === group.id));
-    return `<li><button type="button" data-open="${esc(group.id)}">${esc(group.label)}</button>: ${owned.length ? owned.map(item => `<button type="button" data-open="${esc(item.id)}">${esc(item.label)}</button>`).join(", ") : `<span class="muted">No products listed</span>`}</li>`;
-  }).join("");
-
-  const fundedProjects = projects.map(project => {
-    const funders = project.outgoing.filter(link => link.key === "funding").map(link => link.targetNode);
-    return `<li><button type="button" data-open="${esc(project.id)}">${esc(project.label)}</button>${funders.length ? `: funded by ${funders.map(g => `<button type="button" data-open="${esc(g.id)}">${esc(g.label)}</button>`).join(", ")}` : ` <span class="muted">has no grant listed</span>`}</li>`;
-  }).join("");
-
-  const dated = timelineItems().slice(0, 8).map(item => `<li><span class="muted">${esc(item.date)}</span> — <button type="button" data-open="${esc(item.node.id)}">${esc(item.node.label)}</button></li>`).join("");
-
-  $("answers").innerHTML = `<div class="section-title"><h2>Question-style views</h2><p>Simple answers generated from the same Turtle file.</p></div>
-    <div class="answers">
-      <article class="answer-card"><h3>Who leads each working group?</h3><ul>${chairsByGroup || `<li class="muted">No working groups found.</li>`}</ul></article>
-      <article class="answer-card"><h3>What outputs belong to each working group?</h3><ul>${outputsByGroup || `<li class="muted">No outputs found.</li>`}</ul></article>
-      <article class="answer-card"><h3>Which projects have funding links?</h3><ul>${fundedProjects || `<li class="muted">No projects found.</li>`}</ul></article>
-      <article class="answer-card"><h3>What is coming up or dated?</h3><ul>${dated || `<li class="muted">No dated items found.</li>`}</ul></article>
-    </div>`;
+function renderTree(){
+  const ul = document.createElement("ul"); ul.className = "root";
+  for(const r of TREE.roots) { const li = renderNode(r.id, new Set()); if(li) ul.appendChild(li); }
+  const host = $("tree"); host.innerHTML = ""; host.appendChild(ul);
+  if(!ul.children.length) host.innerHTML = '<p class="empty">No items match that filter.</p>';
 }
 
-function renderExplorerList() {
-  const nodes = filteredNodes();
-  $("explorerList").innerHTML = nodes.map(node => `<button type="button" class="item-button ${node.id === state.selectedId ? "active" : ""}" data-open="${esc(node.id)}"><strong>${highlight(node.label)}</strong><span>${esc(typeName(node.type))}</span></button>`).join("") || `<div class="empty">No matches.</div>`;
-}
-
-function relationSentence(link, direction) {
-  if (direction === "out") {
-    return `<li class="sentence"><strong>${esc(link.sourceNode.label)}</strong> ${esc(link.label)} ${valueHtml(link.targetNode.label, true, link.targetNode.id)}.</li>`;
-  }
-  return `<li class="sentence">${valueHtml(link.sourceNode.label, true, link.sourceNode.id)} ${esc(link.label)} <strong>${esc(link.targetNode.label)}</strong>.</li>`;
-}
-function renderDetails(id, targetId = "details") {
-  if (!state.data) return;
-  const node = state.data.nodeById.get(id) || state.data.nodes[0];
-  if (!node) return;
-  state.selectedId = node.id;
-  const sentences = [...node.outgoing.map(l => relationSentence(l, "out")), ...node.incoming.map(l => relationSentence(l, "in"))];
-  const properties = node.props.filter(prop => !["name", "description"].includes(prop.key));
-  const description = propValue(node, "description") || "";
-  const types = node.types.map(localName).filter(Boolean).join(", ");
-  const html = `<div class="detail-title"><div><div class="kind">${esc(typeName(node.type))}</div><h2>${esc(node.label)}</h2></div><span class="pill">${node.outgoing.length + node.incoming.length} connections</span></div>
-    ${description ? `<p class="description">${esc(description)}</p>` : ""}
-    <h3>Plain-language connections</h3>
-    <ul class="sentences">${sentences.length ? sentences.join("") : `<li class="sentence muted">No connections listed yet.</li>`}</ul>
-    <h3>Details from the Turtle file</h3>
-    <dl class="properties">
-      <dt>Identifier</dt><dd>${esc(node.id)}</dd>
-      ${types ? `<dt>Types</dt><dd>${esc(types)}</dd>` : ""}
-      ${properties.map(prop => `<dt>${esc(prop.label)}</dt><dd>${valueHtml(prop.value, prop.isLink, prop.id)}</dd>`).join("")}
-    </dl>`;
-  $(targetId).innerHTML = html;
-  renderExplorerList();
-}
-
-function timelineItems() {
-  const dateKeys = ["startDate", "datePublished", "datePosted", "endDate", "validThrough", "foundingDate"];
-  const items = [];
-  for (const node of state.data.nodes) {
-    for (const key of dateKeys) {
-      const date = propValue(node, key);
-      if (date) {
-        items.push({ node, date, key });
-        break;
-      }
-    }
-  }
-  return items.sort((a, b) => String(a.date).localeCompare(String(b.date)) || a.node.label.localeCompare(b.node.label));
-}
-function renderTimeline() {
-  const items = timelineItems();
-  $("timelineList").innerHTML = items.map(item => {
-    const description = propValue(item.node, "description") || labelPredicate(item.key);
-    return `<div class="time-row"><div class="date">${esc(item.date)}</div><div class="time-card"><button type="button" data-open="${esc(item.node.id)}">${esc(item.node.label)}</button><p>${esc(description)}</p></div></div>`;
-  }).join("") || `<div class="empty">No dates found.</div>`;
-}
-
-function renderPathSelectors() {
-  const options = state.data.nodes.map(node => `<option value="${esc(node.id)}">${esc(node.label)} — ${esc(typeName(node.type))}</option>`).join("");
-  $("pathStart").innerHTML = options;
-  $("pathEnd").innerHTML = options;
-  const bbq = state.data.nodes.find(n => n.label === "BRAIN BBQS") || state.data.nodes[0];
-  const sample = state.data.nodes.find(n => n.label.includes("Pose")) || state.data.nodes[state.data.nodes.length - 1];
-  if (bbq) $("pathStart").value = bbq.id;
-  if (sample) $("pathEnd").value = sample.id;
-  findPath();
-}
-function findPath() {
-  const start = $("pathStart").value;
-  const end = $("pathEnd").value;
-  if (!start || !end) return;
-  if (start === end) {
-    $("pathResult").innerHTML = `<div class="empty">Choose two different things.</div>`;
-    return;
-  }
-  const adjacency = new Map(state.data.nodes.map(n => [n.id, []]));
-  for (const link of state.data.links) {
-    adjacency.get(link.source)?.push({ next: link.target, link, direction: "out" });
-    adjacency.get(link.target)?.push({ next: link.source, link, direction: "in" });
-  }
-  const queue = [start];
-  const visited = new Set([start]);
-  const previous = new Map();
-  while (queue.length) {
-    const current = queue.shift();
-    if (current === end) break;
-    for (const edge of adjacency.get(current) || []) {
-      if (visited.has(edge.next)) continue;
-      visited.add(edge.next);
-      previous.set(edge.next, { from: current, edge });
-      queue.push(edge.next);
-    }
-  }
-  if (!previous.has(end)) {
-    $("pathResult").innerHTML = `<div class="empty">No path found.</div>`;
-    return;
-  }
-  const steps = [];
-  let cursor = end;
-  while (cursor !== start) {
-    const prev = previous.get(cursor);
-    steps.push(prev.edge);
-    cursor = prev.from;
-  }
-  steps.reverse();
-  $("pathResult").innerHTML = steps.map(step => {
-    const source = state.data.nodeById.get(step.link.source);
-    const target = state.data.nodeById.get(step.link.target);
-    const left = step.direction === "out" ? source : target;
-    const right = step.direction === "out" ? target : source;
-    const arrow = step.direction === "out" ? "→" : "←";
-    return `<div class="path-step"><button class="small-button" type="button" data-open="${esc(left.id)}">${esc(left.label)}</button><div class="relation">${arrow} ${esc(step.link.label)} ${arrow}</div><button class="small-button" type="button" data-open="${esc(right.id)}">${esc(right.label)}</button></div>`;
-  }).join("");
-}
-
-function drawMap() {
-  if (!state.data || state.mapDrawn) return;
-  state.mapDrawn = true;
-  const svgEl = $("mapSvg");
-  const width = svgEl.clientWidth || 800;
-  const height = svgEl.clientHeight || 620;
-  const svg = d3.select(svgEl).attr("viewBox", [0, 0, width, height]);
-  const graph = {
-    nodes: state.data.nodes.map(n => ({ ...n })),
-    links: state.data.links.map(l => ({ ...l }))
-  };
-  const link = svg.append("g").selectAll("line").data(graph.links).join("line").attr("class", "map-link");
-  const node = svg.append("g").selectAll("g").data(graph.nodes).join("g").attr("class", "map-node").on("click", (_, d) => {
-    renderDetails(d.id, "mapDetails");
+function renderNode(id, ancestors){
+  if(ancestors.has(id)) return null;
+  const n = state.data.nodeById.get(id); if(!n) return null;
+  if(state.query && !subtreeMatches(id)) return null;
+  const kids = TREE.sortIds((TREE.childrenOf.get(id)||[]).filter(c=>!ancestors.has(c)));
+  const isOpen = state.query ? true : state.open.has(id);
+  const li = document.createElement("li");
+  const row = document.createElement("div");
+  row.className = "row" + (state.selectedId === id ? " sel" : "") + (state.query && matches(n) ? " hit" : "") + (state.query && !matches(n) ? " faded" : "");
+  row.innerHTML =
+    '<span class="twisty">' + (kids.length ? (isOpen ? "▾" : "▸") : "") + '</span>' +
+    '<span class="dot" style="background:var(--' + n.type + ')"></span>' +
+    '<span class="name">' + esc(n.label) + '</span>' +
+    '<span class="kind">' + esc(TYPE_LABELS[n.type] || n.type) + '</span>' +
+    (kids.length ? '<span class="count">(' + kids.length + ')</span>' : "");
+  row.addEventListener("click", e => {
+    if(kids.length && e.target.classList.contains("twisty")){ toggle(id); return; }
+    select(id);
+    if(kids.length) toggle(id);
   });
-  node.append("circle").attr("r", d => d.type === "Consortium" ? 13 : d.type === "WorkingGroup" ? 10 : 7).attr("fill", d => TYPE_COLORS[d.type] || TYPE_COLORS.Other);
-  node.append("text").attr("text-anchor", "middle").attr("dy", d => d.type === "Consortium" ? -17 : -12).text(d => d.label.length > 22 ? d.label.slice(0, 21) + "…" : d.label);
-  const sim = d3.forceSimulation(graph.nodes)
-    .force("link", d3.forceLink(graph.links).id(d => d.id).distance(90))
-    .force("charge", d3.forceManyBody().strength(-260))
-    .force("center", d3.forceCenter(width / 2, height / 2))
-    .force("collide", d3.forceCollide(28));
-  sim.on("tick", () => {
-    link.attr("x1", d => d.source.x).attr("y1", d => d.source.y).attr("x2", d => d.target.x).attr("y2", d => d.target.y);
-    node.attr("transform", d => `translate(${Math.max(24, Math.min(width - 24, d.x))},${Math.max(24, Math.min(height - 24, d.y))})`);
-  });
-}
-
-function openNode(id) {
-  renderDetails(id);
-  setView("explorer");
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-function setView(name) {
-  document.querySelectorAll(".tab").forEach(tab => tab.setAttribute("aria-selected", String(tab.dataset.view === name)));
-  document.querySelectorAll(".view").forEach(view => view.classList.toggle("active", view.id === name));
-  if (name === "map") drawMap();
-}
-
-document.addEventListener("click", event => {
-  const open = event.target.closest("[data-open]");
-  if (open) {
-    event.preventDefault();
-    openNode(open.dataset.open);
-    return;
+  li.appendChild(row);
+  if(kids.length && isOpen){
+    const sub = document.createElement("ul");
+    const nextAncestors = new Set(ancestors); nextAncestors.add(id);
+    for(const k of kids){ const kl = renderNode(k.id, nextAncestors); if(kl) sub.appendChild(kl); }
+    if(sub.children.length) li.appendChild(sub);
   }
-  const jump = event.target.closest("[data-jump-type]");
-  if (jump) {
-    const target = document.getElementById(`cat-${jump.dataset.jumpType}`);
-    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-});
-document.querySelectorAll(".tab").forEach(tab => tab.addEventListener("click", () => setView(tab.dataset.view)));
-$("search").addEventListener("input", event => {
-  state.query = event.target.value;
-  renderQuickCards();
-  renderBrowse();
-  renderExplorerList();
-});
-$("pathButton").addEventListener("click", findPath);
-$("pathStart").addEventListener("change", findPath);
-$("pathEnd").addEventListener("change", findPath);
+  return li;
+}
 
-loadGraph().then(data => {
-  state.data = data;
-  state.selectedId = data.nodes.find(n => n.label === "BRAIN BBQS")?.id || data.nodes[0]?.id || null;
-  $("status").remove();
-  renderAll();
-}).catch(error => {
-  $("status").className = "error";
-  $("status").textContent = `${error.message}. Make sure knowledge-graph.ttl sits next to index.html in the same repo folder.`;
-});
+function toggle(id){ state.open.has(id) ? state.open.delete(id) : state.open.add(id); renderTree(); }
+function select(id){ state.selectedId = id; renderDetails(id); renderTree(); }
+
+function renderDetails(id){
+  const n = state.data.nodeById.get(id);
+  const side = $("side"); if(!n){ side.innerHTML = '<p class="empty">Nothing selected.</p>'; return; }
+  const lines = [];
+  lines.push('<h2>' + esc(n.label) + '</h2>');
+  lines.push('<div class="type">' + esc(TYPE_LABELS[n.type] || n.type) + '</div>');
+  const desc = n.props.find(p => p.key === "description");
+  if(desc) lines.push('<p>' + esc(desc.value) + '</p>');
+
+  const facts = n.props.filter(p => !p.isLink && p.key !== "description" && p.key !== "name");
+  if(facts.length){
+    lines.push('<h3>details</h3>');
+    for(const f of facts) lines.push('<p><span class="kind">' + esc(f.label) + ':</span> ' + esc(f.value) + '</p>');
+  }
+  const out = n.outgoing;
+  if(out.length){
+    lines.push('<h3>connects to</h3>');
+    for(const l of out){
+      const t = state.data.nodeById.get(l.target);
+      const known = t && t.props.length;
+      const text = esc(l.label) + " " + esc(t ? t.label : localName(l.target));
+      lines.push('<p>' + (known ? '<button class="jump" data-go="' + esc(l.target) + '">' + text + '</button>'
+        : (isUrl(l.target) ? '<a href="' + esc(l.target) + '" target="_blank" rel="noopener">' + text + '</a>' : text)) + '</p>');
+    }
+  }
+  const inc = n.incoming;
+  if(inc.length){
+    lines.push('<h3>referenced by</h3>');
+    for(const l of inc){
+      const s = state.data.nodeById.get(l.source);
+      lines.push('<p><button class="jump" data-go="' + esc(l.source) + '">' + esc(s ? s.label : localName(l.source)) + ' &' + 'mdash; ' + esc(l.label) + '</button></p>');
+    }
+  }
+  side.innerHTML = lines.join("");
+  side.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => {
+    const target = b.getAttribute("data-go");
+    let cur = target;
+    for(let i=0;i<20;i++){ const parent = parentOf(cur); if(!parent) break; state.open.add(parent); cur = parent; }
+    select(target);
+    const el = document.querySelector(".row.sel"); if(el) el.scrollIntoView({block:"center",behavior:"smooth"});
+  }));
+}
+
+function parentOf(id){
+  for(const [p,kids] of TREE.childrenOf) if(kids.includes(id)) return p;
+  return null;
+}
+
+function renderLegend(){
+  $("legend").innerHTML = TYPE_ORDER.map(t =>
+    '<span><i class="dot" style="background:var(--' + t + ')"></i>' + esc(TYPE_LABELS[t]) + '</span>').join("");
+}
+
+function allIds(){ return [...TREE.childrenOf.keys()]; }
+
+(async function init(){
+  try{
+    state.data = await loadGraph();
+    TREE = buildTree(state.data);
+    $("stats").textContent = state.data.nodes.length + " items · " + state.data.links.length + " connections";
+    renderLegend();
+    TREE.roots.forEach(r => state.open.add(r.id));
+    (TREE.childrenOf.get(TREE.roots[0] && TREE.roots[0].id) || []).forEach(c => state.open.add(c));
+    renderTree();
+  }catch(err){
+    $("tree").innerHTML = '<p class="empty">' + esc(err.message) + '</p>';
+  }
+})();
+
+$("q").addEventListener("input", e => { state.query = e.target.value.trim().toLowerCase(); renderTree(); });
+$("expand").addEventListener("click", () => { allIds().forEach(id => state.open.add(id)); renderTree(); });
+$("collapse").addEventListener("click", () => { state.open.clear(); TREE.roots.forEach(r=>state.open.add(r.id)); renderTree(); });
 </script>
 </body>
 </html>
