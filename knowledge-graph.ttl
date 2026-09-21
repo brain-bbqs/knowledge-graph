@@ -9,6 +9,8 @@
 @prefix ex:     <https://brain-bbqs.org/vocab/> .
 @prefix bbqs:   <https://brain-bbqs.org/> .
 @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix sosa:   <http://www.w3.org/ns/sosa/> .
+@prefix ssn:    <http://www.w3.org/ns/ssn/> .
 
 
 # ── Consortium ────────────────────────────────────────────────────────────────
@@ -223,3 +225,560 @@ bbqs:prod-rodent-dataset a ex:Product, schema:Dataset ;
     schema:variableMeasured "locomotion, grooming, rearing, social interaction" ;
     schema:identifier       "PLACEHOLDER-DOI" ;
     schema:isPartOf         bbqs:project-species .
+
+# ── Observable Properties (SOSA) ──────────────────────────────────────────────
+# Shared measurement phenomena; multiple sensors may observe the same property.
+
+bbqs:prop-video a sosa:ObservableProperty ;
+    schema:name        "Video" ;
+    schema:description "Visual recording of behavior and environment" .
+
+bbqs:prop-body-position a sosa:ObservableProperty ;
+    schema:name        "Body position / posture" ;
+    schema:description "2-D or 3-D body position, pose, and postural kinematics" .
+
+bbqs:prop-gaze a sosa:ObservableProperty ;
+    schema:name        "Gaze and pupil" ;
+    schema:description "Gaze direction, pupil size, fixations, and saccades" .
+
+bbqs:prop-eda a sosa:ObservableProperty ;
+    schema:name        "Electrodermal activity" ;
+    schema:description "Skin conductance / galvanic skin response reflecting arousal" .
+
+bbqs:prop-respiration a sosa:ObservableProperty ;
+    schema:name        "Respiration" ;
+    schema:description "Breathing rhythm, airflow, and respiratory effort" .
+
+bbqs:prop-audio-bioacoustic a sosa:ObservableProperty ;
+    schema:name        "Bioacoustic audio" ;
+    schema:description "Passive acoustic monitoring of vocalizations and environmental sounds" .
+
+bbqs:prop-audio-ultrasonic a sosa:ObservableProperty ;
+    schema:name        "Ultrasonic vocalizations" ;
+    schema:description "Ultrasonic vocalizations up to ~250 kHz" .
+
+bbqs:prop-audio-localization a sosa:ObservableProperty ;
+    schema:name        "Acoustic source localization" ;
+    schema:description "Multi-microphone direction-of-arrival and source localization" .
+
+bbqs:prop-location-gps a sosa:ObservableProperty ;
+    schema:name        "GPS location" ;
+    schema:description "Geographic position and ranging via GPS" .
+
+bbqs:prop-3d-kinematics a sosa:ObservableProperty ;
+    schema:name        "3-D kinematics" ;
+    schema:description "Whole-body 3-D joint angles and kinematic trajectories" .
+
+bbqs:prop-imu a sosa:ObservableProperty ;
+    schema:name        "Inertial motion" ;
+    schema:description "Accelerometry, gyroscopy, and IMU-derived motion" .
+
+bbqs:prop-neural-eeg a sosa:ObservableProperty ;
+    schema:name        "EEG" ;
+    schema:description "Surface electroencephalography" .
+
+bbqs:prop-neural-ieeg a sosa:ObservableProperty ;
+    schema:name        "Intracranial EEG / LFP" ;
+    schema:description "iEEG, ECoG, and local field potentials" .
+
+bbqs:prop-neural-single-unit a sosa:ObservableProperty ;
+    schema:name        "Single-unit spiking" ;
+    schema:description "Action potentials from individual neurons" .
+
+bbqs:prop-neural-meg a sosa:ObservableProperty ;
+    schema:name        "MEG" ;
+    schema:description "Magnetoencephalography" .
+
+bbqs:prop-neural-emg a sosa:ObservableProperty ;
+    schema:name        "EMG" ;
+    schema:description "Surface or intramuscular electromyography" .
+
+bbqs:prop-neural-nirs a sosa:ObservableProperty ;
+    schema:name        "fNIRS" ;
+    schema:description "Functional near-infrared spectroscopy for hemodynamic response" .
+
+bbqs:prop-heart-rate a sosa:ObservableProperty ;
+    schema:name        "Heart rate / ECG / PPG" ;
+    schema:description "Cardiac rhythm via ECG electrodes or PPG optical sensor" .
+
+bbqs:prop-temperature a sosa:ObservableProperty ;
+    schema:name        "Body temperature" ;
+    schema:description "Core or skin temperature" .
+
+bbqs:prop-rfid-id a sosa:ObservableProperty ;
+    schema:name        "RFID animal ID" ;
+    schema:description "Passive integrated transponder individual identification" .
+
+bbqs:prop-operant-behavior a sosa:ObservableProperty ;
+    schema:name        "Operant / cognitive behavior" ;
+    schema:description "Touch-screen or button responses in cognitive and operant tasks" .
+
+bbqs:prop-biochemical a sosa:ObservableProperty ;
+    schema:name        "Biochemical markers" ;
+    schema:description "Cortisol, glucose, melatonin, epinephrine assays" .
+
+bbqs:prop-egocentric-video a sosa:ObservableProperty ;
+    schema:name        "Egocentric video" ;
+    schema:description "First-person point-of-view video for visual sensorium" .
+
+
+# ── Sensor Registry — WG-Devices Workshop 2026 ───────────────────────────────
+# Source: unstructured_data/working_groups/wg_devices/sensor_device_registry_workshop_2026.pdf
+# All sensors use SOSA ontology (http://www.w3.org/ns/sosa/).
+# ex:institution = submitting institution; schema:manufacturer = device maker (HQ).
+
+# ── Mount Sinai — Grinband lab ────────────────────────────────────────────────
+
+bbqs:sensor-obsbot-tiny2 a sosa:Sensor ;
+    schema:name         "OBSBOT Tiny 2 AI PTZ 4K" ;
+    schema:manufacturer "OBSBOT, Shenzhen, China" ;
+    schema:description  "AI-tracked pan-tilt-zoom 4K webcam for overhead behavioral video" ;
+    sosa:observes       bbqs:prop-video, bbqs:prop-body-position ;
+    ex:institution      "Mount Sinai" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-tobii-pro-spectrum a sosa:Sensor ;
+    schema:name         "Tobii Pro Spectrum (to 1200 Hz)" ;
+    schema:manufacturer "Tobii AB, Danderyd, Sweden" ;
+    schema:description  "High-frequency screen-based eye tracker for gaze and pupillometry" ;
+    sosa:observes       bbqs:prop-gaze ;
+    ex:institution      "Mount Sinai" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-biopac-pleth-eda a sosa:Sensor ;
+    schema:name         "BIOPAC SS5LB + Shimmer3 GSR+" ;
+    schema:manufacturer "BIOPAC Systems, Goleta CA; Shimmer Research, Dublin" ;
+    schema:description  "Plethysmograph for respiratory effort combined with EDA recording" ;
+    sosa:observes       bbqs:prop-respiration, bbqs:prop-eda ;
+    ex:institution      "Mount Sinai" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── Duke — Dunn lab ───────────────────────────────────────────────────────────
+
+bbqs:sensor-basler-flir-sync a sosa:Sensor ;
+    schema:name         "Basler ace2 / Teledyne FLIR Blackfly S (synchronized)" ;
+    schema:manufacturer "Basler AG, Ahrensburg; Teledyne FLIR, Wilsonville OR" ;
+    schema:description  "Synchronized multi-view camera array for behavioral recording" ;
+    sosa:observes       bbqs:prop-video, bbqs:prop-body-position ;
+    ex:institution      "Duke" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-st3dio-3d-pose a sosa:Sensor ;
+    schema:name         "St3DIO 3-D pose camera system" ;
+    schema:manufacturer "Custom / in-house" ;
+    schema:description  "Custom multi-camera rig for 3-D whole-body kinematics" ;
+    sosa:observes       bbqs:prop-3d-kinematics, bbqs:prop-video ;
+    ex:institution      "Duke" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── University of Michigan ────────────────────────────────────────────────────
+
+bbqs:sensor-gopro-hero10 a sosa:Sensor ;
+    schema:name         "GoPro HERO10 Black" ;
+    schema:manufacturer "GoPro Inc., San Mateo CA" ;
+    schema:description  "Wearable action camera for field behavioral video" ;
+    sosa:observes       bbqs:prop-video ;
+    ex:institution      "University of Michigan" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-wildlife-acoustics-sm4 a sosa:Sensor ;
+    schema:name         "Wildlife Acoustics Song Meter SM4" ;
+    schema:manufacturer "Wildlife Acoustics, Maynard MA" ;
+    schema:description  "Passive acoustic monitor for bioacoustic and ultrasonic audio recording" ;
+    sosa:observes       bbqs:prop-audio-bioacoustic ;
+    ex:institution      "University of Michigan" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-caracal-recorder a sosa:Sensor ;
+    schema:name         "CARACAL multi-microphone recorder" ;
+    schema:manufacturer "Oxford WildCRU, UK (open hardware)" ;
+    schema:description  "Open-hardware multi-mic logger for acoustic source localization in the field" ;
+    sosa:observes       bbqs:prop-audio-localization ;
+    ex:institution      "University of Michigan" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-minidsp-uma16 a sosa:Sensor ;
+    schema:name         "miniDSP UMA-16 v2" ;
+    schema:manufacturer "miniDSP Ltd., Hong Kong" ;
+    schema:description  "16-microphone USB array for beamforming and direction-of-arrival estimation" ;
+    sosa:observes       bbqs:prop-audio-localization ;
+    ex:institution      "University of Michigan" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-garmin-alpha300i a sosa:Sensor ;
+    schema:name         "Garmin Alpha 300i + TT 25/T 20" ;
+    schema:manufacturer "Garmin Ltd., Olathe KS" ;
+    schema:description  "GPS dog-tracking collar system for location and ranging in field studies" ;
+    sosa:observes       bbqs:prop-location-gps ;
+    ex:institution      "University of Michigan; Rice University" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-medassociates-touchscreen a sosa:Sensor ;
+    schema:name         "Med Associates MedTouch Screens" ;
+    schema:manufacturer "Med Associates, Fairfax VT" ;
+    schema:description  "Touchscreen panels for cognitive and operant behavioral paradigms in the field" ;
+    sosa:observes       bbqs:prop-operant-behavior ;
+    ex:institution      "University of Michigan" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── Rice University — Kemere lab ──────────────────────────────────────────────
+
+bbqs:sensor-ewego-firstperson a sosa:Sensor ;
+    schema:name         "EweGo first-person stereo camera" ;
+    schema:manufacturer "Custom / in-house" ;
+    schema:description  "Wearable stereo camera + mic + GPS + IMU for egocentric behavioral capture" ;
+    sosa:observes       bbqs:prop-egocentric-video, bbqs:prop-audio-bioacoustic, bbqs:prop-location-gps, bbqs:prop-imu ;
+    ex:institution      "Rice University" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-wireless-implant-rice a sosa:Sensor ;
+    schema:name         "Wireless neural implant (EEG / single-unit)" ;
+    schema:manufacturer "Not specified" ;
+    schema:description  "Wireless chronic implant for cortical/hippocampal LFP and single-unit recording" ;
+    sosa:observes       bbqs:prop-neural-ieeg, bbqs:prop-neural-single-unit ;
+    ex:institution      "Rice University" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── Georgia Tech + NYU / Sanes lab ───────────────────────────────────────────
+
+bbqs:sensor-whitematter-e3vision a sosa:Sensor ;
+    schema:name         "White Matter e3Vision + eCube (32–640 ch)" ;
+    schema:manufacturer "White Matter LLC, Seattle WA" ;
+    schema:description  "Synchronized multi-view cameras tightly integrated with electrophysiology acquisition" ;
+    sosa:observes       bbqs:prop-video, bbqs:prop-neural-ieeg, bbqs:prop-neural-single-unit ;
+    ex:institution      "Georgia Tech; NYU" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-biomark-pit-tags a sosa:Sensor ;
+    schema:name         "Biomark APT12 PIT tags (12 mm ISO FDX-B)" ;
+    schema:manufacturer "Biomark Inc., Boise ID" ;
+    schema:description  "Passive RFID transponders for individual animal identification" ;
+    sosa:observes       bbqs:prop-rfid-id ;
+    ex:institution      "Georgia Tech" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── University of Florida ─────────────────────────────────────────────────────
+
+bbqs:sensor-head-accel-florida a sosa:Sensor ;
+    schema:name         "Head-mounted accelerometers" ;
+    schema:manufacturer "Not specified" ;
+    schema:description  "Head-worn accelerometers for body movement tracking" ;
+    sosa:observes       bbqs:prop-imu ;
+    ex:institution      "University of Florida" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-braebon-glnt-respiration a sosa:Sensor ;
+    schema:name         "Braebon thermistor / GLNT piezo belt (respiration)" ;
+    schema:manufacturer "Braebon Medical, Kanata ON; GLNT, Cleveland OH" ;
+    schema:description  "Nasal thermistor and respiratory effort belt for breathing rhythm monitoring" ;
+    sosa:observes       bbqs:prop-respiration ;
+    ex:institution      "University of Florida" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── NYU / Sanes lab + CMU ─────────────────────────────────────────────────────
+
+bbqs:sensor-avisoft-ultrasonic a sosa:Sensor ;
+    schema:name         "Avisoft UltraSound Gate 416H + CM16/CMPA" ;
+    schema:manufacturer "Avisoft Bioacoustics, Glienicke, Germany" ;
+    schema:description  "High-frequency microphone system for ultrasonic vocalizations to ~250 kHz" ;
+    sosa:observes       bbqs:prop-audio-ultrasonic ;
+    ex:institution      "NYU; CMU" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-infrared-cameras-bonsai a sosa:Sensor ;
+    schema:name         "Infrared cameras (Bonsai acquisition)" ;
+    schema:manufacturer "Not specified (Bonsai = acquisition software)" ;
+    schema:description  "IR camera system with Bonsai software for two connected arenas" ;
+    sosa:observes       bbqs:prop-video ;
+    ex:institution      "NYU" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── University of Pennsylvania ────────────────────────────────────────────────
+
+bbqs:sensor-aviary-cameras-upenn a sosa:Sensor ;
+    schema:name         "Aviary cameras + microphone arrays" ;
+    schema:manufacturer "Not specified" ;
+    schema:description  "Multi-camera and microphone array system for 3-D pose and vocalization source tracking" ;
+    sosa:observes       bbqs:prop-video, bbqs:prop-3d-kinematics, bbqs:prop-audio-localization ;
+    ex:institution      "University of Pennsylvania" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── NYU / Schoppik lab ────────────────────────────────────────────────────────
+
+bbqs:sensor-bioluminescent-indicators a sosa:Sensor ;
+    schema:name         "Bioluminescent neural activity indicators" ;
+    schema:manufacturer "Custom / in-house" ;
+    schema:description  "Non-invasive in-vivo optical reporters of neural activity via bioluminescence" ;
+    sosa:observes       bbqs:prop-neural-ieeg ;
+    ex:institution      "NYU" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── Northwestern University — Shepherd / Mangal lab ──────────────────────────
+
+bbqs:sensor-robocam-highspeed a sosa:Sensor ;
+    schema:name         "RoboCam high-speed video" ;
+    schema:manufacturer "Custom / in-house" ;
+    schema:description  "Robot-positioned high-frame-rate camera for sub-mm, ms-scale food handling analysis" ;
+    sosa:observes       bbqs:prop-video ;
+    ex:institution      "Northwestern University" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-braebon-intranasal a sosa:Sensor ;
+    schema:name         "Braebon intranasal thermistor (airflow sensor)" ;
+    schema:manufacturer "Braebon Medical, Kanata ON" ;
+    schema:description  "Intranasal airflow thermistor for respiration monitoring in behaving animals" ;
+    sosa:observes       bbqs:prop-respiration ;
+    ex:institution      "Northwestern University" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── Harvard University ────────────────────────────────────────────────────────
+
+bbqs:sensor-prey-tracking-harvard a sosa:Sensor ;
+    schema:name         "Prey-tracking + water-flow apparatus" ;
+    schema:manufacturer "Custom / in-house" ;
+    schema:description  "Custom apparatus for measuring prey capture behavior and environmental water flow" ;
+    sosa:observes       bbqs:prop-body-position ;
+    ex:institution      "Harvard University" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── UC Berkeley — Wilbrecht lab ───────────────────────────────────────────────
+
+bbqs:sensor-coretemp-berkeley a sosa:Sensor ;
+    schema:name         "Core-body temperature sensor" ;
+    schema:manufacturer "Not specified" ;
+    schema:description  "Implantable or wearable sensor for continuous core body temperature monitoring" ;
+    sosa:observes       bbqs:prop-temperature ;
+    ex:institution      "UC Berkeley" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── Carnegie Mellon University ────────────────────────────────────────────────
+
+bbqs:sensor-neuropixels-20 a sosa:Sensor ;
+    schema:name         "Neuropixels 2.0" ;
+    schema:manufacturer "imec, Leuven, Belgium" ;
+    schema:description  "High-density silicon probe for simultaneous single-unit and LFP recording (Steinmetz 2021)" ;
+    sosa:observes       bbqs:prop-neural-single-unit, bbqs:prop-neural-ieeg ;
+    ex:institution      "CMU" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── Michigan State University ─────────────────────────────────────────────────
+
+bbqs:sensor-accel-icephys-msu a sosa:Sensor ;
+    schema:name         "Accelerometers + intracranial electrophysiology" ;
+    schema:manufacturer "Not specified" ;
+    schema:description  "Combined body movement and neural recording system for freely behaving animals" ;
+    sosa:observes       bbqs:prop-imu, bbqs:prop-neural-ieeg ;
+    ex:institution      "Michigan State University" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── University of Pittsburgh ──────────────────────────────────────────────────
+
+bbqs:sensor-ieeg-biofluid-pitt a sosa:Sensor ;
+    schema:name         "iEEG + single-unit + biofluid sensing" ;
+    schema:manufacturer "Not specified" ;
+    schema:description  "Intracranial EEG and single-unit recording with simultaneous glucose, cortisol, and melatonin assay" ;
+    sosa:observes       bbqs:prop-neural-ieeg, bbqs:prop-neural-single-unit, bbqs:prop-biochemical ;
+    ex:institution      "University of Pittsburgh" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── Yale University — Hirsch lab ─────────────────────────────────────────────
+
+bbqs:sensor-social-interaction-suite a sosa:Sensor ;
+    schema:name         "Social Interaction Suite (fNIRS + EEG + gaze + pupillometry)" ;
+    schema:manufacturer "Integrated in-house (no single commercial model)" ;
+    schema:description  "Multi-modal wearable suite for two-person social neuroscience: fNIRS, EEG, gaze, pupillometry, HR, skin conductance" ;
+    sosa:observes       bbqs:prop-neural-nirs, bbqs:prop-neural-eeg, bbqs:prop-gaze, bbqs:prop-heart-rate, bbqs:prop-eda ;
+    ex:institution      "Yale University" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── University of Utah — Inman lab ───────────────────────────────────────────
+
+bbqs:sensor-chest-video-utah a sosa:Sensor ;
+    schema:name         "Chest-mounted video + Capture App" ;
+    schema:manufacturer "Custom / in-house" ;
+    schema:description  "Chest-worn camera with custom app for egocentric behavioral video and movement capture" ;
+    sosa:observes       bbqs:prop-egocentric-video, bbqs:prop-imu ;
+    ex:institution      "University of Utah" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-emotibit a sosa:Sensor ;
+    schema:name         "EmotiBit (via OpenBCI)" ;
+    schema:manufacturer "EmotiBit / OpenBCI, New York" ;
+    schema:description  "Wearable physiological sensor for PPG, EDA, 9-axis IMU, and skin temperature" ;
+    sosa:observes       bbqs:prop-heart-rate, bbqs:prop-eda, bbqs:prop-imu, bbqs:prop-temperature ;
+    ex:institution      "University of Utah" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-pupil-labs-glasses a sosa:Sensor ;
+    schema:name         "Pupil Labs glasses (Pupil Core / Neon)" ;
+    schema:manufacturer "Pupil Labs GmbH, Berlin" ;
+    schema:description  "Wearable eye-tracking glasses for gaze, pupil diameter, and fixation mapping" ;
+    sosa:observes       bbqs:prop-gaze ;
+    ex:institution      "University of Utah; Duke; UCLA" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-neuropace-rns a sosa:Sensor ;
+    schema:name         "NeuroPace RNS-320" ;
+    schema:manufacturer "NeuroPace Inc., Mountain View CA" ;
+    schema:description  "Chronic closed-loop responsive neurostimulator with continuous intracranial EEG" ;
+    sosa:observes       bbqs:prop-neural-ieeg ;
+    ex:institution      "University of Utah; Duke" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── UCLA — Lenartowicz lab ────────────────────────────────────────────────────
+
+bbqs:sensor-lidar-mmwave-ucla a sosa:Sensor ;
+    schema:name         "LiDAR / mmWave radar / IMU" ;
+    schema:manufacturer "Not specified" ;
+    schema:description  "Privacy-preserving movement sensing using LiDAR and radar instead of identifiable video" ;
+    sosa:observes       bbqs:prop-body-position, bbqs:prop-imu ;
+    ex:institution      "UCLA" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-mbraintrain-eeg a sosa:Sensor ;
+    schema:name         "mBrainTrain Smarting PRO X (64-ch)" ;
+    schema:manufacturer "mBrainTrain, Belgrade, Serbia" ;
+    schema:description  "Mobile 64-channel EEG with 9-DOF motion sensing for naturalistic recording" ;
+    sosa:observes       bbqs:prop-neural-eeg, bbqs:prop-imu ;
+    ex:institution      "UCLA" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-md2k-motionsense a sosa:Sensor ;
+    schema:name         "MD2K MotionSenseHRV / AutoSense" ;
+    schema:manufacturer "MD2K Center (academic hardware)" ;
+    schema:description  "Open academic wearable for HRV, ECG, and respiration monitoring" ;
+    sosa:observes       bbqs:prop-heart-rate, bbqs:prop-respiration ;
+    ex:institution      "UCLA" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-shimmer3-gsr a sosa:Sensor ;
+    schema:name         "Shimmer3 GSR+" ;
+    schema:manufacturer "Shimmer Research, Dublin; iMotions, Copenhagen" ;
+    schema:description  "Wearable galvanic skin response sensor for electrodermal activity" ;
+    sosa:observes       bbqs:prop-eda ;
+    ex:institution      "UCLA; Mount Sinai" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── Stony Brook University — Mofakham / Mikell lab ───────────────────────────
+
+bbqs:sensor-blurred-video-ecog-emg a sosa:Sensor ;
+    schema:name         "Blurred video + mocap + ECoG + EMG" ;
+    schema:manufacturer "Not specified" ;
+    schema:description  "Privacy-blurred facial video, motion capture, intracranial ECoG, and EMG for social interaction research" ;
+    sosa:observes       bbqs:prop-video, bbqs:prop-3d-kinematics, bbqs:prop-neural-ieeg, bbqs:prop-neural-emg ;
+    ex:institution      "Stony Brook University" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── Georgia Tech — Rozell lab ─────────────────────────────────────────────────
+
+bbqs:sensor-delsys-trigno-emg a sosa:Sensor ;
+    schema:name         "Delsys Trigno Centro (to 128 ch)" ;
+    schema:manufacturer "Delsys Inc., Natick MA" ;
+    schema:description  "Wireless high-density surface EMG system with IMU for movement and muscle activity" ;
+    sosa:observes       bbqs:prop-neural-emg, bbqs:prop-imu ;
+    ex:institution      "Georgia Tech" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-ant-neuro-eeg a sosa:Sensor ;
+    schema:name         "ANT Neuro eego sports (64-ch)" ;
+    schema:manufacturer "ANT Neuro, Hengelo, Netherlands" ;
+    schema:description  "Mobile 64-channel high-density EEG for naturalistic environments" ;
+    sosa:observes       bbqs:prop-neural-eeg ;
+    ex:institution      "Georgia Tech" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-caren-vr-mocap a sosa:Sensor ;
+    schema:name         "CAREN VR + motion capture + Cosmed K5" ;
+    schema:manufacturer "Motek (D-Flow); Cosmed K5" ;
+    schema:description  "Virtual reality treadmill with full-body motion capture and metabolic monitoring" ;
+    sosa:observes       bbqs:prop-3d-kinematics, bbqs:prop-imu, bbqs:prop-respiration ;
+    ex:institution      "Georgia Tech" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── University of Southern California — Shanechi lab ─────────────────────────
+
+bbqs:sensor-custom-skin-wearable a sosa:Sensor ;
+    schema:name         "Custom flexible skin-like wearable patch" ;
+    schema:manufacturer "Custom / in-house (USC)" ;
+    schema:description  "First-of-its-kind thin flexible wearable for simultaneous HRV, skin conductance, and cortisol sensing" ;
+    sosa:observes       bbqs:prop-heart-rate, bbqs:prop-eda, bbqs:prop-biochemical ;
+    ex:institution      "USC" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-natus-xltek-eeg a sosa:Sensor ;
+    schema:name         "Natus NeuroWorks + Xltek clinical EEG" ;
+    schema:manufacturer "Natus Medical, Middleton WI" ;
+    schema:description  "Clinical-grade long-term video-EEG system for epilepsy monitoring and research" ;
+    sosa:observes       bbqs:prop-neural-eeg, bbqs:prop-neural-ieeg, bbqs:prop-video ;
+    ex:institution      "USC; Columbia University" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── Duke University — Suthana lab ────────────────────────────────────────────
+
+bbqs:sensor-optitrack-prime a sosa:Sensor ;
+    schema:name         "OptiTrack Prime x 41 / x 260" ;
+    schema:manufacturer "NaturalPoint (OptiTrack), Corvallis OR" ;
+    schema:description  "Marker-based optical 3-D motion capture system for precise whole-body kinematics" ;
+    sosa:observes       bbqs:prop-3d-kinematics ;
+    ex:institution      "Duke" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-xsens-mvn a sosa:Sensor ;
+    schema:name         "Xsens MVN Awinda (17 IMUs)" ;
+    schema:manufacturer "Movella (formerly Xsens), Enschede, Netherlands" ;
+    schema:description  "17-IMU full-body inertial motion capture suit for outdoor and clinical use" ;
+    sosa:observes       bbqs:prop-3d-kinematics, bbqs:prop-imu ;
+    ex:institution      "Duke" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-biopac-mp160 a sosa:Sensor ;
+    schema:name         "BIOPAC MP160 + AcqKnowledge" ;
+    schema:manufacturer "BIOPAC Systems, Goleta CA" ;
+    schema:description  "Multi-channel physiological data acquisition system for ECG, EDA, respiration, and EMG" ;
+    sosa:observes       bbqs:prop-heart-rate, bbqs:prop-eda, bbqs:prop-respiration, bbqs:prop-neural-emg ;
+    ex:institution      "Duke" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-custom-smartwatch-duke a sosa:Sensor ;
+    schema:name         "Custom smartwatch (cortisol / epinephrine)" ;
+    schema:manufacturer "Custom / in-house (Duke, in development)" ;
+    schema:description  "Prototype wrist-worn biochemical assay device for cortisol and epinephrine monitoring" ;
+    sosa:observes       bbqs:prop-biochemical ;
+    ex:institution      "Duke" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── Seattle Children's / CHOP — Roberts lab ──────────────────────────────────
+
+bbqs:sensor-opm-meg a sosa:Sensor ;
+    schema:name         "On-scalp OPM-MEG (QZFM Gen-3 / HEDscan / Cerca)" ;
+    schema:manufacturer "QuSpin, Louisville CO; FieldLine, Boulder CO; Cerca, Nottingham UK" ;
+    schema:description  "Optically pumped magnetometer MEG worn on the scalp for whole-head neuroimaging during movement" ;
+    sosa:observes       bbqs:prop-neural-meg ;
+    ex:institution      "Seattle Children's / CHOP" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-highspeed-video-1000fps a sosa:Sensor ;
+    schema:name         "High-speed video (to 1000 fps)" ;
+    schema:manufacturer "Not specified" ;
+    schema:description  "High-frame-rate camera for precise movement kinematics analysis" ;
+    sosa:observes       bbqs:prop-video, bbqs:prop-3d-kinematics ;
+    ex:institution      "Seattle Children's / CHOP" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+# ── Columbia University — Jacobs lab ─────────────────────────────────────────
+
+bbqs:sensor-empatica-embrace-plus a sosa:Sensor ;
+    schema:name         "Empatica EmbraceePlus" ;
+    schema:manufacturer "Empatica Inc., Boston / Milan" ;
+    schema:description  "Clinical-grade wristband for EDA, PPG, IMU, and skin temperature with real-time streaming" ;
+    sosa:observes       bbqs:prop-eda, bbqs:prop-heart-rate, bbqs:prop-imu, bbqs:prop-temperature ;
+    ex:institution      "Columbia University" ;
+    schema:isPartOf     bbqs:wg-devices .
+
+bbqs:sensor-ipad-ema-smartphone a sosa:Sensor ;
+    schema:name         "iPad EMA + smartphone phenotyping" ;
+    schema:manufacturer "Apple; Android OEMs" ;
+    schema:description  "Ecological momentary assessment via bedside iPad (~90-120 min intervals) plus passive smartphone usage monitoring" ;
+    sosa:observes       bbqs:prop-operant-behavior ;
+    ex:institution      "Columbia University; University of Pittsburgh; USC" ;
+    schema:isPartOf     bbqs:wg-devices .
