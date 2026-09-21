@@ -11,6 +11,9 @@
 @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
 @prefix sosa:   <http://www.w3.org/ns/sosa/> .
 @prefix ssn:    <http://www.w3.org/ns/ssn/> .
+@prefix org:    <http://www.w3.org/ns/org#> .
+@prefix odrl:   <http://www.w3.org/ns/odrl/2/> .
+@prefix dct:    <http://purl.org/dc/terms/> .
 
 
 # ── Consortium ────────────────────────────────────────────────────────────────
@@ -782,3 +785,136 @@ bbqs:sensor-ipad-ema-smartphone a sosa:Sensor ;
     sosa:observes       bbqs:prop-operant-behavior ;
     ex:institution      "Columbia University; University of Pittsburgh; USC" ;
     schema:isPartOf     bbqs:wg-devices .
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# GOVERNANCE — BBQS Consortium Governance v1.0 (2026-07-17)
+# Ontologies: W3C Organization (org:), ODRL (odrl:), Dublin Core Terms (dct:)
+# Source: unstructured_data/working_groups/wg_elsi/BBQS_Consortium_Governance_v1.0_2026-07-17.pdf
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ── Governance document provenance ───────────────────────────────────────────
+
+bbqs:gov-doc-v1 a schema:DigitalDocument ;
+    schema:name             "BBQS Consortium Governance" ;
+    schema:version          "1.0" ;
+    dct:issued              "2026-07-17"^^xsd:date ;
+    schema:author           bbqs:person-jyl-boline, bbqs:person-laura-cabrera, bbqs:person-satra-ghosh ;
+    schema:description      "Formal governance document establishing the organizational structure, decision-making processes, and proposed policies for the BRAIN BBQS consortium." ;
+    dct:isPartOf            bbqs:wg-elsi ;
+    schema:encodingFormat   "application/pdf" ;
+    schema:url              <https://brain-bbqs.org/governance/v1.0> .
+
+# ── Governance authors ────────────────────────────────────────────────────────
+
+bbqs:person-jyl-boline a schema:Person ;
+    schema:name             "Jyl Boline" ;
+    schema:givenName        "Jyl" ;
+    schema:familyName       "Boline" ;
+    schema:jobTitle         "Governance Lead, WG-ELSI" ;
+    schema:affiliation      bbqs:wg-elsi .
+
+bbqs:person-satra-ghosh a schema:Person ;
+    schema:name             "Satra Ghosh" ;
+    schema:givenName        "Satra" ;
+    schema:familyName       "Ghosh" ;
+    schema:affiliation      bbqs:wg-elsi .
+
+# ── Governance bodies (W3C Organization Ontology) ─────────────────────────────
+
+bbqs:org-nih a org:Organization ;
+    schema:name             "NIH" ;
+    schema:description      "National Institutes of Health — primary funder and external authority; NIH program official makes final conflict-resolution decisions." ;
+    schema:sameAs           <https://www.nih.gov/> ;
+    dct:isPartOf            bbqs:BBQS .
+
+bbqs:org-pic a org:Organization ;
+    schema:name             "PI Committee" ;
+    schema:alternateName    "PIC" ;
+    schema:description      "Primary governance body of BBQS; all principal investigators of funded projects. Meets quarterly; requires 60% quorum for voting." ;
+    org:subOrganizationOf   bbqs:BBQS ;
+    dct:isPartOf            bbqs:wg-elsi .
+
+bbqs:org-sc a org:Organization ;
+    schema:name             "Steering Committee" ;
+    schema:alternateName    "SC" ;
+    schema:description      "Executive body that manages day-to-day consortium operations, prepares PIC agendas, and implements PIC decisions. Meets monthly; 60% quorum required." ;
+    org:subOrganizationOf   bbqs:org-pic ;
+    dct:isPartOf            bbqs:wg-elsi .
+
+bbqs:org-dcaic a org:Organization ;
+    schema:name             "Data Coordination and AI Center" ;
+    schema:alternateName    "DCAIC" ;
+    schema:description      "Technical coordination hub responsible for data infrastructure, the Ember ASAP sharing platform, and AI/ML tool integration for BBQS." ;
+    org:subOrganizationOf   bbqs:BBQS ;
+    dct:isPartOf            bbqs:wg-elsi .
+
+bbqs:org-dac a org:Organization ;
+    schema:name             "Data Access Committee" ;
+    schema:alternateName    "DAC" ;
+    schema:description      "Proposed 7–9 member committee that reviews and adjudicates controlled-access data requests. Members serve 2-year terms; ELSI WG recommends the initial slate." ;
+    org:subOrganizationOf   bbqs:BBQS ;
+    dct:isPartOf            bbqs:wg-elsi ;
+    schema:status           "Proposed — not yet adopted" .
+
+bbqs:org-drp a org:Organization ;
+    schema:name             "Dispute Resolution Panel" ;
+    schema:alternateName    "DRP" ;
+    schema:description      "Ad-hoc panel convened to adjudicate formal conflicts between consortium members. Panel recommendations are forwarded to the NIH program official for final decision." ;
+    org:subOrganizationOf   bbqs:org-sc ;
+    dct:isPartOf            bbqs:wg-elsi .
+
+# ── Policies (W3C ODRL) ───────────────────────────────────────────────────────
+
+bbqs:policy-conflict-resolution a odrl:Policy ;
+    schema:name             "Conflict Resolution Policy" ;
+    schema:description      "Three-stage process: (1) direct negotiation within 30 days, (2) SC-mediated resolution within 60 days, (3) DRP formal adjudication with NIH program official as final arbiter." ;
+    odrl:obligation         bbqs:rule-direct-negotiation ;
+    dct:isPartOf            bbqs:gov-doc-v1 ;
+    schema:status           "Proposed — not yet adopted" .
+
+bbqs:policy-data-sharing a odrl:Policy ;
+    schema:name             "Data Sharing Policy" ;
+    schema:description      "Governs external sharing of BBQS data with the broader research community. Platform: Ember ASAP. Proposed; pending PIC adoption." ;
+    dct:isPartOf            bbqs:gov-doc-v1 ;
+    schema:status           "Proposed — not yet adopted" .
+
+bbqs:policy-internal-data-sharing a odrl:Policy ;
+    schema:name             "Internal Data Sharing Policy" ;
+    schema:description      "Governs sharing of data among BBQS consortium member projects before public release. Proposed; pending PIC adoption." ;
+    dct:isPartOf            bbqs:gov-doc-v1 ;
+    schema:status           "Proposed — not yet adopted" .
+
+bbqs:policy-publication a odrl:Policy ;
+    schema:name             "Publication Policy" ;
+    schema:description      "Defines authorship, acknowledgment, and coordination requirements for BBQS-affiliated publications. Proposed; pending PIC adoption." ;
+    dct:isPartOf            bbqs:gov-doc-v1 ;
+    schema:status           "Proposed — not yet adopted" .
+
+# ── ODRL rule stub (conflict resolution step 1) ──────────────────────────────
+
+bbqs:rule-direct-negotiation a odrl:Duty ;
+    schema:name             "Direct Negotiation" ;
+    schema:description      "Parties in conflict must first attempt resolution via direct negotiation within 30 days before escalating to SC or DRP." .
+
+# ── Governance participation classes ──────────────────────────────────────────
+
+bbqs:participation-grant-awardee a org:Role ;
+    schema:name             "Grant Awardee" ;
+    schema:description      "NIH-funded project PI or co-I; automatic BBQS consortium member and PIC voting participant." .
+
+bbqs:participation-data-contributor a org:Role ;
+    schema:name             "Data Contributor" ;
+    schema:description      "Researcher or institution contributing behavioral or neural datasets to BBQS without holding a funded award." .
+
+bbqs:participation-tool-contributor a org:Role ;
+    schema:name             "Tool / Model / Infrastructure Contributor" ;
+    schema:description      "Researcher or institution contributing analytical tools, ML models, or shared infrastructure to BBQS." .
+
+# ── Link governance structure to WG-ELSI and BBQS ────────────────────────────
+
+bbqs:wg-elsi schema:hasPart bbqs:gov-doc-v1 ;
+    org:hasSubOrganization  bbqs:org-dac .
+
+bbqs:BBQS org:hasSubOrganization bbqs:org-pic, bbqs:org-sc, bbqs:org-dcaic, bbqs:org-dac .
+
